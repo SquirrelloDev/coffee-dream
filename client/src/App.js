@@ -1,12 +1,18 @@
 import React from 'react'
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import BottomBar from "./components/navs/BottomBar";
-
+import Home from "./pages/Home";
+import Profile from "./pages/Profile";
 class App extends React.Component {
   render(){
-    return(<div>
-      <p>Jebany derek i jego podejście do komponentów funkcyjnych</p>
-    <BottomBar/>
-    </div>)
+    return(
+        <BrowserRouter>
+          <Switch>
+            <Route exact path='/' component={Home}/>
+              <Route exact path='/profile' component={Profile}/>
+          </Switch>
+        </BrowserRouter>
+    )
   }
   }
 export default App;

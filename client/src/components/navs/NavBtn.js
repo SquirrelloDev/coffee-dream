@@ -16,8 +16,6 @@ class NavBtn extends Component{
     }
     componentDidMount() {
             if(Object.keys(icons).includes(this.props.icon)){
-               console.log("Exist!");
-                console.log(this.context);
                this.setState({desiredIcon: icons[`${this.props.icon}`]})
             }
             else{
@@ -29,7 +27,7 @@ class NavBtn extends Component{
     render() {
         return (
             <div>
-                <button className={classes.icon__btn}><FontAwesomeIcon icon={this.state.desiredIcon} size="xl" className={classes['icon']}/></button>
+                <button className={classes.icon__btn}><FontAwesomeIcon icon={this.state.desiredIcon} size="2x" className={classes['icon--highlight']}/></button>
             </div>
         );
     }

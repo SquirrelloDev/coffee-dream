@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import classes from "./BottomBar.module.css";
+import classes from "./BottomBar.module.scss";
 class BottomBar extends Component{
     render() {
         return(

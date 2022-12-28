@@ -74,9 +74,9 @@ const returnUsersDetailsAsJSON = (req, res, next) =>
     }    
 }
 
-router.post(`/users/register/:name/:email/:password`, checkThatUserIsNotAlreadyInUsersCollection, addNewUserToUsersCollection)
+router.post(`/users/register/:name/:email/:password`, checkIfUserNotAlreadyInCollection, addNewUser)
 
-router.post(`/users/login/:email/:password`, checkThatUserExistsInUsersCollection, returnUsersDetailsAsJSON)
+router.post(`/users/login/:email/:password`, checkIfUserExists, returnUsersDetailsAsJSON)
 
 router.post(`/users/logout`, logout)
 

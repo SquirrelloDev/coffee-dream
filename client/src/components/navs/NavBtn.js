@@ -3,6 +3,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faHouse} from "@fortawesome/free-solid-svg-icons";
 import {faCartShopping} from "@fortawesome/free-solid-svg-icons";
 import {faUser} from "@fortawesome/free-solid-svg-icons";
+import {AppContext} from "../../context/app-context";
 import classes from "./BottomBar.module.scss";
 const icons = {
     home: faHouse,
@@ -10,6 +11,7 @@ const icons = {
     user: faUser
 }
 class NavBtn extends Component{
+    static contextType = AppContext;
     constructor(props) {
         super(props);
         this.state = {desiredIcon: null}
@@ -17,6 +19,7 @@ class NavBtn extends Component{
     componentDidMount() {
             if(Object.keys(icons).includes(this.props.icon)){
                console.log("Exist!");
+                console.log(this.context);
                this.setState({desiredIcon: icons[`${this.props.icon}`]})
             }
             else{

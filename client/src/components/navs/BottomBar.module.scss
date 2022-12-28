@@ -4,5 +4,32 @@
   height: 50px;
   position: fixed;
   bottom: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   background-color: $dark-color;
+  div{
+    .icon{
+      color: $text-color;
+    }
+    .icon__btn{
+      padding: 1em;
+      background: none;
+      border: 1px solid transparent;
+      outline: none;
+      &:focus{
+        border: 1px solid $cta-color;
+        border-radius: 8px;
+      }
+    }
+    .icon--highlight{
+      color: $cta-color;
+    }
+    .avatar--highlight{
+      border: 1px solid $cta-color;
+      border-radius: 50%;
+    }
+  }
+
+
 }

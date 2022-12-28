@@ -8,14 +8,10 @@ html{
   font-size: 62.5%;
   scroll-behavior: smooth;
 }
-:root{
-
-}
 body {
   font-family: 'Poppins', 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 1.6rem;
   background-color: #171413;
-
 }

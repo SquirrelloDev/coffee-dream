@@ -12,7 +12,7 @@ const icons = {
 class NavBtn extends Component{
     constructor(props) {
         super(props);
-        this.state = {desiredIcon: null}
+        this.state = {desiredIcon: faHouse}
     }
     componentDidMount() {
             if(Object.keys(icons).includes(this.props.icon)){

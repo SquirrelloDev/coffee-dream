@@ -6,6 +6,7 @@ import classes from "./Home.module.scss";
 import Button from "../components/UI/Button";
 import Toast from "../components/UI/Toast";
 import Modal from "../components/UI/Modal";
+import TopBar from "../components/navs/TopBar";
 class Home extends React.Component{
     constructor(props) {
         super(props);
@@ -18,6 +19,7 @@ class Home extends React.Component{
     render() {
         return(
             <React.Fragment>
+                <TopBar/>
             <main className={classes.homepage}>
                 <h1 className={classes.homepage__heading}>Hello Derek!</h1>
                 <h2 className={classes['homepage__section-heading']}>Popular</h2>
@@ -30,7 +32,7 @@ class Home extends React.Component{
                 <HorizontalContainer/>
                 <Button behaviorFn={()=>{console.log('siema')}} variant='outline' disabled={false}>Test</Button>
                 {/*<Toast><span>I'm a wonderful toast!</span></Toast>*/}
-                {this.state.modalOpen && <Modal closeModalFn={this.closeModalHandler}><p>I'm a modal!</p></Modal>}
+                {/*{this.state.modalOpen && <Modal closeModalFn={this.closeModalHandler}><p>I'm a modal!</p></Modal>}*/}
             </main>
                 <BottomBar/>
             </React.Fragment>

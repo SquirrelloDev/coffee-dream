@@ -1,8 +1,6 @@
 import React, {Component} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faHouse} from "@fortawesome/free-solid-svg-icons";
-import {faCartShopping} from "@fortawesome/free-solid-svg-icons";
-import {faUser} from "@fortawesome/free-solid-svg-icons";
+import {faHouse, faCartShopping, faUser} from "@fortawesome/free-solid-svg-icons";
 import classes from "./BottomBar.module.scss";
 const icons = {
     home: faHouse,

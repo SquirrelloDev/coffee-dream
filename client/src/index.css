@@ -30,9 +30,16 @@ body {
     height: 10px;
     background-color: #171413;
   }
-  ::-webkit-scrollbar-thumb:horizontal{
-    background-color: #bababa;
+  ::-webkit-scrollbar-thumb:vertical{
+    background-color: none;
     padding: 10px;
+    border: 1px solid #bababa;
+    border-radius: 15px;
+  }
+  ::-webkit-scrollbar-thumb:horizontal{
+    background-color: none;
+    padding: 10px;
+    border: 1px solid #bababa;
     border-radius: 15px;
   }
 }

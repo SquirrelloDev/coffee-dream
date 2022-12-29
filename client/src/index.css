@@ -16,3 +16,20 @@ body {
   background-color: #171413;
   color: #fff;
 }
+::-webkit-scrollbar{
+  height: 0px;
+  /*background-color: #171413;*/
+  display: none;
+}
+@media (min-width: 992px) {
+  ::-webkit-scrollbar {
+    display: inline;
+    height: 10px;
+    background-color: #171413;
+  }
+  ::-webkit-scrollbar-thumb:horizontal{
+    background-color: #bababa;
+    padding: 10px;
+    border-radius: 15px;
+  }
+}

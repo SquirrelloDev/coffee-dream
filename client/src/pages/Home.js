@@ -4,6 +4,7 @@ import Card from "../components/UI/Card";
 import HorizontalContainer from "../components/UI/HorizontalContainer";
 import classes from "./Home.module.scss";
 import Button from "../components/UI/Button";
+import Toast from "../components/UI/Toast";
 class Home extends React.Component{
     render() {
         return(
@@ -19,6 +20,7 @@ class Home extends React.Component{
                 <h2 className={classes['homepage__section-heading']}>High caffeine ratio</h2>
                 <HorizontalContainer/>
                 <Button behaviorFn={()=>{console.log('siema')}} variant='outline' disabled={false}>Test</Button>
+                <Toast><span>I'm a wonderful toast!</span></Toast>
             </main>
                 <BottomBar/>
             </React.Fragment>

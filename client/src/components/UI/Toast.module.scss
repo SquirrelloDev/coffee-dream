@@ -1,0 +1,25 @@
+@use '../../styles/utils' as *;
+.toast{
+  width: 90%;
+  padding: 1em;
+  min-height: 55px;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%,-125%) scale(0);
+  background-color: $err-des;
+  color: $err-color-dark;
+  border-radius: 8px;
+  animation: scale-in .1s linear forwards;
+  &--disabled{
+    display: none;
+  }
+  span{
+    margin-left: .5em;
+  }
+}
+@keyframes scale-in {
+  to{
+    transform: translate(-50%,-125%) scale(1);
+  }
+}

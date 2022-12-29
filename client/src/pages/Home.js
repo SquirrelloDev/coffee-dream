@@ -5,7 +5,16 @@ import HorizontalContainer from "../components/UI/HorizontalContainer";
 import classes from "./Home.module.scss";
 import Button from "../components/UI/Button";
 import Toast from "../components/UI/Toast";
+import Modal from "../components/UI/Modal";
 class Home extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state = {modalOpen: true}
+        this.closeModalHandler = () =>{
+            this.setState({modalOpen: false});
+        }
+    }
+
     render() {
         return(
             <React.Fragment>
@@ -20,7 +29,8 @@ class Home extends React.Component{
                 <h2 className={classes['homepage__section-heading']}>High caffeine ratio</h2>
                 <HorizontalContainer/>
                 <Button behaviorFn={()=>{console.log('siema')}} variant='outline' disabled={false}>Test</Button>
-                <Toast><span>I'm a wonderful toast!</span></Toast>
+                {/*<Toast><span>I'm a wonderful toast!</span></Toast>*/}
+                {this.state.modalOpen && <Modal closeModalFn={this.closeModalHandler}><p>I'm a modal!</p></Modal>}
             </main>
                 <BottomBar/>
             </React.Fragment>

@@ -13,10 +13,10 @@ class ProductPage extends React.Component{
                     <img src={testImg2}/>
                 </div>
                 <section className={classes.main__box}>
-                    <p>Coffee name</p>
+                    <p className={classes.main__box__title}>Arabica </p>
                     <SCA/>
-                    <p><span>$</span>29.99</p>
-                    <p>In stock: 216</p>
+                    <p className={classes.main__box__price}><span>$</span>29.99</p>
+                    <p className={classes.main__box__stock}>In stock: 216</p>
                 </section>
             </main>
         );

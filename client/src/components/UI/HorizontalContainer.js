@@ -7,12 +7,12 @@ class HorizontalContainer extends React.Component{
     render() {
         return (
             <div className={`${classes.container} ${classes['snaps-inline']}`}>
-                <ProductCard stockValue={0}/>
-                <ProductCard stockValue={20}/>
-                <ProductCard stockValue={20}/>
-                <ProductCard stockValue={20}/>
-                <ProductCard stockValue={20}/>
-                <ProductCard stockValue={20}/>
+                <ProductCard stockValue={20}>Arabica with nut</ProductCard>
+                <ProductCard stockValue={20}>Test with 11</ProductCard>
+                <ProductCard stockValue={20}>Test with 11</ProductCard>
+                <ProductCard stockValue={20}>Test with 11</ProductCard>
+                <ProductCard stockValue={20}>Test with 11</ProductCard>
+                <ProductCard stockValue={20}>Test with 11</ProductCard>
             </div>
         );
     }

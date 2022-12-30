@@ -44,7 +44,28 @@
   justify-content: space-between;
   align-items: center;
 }
+.desc-box{
+  margin-top: 1em;
+}
+.information-box{
+  margin-top: 1em;
+  ul{
+    list-style-type: none;
+    li{
+      position: relative;
+      margin-top: .5em;
+      font-size: calc($normal + .2rem);
+      span{
+        color: $cta-color;
+        margin-right: .5em;
+      }
+    }
+  }
+}
 .section{
   padding-left: 1em;
   padding-right: 1em;
+  &__padding{
+    margin-bottom: 4em;
+  }
 }

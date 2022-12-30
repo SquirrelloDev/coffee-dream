@@ -1,0 +1,12 @@
+@use "../../styles/utils" as *;
+.rating__container{
+  display: inline-block;
+  position: absolute;
+  left: 45%;
+}
+.star{
+  color: $cta-color;
+  &--off{
+    color: $grayish-color;
+  }
+}

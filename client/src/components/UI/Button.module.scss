@@ -12,6 +12,7 @@
   transition: background-color .3s;
   &:disabled{
     background-color: #c08767;
+    color: $grayish-color;
     cursor: not-allowed;
   }
   &:disabled:hover{

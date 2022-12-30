@@ -1,0 +1,34 @@
+@use "../../styles/utils" as *;
+.box{
+  position: relative;
+  &__title{
+    position: absolute;
+    top: -45%;
+    color: $grayer-color;
+  }
+  &__container{
+    display: flex;
+    background-color: $light-dark;
+    border-radius: 8px;
+    div{
+      padding: 1em;
+      display: flex;
+      align-items: center;
+    }
+    button{
+      padding: 1.25em;
+      background-color: $light-dark;
+      border: 1px solid transparent;
+      color: $text-color;
+      &:first-child{
+        border-bottom-left-radius: 8px;
+        border-top-left-radius: 8px;
+      }
+      &:last-child{
+        border-bottom-right-radius: 8px;
+        border-top-right-radius: 8px;
+      }
+
+    }
+  }
+}

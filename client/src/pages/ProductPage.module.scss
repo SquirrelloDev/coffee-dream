@@ -34,6 +34,17 @@
     }
   }
   &__stock{
+    font-family: $secondary;
+    text-align: center;
     color: $cta-color;
   }
+}
+.action-box{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.section{
+  padding-left: 1em;
+  padding-right: 1em;
 }

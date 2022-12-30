@@ -1,0 +1,11 @@
+@use "../../styles/utils" as *;
+.sca__box{
+  padding: .5em .75em;
+  margin: .5em;
+  background-color: $sca;
+  color: $sca-text;
+  border-radius: 8px;
+  span:last-child{
+    margin-left: .5em;
+  }
+}

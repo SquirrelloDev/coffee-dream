@@ -1,0 +1,13 @@
+.image-box{
+  position: relative;
+  left: 50%;
+  margin-top: 1em;
+  width: 250px;
+  height: 250px;
+  transform: translateX(-50%);
+  img{
+    width: inherit;
+    height: inherit;
+    object-fit: contain;
+  }
+}

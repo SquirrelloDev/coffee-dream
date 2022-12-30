@@ -22,15 +22,24 @@ class Home extends React.Component{
                 <TopBar/>
             <main className={classes.homepage}>
                 <h1 className={classes.homepage__heading}>Hello Derek!</h1>
-                <h2 className={classes['homepage__section-heading']}>Popular</h2>
-                <HorizontalContainer/>
-                <h2 className={classes['homepage__section-heading']}>Arabica selection</h2>
-                <HorizontalContainer/>
-                <h2 className={classes['homepage__section-heading']}>Espresso</h2>
-                <HorizontalContainer/>
-                <h2 className={classes['homepage__section-heading']}>High caffeine ratio</h2>
-                <HorizontalContainer/>
-                <Button behaviorFn={()=>{console.log('siema')}} variant='outline' disabled={false}>Test</Button>
+                <section>
+                    <h2 className={classes['homepage__section-heading']}>Popular</h2>
+                    <HorizontalContainer/>
+                </section>
+                <section>
+                    <h2 className={classes['homepage__section-heading']}>Arabica selection</h2>
+                    <HorizontalContainer/>
+                </section>
+                <section>
+                    <h2 className={classes['homepage__section-heading']}>Espresso</h2>
+                    <HorizontalContainer/>
+                </section>
+                <section>
+                    <h2 className={classes['homepage__section-heading']}>High caffeine ratio</h2>
+                    <HorizontalContainer/>
+                </section>
+                <div className={classes.homepage__padding}></div>
+                {/*<Button behaviorFn={()=>{console.log('siema')}} variant='outline' disabled={false}>Test</Button>*/}
                 {/*<Toast><span>I'm a wonderful toast!</span></Toast>*/}
                 {/*{this.state.modalOpen && <Modal closeModalFn={this.closeModalHandler}><p>I'm a modal!</p></Modal>}*/}
             </main>

@@ -13,7 +13,6 @@ class BackButton extends React.Component{
         window.addEventListener('scroll', () => {
             if(window.scrollY > this.props.glassZone){
                 btn.classList.add(classes.glass);
-                console.log(btn);
             }
             else{
                 btn.classList.remove(classes.glass);

@@ -6,6 +6,12 @@
   grid-column-gap: 30px;
   overflow-x: auto;
   overflow-behavior-inline: contain;
+  text-decoration: none;
+}
+.link{
+  color: #fff;
+  text-decoration: none;
+
 }
 .snaps-inline{
   scroll-snap-type: inline mandatory;

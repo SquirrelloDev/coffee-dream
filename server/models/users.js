@@ -15,7 +15,7 @@ const usersSchema = new mongoose.Schema(
   profilePhotoFilename: {type: String, default: ""},
 },
 {
-    collection: `users`
+    collection: `Users`
 });
 
-module.exports = mongoose.model('users', usersSchema);
+module.exports = mongoose.model('Users', usersSchema);

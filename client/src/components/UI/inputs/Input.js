@@ -25,7 +25,7 @@ class Input extends React.Component{
         return (
             <React.Fragment>
                 {this.props.label && <p>{this.props.label}</p>}
-                <input className={`${classes.input}`} type={this.props.type === 'number' ? 'number' : 'text'}/>
+                <input className={`${classes.input}`} type={this.props.type === 'number' ? 'number' : 'text'} placeholder={this.props.placeholder && this.props.placeholder}/>
                 {this.state.inputState.stateName === 'ERROR' && <p className={classes['input__error-text']}>Error text</p>}
             </React.Fragment>
         );

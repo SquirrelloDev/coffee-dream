@@ -12,7 +12,9 @@
   left: 50%;
   bottom: 5%;
   transform: translateX(-50%);
+  border-top: 1px solid $light-dark;
   p{
+    color: $grayer-color;
     &:first-child{
       grid-area: 1 / 1 / 2 / 2;
     }

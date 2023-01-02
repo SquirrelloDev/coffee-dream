@@ -10,8 +10,17 @@ import{faBagShopping, faEarthAmericas, faCoffee, faFire, faDroplet, faLemon} fro
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Rating from "../components/Products/Rating";
 import BottomBar from "../components/navs/BottomBar";
+import Modal from "../components/UI/Modal";
+import Input from "../components/UI/inputs/Input";
 
 class ProductPage extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state = {modalOpen: true}
+    }
+    closeModal(){
+        this.setState({modalOpen: false})
+    }
     render() {
         return (
             <React.Fragment>
@@ -26,8 +35,10 @@ class ProductPage extends React.Component{
                     <p className={classes.main__box__price}><span>$</span>29.99</p>
                     <p className={classes.main__box__stock}>In stock: 216</p>
                 </section>
-                <section>
-                {/*buttony dla admina */}
+                <section className={`${classes['admin-box']} ${classes.section}`}>
+                    <Button variant={'fill'}>Change stock</Button>
+                    <Button variant={'outline'}>Edit product</Button>
+                    <Button variant={'outline'}>Delete</Button>
                 </section>
                 <section className={`${classes.section} ${classes['action-box']}`}>
                     <QuantityBox labelEnabled={true}/>
@@ -47,6 +58,12 @@ class ProductPage extends React.Component{
                         <li><span><FontAwesomeIcon icon={faDroplet} fixedWidth/></span>Body:<Rating rating={5}/></li>
                     </ul>
                 </section>
+                {this.state.modalOpen &&
+                    <Modal closeModalFn={this.closeModal.bind(this)}>
+                        <p>Enter new stock value</p>
+                        <p>Enter a positive number to add or negative to subtract</p>
+                        <Input type={'number'}/>
+                </Modal>}
                 <div className={classes.section__padding}></div>
             </main>
             <BottomBar/>

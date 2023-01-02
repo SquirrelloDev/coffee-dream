@@ -10,7 +10,7 @@ class Avatar extends React.Component{
     render() {
         return (
             <div className={classes['avatar-box']}>
-                <img src={defaultAvatar} width={80} height={80} className={classes['avatar-box__image']}/>
+                <img src={defaultAvatar} className={classes['avatar-box__image']}/>
                 {this.props.label && <p>{this.props.label}</p>}
             </div>
         );

@@ -11,7 +11,9 @@
   position: fixed;
   left: 50%;
   bottom: 5%;
+  z-index: 100;
   transform: translateX(-50%);
+  background-color: $dark-color;
   border-top: 1px solid $light-dark;
   p{
     color: $grayer-color;

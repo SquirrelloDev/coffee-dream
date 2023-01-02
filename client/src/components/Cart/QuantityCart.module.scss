@@ -1,0 +1,25 @@
+@use "../../styles/utils" as *;
+.box{
+  position: relative;
+  div{
+    padding: .5em;
+    display: flex;
+    align-items: center;
+    font-family: monospace;
+  }
+  button{
+    padding: .5em;
+    background-color: $light-dark;
+    border: 1px solid transparent;
+    color: $text-color;
+    &:first-child{
+      border-bottom-left-radius: 8px;
+      border-top-left-radius: 8px;
+    }
+    &:last-child{
+      border-bottom-right-radius: 8px;
+      border-top-right-radius: 8px;
+    }
+
+  }
+}

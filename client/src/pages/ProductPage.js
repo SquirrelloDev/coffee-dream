@@ -61,10 +61,10 @@ class ProductPage extends React.Component{
                 </section>
                 {this.state.modalOpen &&
                     <Modal closeModalFn={this.closeModal.bind(this)}>
-                        <p>Enter new stock value</p>
-                        <p>Enter a positive number to add or negative to subtract</p>
+                        <h3>Enter new stock value</h3>
+                        <p className={classes.modal__sub}>Enter a positive number to add or negative to subtract</p>
                         <Input type={'number'}/>
-                        <Textarea/>
+                        <Button variant={'fill'}>Confirm</Button>
                 </Modal>}
                 <div className={classes.section__padding}></div>
             </main>

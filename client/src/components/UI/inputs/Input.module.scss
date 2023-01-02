@@ -1,5 +1,5 @@
 @use "../../../styles/utils" as *;
-.input{
+.input, .textarea{
   margin: .5em 0;
   padding: .5em;
   background-color: $light-dark;
@@ -22,4 +22,8 @@
     font-size: $tiny;
     color: $err-color;
   }
+}
+.textarea{
+  min-height: 20vh;
+  resize: none;
 }

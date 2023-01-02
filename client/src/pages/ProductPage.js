@@ -12,6 +12,7 @@ import Rating from "../components/Products/Rating";
 import BottomBar from "../components/navs/BottomBar";
 import Modal from "../components/UI/Modal";
 import Input from "../components/UI/inputs/Input";
+import Textarea from "../components/UI/inputs/Textarea";
 
 class ProductPage extends React.Component{
     constructor(props) {
@@ -63,6 +64,7 @@ class ProductPage extends React.Component{
                         <p>Enter new stock value</p>
                         <p>Enter a positive number to add or negative to subtract</p>
                         <Input type={'number'}/>
+                        <Textarea/>
                 </Modal>}
                 <div className={classes.section__padding}></div>
             </main>

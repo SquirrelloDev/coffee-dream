@@ -1,0 +1,25 @@
+@use "../../../styles/utils" as *;
+.input{
+  margin: .5em 0;
+  padding: .5em;
+  background-color: $light-dark;
+  border: 1px solid $input-border;
+  border-radius: 4px;
+  color: $text-color;
+  font-size: $normal;
+  outline: none;
+  &:focus{
+    border-color: $cta-color;
+    transition: border-color .1s;
+  }
+  &--error{
+  border-color: $err-color;
+  }
+  &--success{
+  border-color: $success-color;
+  }
+  &__error-text{
+    font-size: $tiny;
+    color: $err-color;
+  }
+}

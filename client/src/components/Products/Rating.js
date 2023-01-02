@@ -9,7 +9,7 @@ class Rating extends React.Component{
     render() {
         return (
             <div className={classes.rating__container}>
-                {[...Array(5)].map((star, idx)=> <FontAwesomeIcon icon={faStar} className={idx < this.props.rating ? classes.star : classes['star--off']}/>)}
+                {[...Array(5)].map((star, idx)=> <FontAwesomeIcon icon={faStar} key={idx} className={idx < this.props.rating ? classes.star : classes['star--off']}/>)}
             </div>
         );
     }

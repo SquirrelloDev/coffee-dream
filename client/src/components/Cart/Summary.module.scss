@@ -6,6 +6,7 @@
   grid-row-gap: 8px;
   width: 100%;
   padding: 1em;
+  padding-bottom: calc(1rem + env(safe-area-inset-bottom));
   min-height: 150px;
   justify-content: space-between;
   position: fixed;

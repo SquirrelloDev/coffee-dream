@@ -1,0 +1,10 @@
+.list{
+  padding-left: 1em;
+}
+.buttons{
+  display: flex;
+  flex-direction: column;
+  button{
+    margin: .2em 0;
+  }
+}

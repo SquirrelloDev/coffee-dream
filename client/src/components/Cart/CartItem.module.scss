@@ -25,6 +25,10 @@
     color: $text-color;
     border: 1px solid transparent;
     border-radius: 50%;
+    cursor: pointer;
+    &:hover{
+      background-color: $err-color;
+    }
   }
   &__image {
     width: 90px;

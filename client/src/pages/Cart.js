@@ -5,9 +5,21 @@ import classes from "./Cart.module.scss";
 import Summary from "../components/Cart/Summary";
 import PromoCode from "../components/Cart/PromoCode";
 import CartItem from "../components/Cart/CartItem";
+import Modal from "../components/UI/Modal";
+import ModalCart from "../components/Cart/ModalCart";
 
 
 class Cart extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state={modalOpen: true};
+    }
+    closeModal(){
+        this.setState({modalOpen: false})
+    }
+    openModal(){
+        this.setState({modalOpen: true})
+    }
     render() {
         return (
             <React.Fragment>
@@ -32,6 +44,7 @@ class Cart extends React.Component{
                 <Summary/>
                 </main>
                 <BottomBar/>
+                {this.state.modalOpen && <Modal closeModalFn={this.closeModal.bind(this)}><ModalCart/></Modal> }
             </React.Fragment>
         );
     }

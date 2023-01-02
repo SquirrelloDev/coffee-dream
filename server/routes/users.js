@@ -74,10 +74,70 @@ const returnUsersDetailsAsJSON = (req, res, next) =>
     }    
 }
 
+const showUsersList = (req, res, next) =>
+{
+    usersModel.find({}, (err, data) =>
+    {
+        if(err)
+        {
+            return next(err)
+        }
+
+        return res.json(data)
+    })
+}
+
+const deleteUserbyId = (req, res, next) =>
+{
+    usersModel.findByIdAndRemove(req.params.id, (err, data) =>
+    {
+        if(err)
+        {
+            return next(err)
+        }
+
+        return res.json(data)
+    })
+}
+
+const updateUserById = (req, res, next) =>
+{
+    usersModel.findByIdAndUpdate(req.params.id, {$set: req.body}, (err, data) =>
+    {
+        if(err)
+        {
+            return next(err)
+        }
+
+        return res.json(data)
+    })
+}
+
+const getUserById = (req, res, next) =>
+{
+    usersModel.findById(req.params.id, (err, data) =>
+    {
+        if(err)
+        {
+            return next(err)
+        }
+        
+        return res.json(data)
+    })
+}
+
+router.get(`/users`, showUsersList)
+
+router.get(`/users/:id`, getUserById)
+
 router.post(`/users/register/:name/:email/:password`, checkIfUserNotAlreadyInCollection, addNewUser)
 
 router.post(`/users/login/:email/:password`, checkIfUserExists, returnUsersDetailsAsJSON)
 
 router.post(`/users/logout`, logout)
+
+router.put(`/users/:id`, updateUserById)
+
+router.delete(`/users/:id`, deleteUserbyId)
 
 module.exports = router

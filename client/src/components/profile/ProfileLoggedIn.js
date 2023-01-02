@@ -14,14 +14,16 @@ class ProfileLoggedIn extends React.Component{
     render() {
         return (
             <section className={classes.logged}>
-                <Avatar/>
+                <Avatar label={'my name'}/>
                 <div className={classes.logged__actions}>
                     <ActionButton icon={faBoxes}>Your orders</ActionButton>
                     <ActionButton icon={faGear}>Account settings</ActionButton>
                     <ActionButton icon={faShield}>Manage users</ActionButton>
                     <ActionButton logoutVariant={true} icon={faRightFromBracket}>Log out</ActionButton>
                 </div>
+                <div className={classes.profile__padding}></div>
             </section>
+
         );
     }
 }

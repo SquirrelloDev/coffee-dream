@@ -4,6 +4,7 @@
   height: calc(55px + env(safe-area-inset-bottom));
   position: fixed;
   bottom: 0;
+  z-index: 1000;
   display: flex;
   justify-content: space-around;
   align-items: center;

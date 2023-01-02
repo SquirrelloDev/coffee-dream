@@ -8,7 +8,6 @@ class ProfileLoggedOut extends React.Component{
         super(props);
 
     }
-
     render() {
         const perks = [{
             icon: faBookmark,
@@ -32,7 +31,7 @@ class ProfileLoggedOut extends React.Component{
             text: ''
         }];
         return (
-            <React.Fragment>
+            <section>
                 <h2 className={classes.profile__greeting}>Join to our coffee family</h2>
                 <h3>With account you will get:</h3>
                 <div className={classes.profile__perks}>
@@ -47,9 +46,9 @@ class ProfileLoggedOut extends React.Component{
                         <Button variant={'fill'}>Sign Up</Button>
                         <Button variant={'outline'}>Log In</Button>
                     </div>
-
                 </div>
-            </React.Fragment>
+                <div className={classes.profile__padding}></div>
+            </section>
         );
     }
 }export default ProfileLoggedOut;

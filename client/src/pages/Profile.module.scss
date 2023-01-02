@@ -10,6 +10,10 @@
     flex-direction: column;
     align-items: center;
   }
+  &__padding{
+    width: 100%;
+    padding-bottom: 2em;
+  }
   &__sign-box{
     position: relative;
     z-index: 1;
@@ -26,6 +30,12 @@
     h2{
       text-align: center;
     }
+  }
+}
+.logged{
+  &__actions{
+    display: flex;
+    flex-direction: column;
   }
 }
 .hero{

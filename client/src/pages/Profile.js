@@ -5,6 +5,7 @@ import TopBar from "../components/navs/TopBar";
 import classes from "./Profile.module.scss";
 
 import ProfileLoggedOut from "../components/profile/ProfileLoggedOut";
+import ProfileLoggedIn from "../components/profile/ProfileLoggedIn";
 class Profile extends React.Component{
     render() {
         return (
@@ -13,9 +14,10 @@ class Profile extends React.Component{
                 <TopBar/>
                 <main className={classes.profile}>
                     <h1>My account</h1>
-                    <ProfileLoggedOut/>
+                    {/*<ProfileLoggedOut/>*/}
+                    <ProfileLoggedIn/>
                 </main>
-                {/*<BottomBar/>*/}
+                <BottomBar/>
             </React.Fragment>
         );
     }

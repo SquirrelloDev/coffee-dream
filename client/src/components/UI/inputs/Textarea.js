@@ -9,6 +9,7 @@ class Textarea extends React.Component{
     render() {
         return (
             <React.Fragment>
+                {this.props.label && <p>{this.props.label}</p>}
                 <textarea className={classes.textarea}></textarea>
             </React.Fragment>
         );

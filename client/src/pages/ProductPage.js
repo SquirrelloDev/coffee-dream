@@ -17,10 +17,13 @@ import Textarea from "../components/UI/inputs/Textarea";
 class ProductPage extends React.Component{
     constructor(props) {
         super(props);
-        this.state = {modalOpen: true}
+        this.state = {modalOpen: false}
     }
     closeModal(){
         this.setState({modalOpen: false})
+    }
+    openModal(){
+        this.setState({modalOpen: true})
     }
     render() {
         return (
@@ -37,7 +40,7 @@ class ProductPage extends React.Component{
                     <p className={classes.main__box__stock}>In stock: 216</p>
                 </section>
                 <section className={`${classes['admin-box']} ${classes.section}`}>
-                    <Button variant={'fill'}>Change stock</Button>
+                    <Button behaviorFn={this.openModal.bind(this)} variant={'fill'}>Change stock</Button>
                     <Button variant={'outline'}>Edit product</Button>
                     <Button variant={'outline'}>Delete</Button>
                 </section>

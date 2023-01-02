@@ -1,7 +1,15 @@
 const router = require(`express`).Router()
+let createError = require(`http-errors`)
+
 require(`dotenv`).config({path: `./config/.env`})
 
+const fs = require(`fs`)
+
 const usersModel = require(`../models/users`)
+
+const multer = require(`multer`)
+const upload = multer({dest: `${process.env.UPLOADED_FILES_FOLDER}`})
+
 
 const checkIfUserExists = (req, res, next) =>
 {
@@ -35,6 +43,27 @@ const checkIfUserNotAlreadyInCollection = (req, res, next) =>
     return next()
 }
 
+const checkIfFileIsUploaded = (req, res, next) =>
+{
+    if(!req.file)
+    {
+        return next(createError(400, `No file selected`))
+    }
+
+    return next()
+}
+
+const checkIfFileIsImage = (req, res, next) =>
+{
+    if(req.file.mimetype !== `image/jpeg` && req.file.mimetype !== `image/png` && req.file.mimetype !== `image/jpg`)
+    {
+        fs.unlink(`${process.env.UPLOADED_FILES_FOLDER}/${req.file.filename}`, (err) => {return next(err)})
+    }
+    
+    return next()
+} 
+
+
 const addNewUser = (req, res, next) =>
 {
     usersModel.create({login:req.body.login, email:req.body.email, password:req.body.password}, (err, data) => 
@@ -43,8 +72,17 @@ const addNewUser = (req, res, next) =>
         {
             return next(err)
         }
+
+        fs.readFile(`${process.env.UPLOADED_FILES_FOLDER}/${req.file.filename}`, 'base64', (err, fileData) =>
+        {
+            if(err)
+            {
+                return next(err)
+            }
+
         
-        return res.json({login:data.login, email:data.email, password:data.password})
+            return res.json({login:data.login, accessLevel: data.accessLevel, profilePhoto: fileData})
+        })
     })
 }
 
@@ -74,10 +112,70 @@ const returnUsersDetailsAsJSON = (req, res, next) =>
     }    
 }
 
-router.post(`/users/register/:name/:email/:password`, checkIfUserNotAlreadyInCollection, addNewUser)
+const showUsersList = (req, res, next) =>
+{
+    usersModel.find({}, (err, data) =>
+    {
+        if(err)
+        {
+            return next(err)
+        }
+
+        return res.json(data)
+    })
+}
+
+const deleteUserbyId = (req, res, next) =>
+{
+    usersModel.findByIdAndRemove(req.params.id, (err, data) =>
+    {
+        if(err)
+        {
+            return next(err)
+        }
+
+        return res.json(data)
+    })
+}
+
+const updateUserById = (req, res, next) =>
+{
+    usersModel.findByIdAndUpdate(req.params.id, {$set: req.body}, (err, data) =>
+    {
+        if(err)
+        {
+            return next(err)
+        }
+
+        return res.json(data)
+    })
+}
+
+const getUserById = (req, res, next) =>
+{
+    usersModel.findById(req.params.id, (err, data) =>
+    {
+        if(err)
+        {
+            return next(err)
+        }
+        
+        return res.json(data)
+    })
+}
+
+router.get(`/users`, showUsersList)
+
+router.get(`/users/:id`, getUserById)
+
+router.post(`/users/register/:name/:email/:password`, upload.single("profilePhoto"), checkIfFileIsUploaded, checkIfFileIsImage, checkIfUserNotAlreadyInCollection, addNewUser)
 
 router.post(`/users/login/:email/:password`, checkIfUserExists, returnUsersDetailsAsJSON)
 
 router.post(`/users/logout`, logout)
+
+router.put(`/users/:id`, updateUserById)
+
+router.delete(`/users/:id`, deleteUserbyId)
 
 module.exports = router

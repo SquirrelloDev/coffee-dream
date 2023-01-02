@@ -1,11 +1,17 @@
 const mongoose = require('mongoose');
 
+const productPhotosSchema = new mongoose.Schema(
+    {
+        filename: { type: String },
+    })
+
+
 const productsSchema = new mongoose.Schema(
     {
         name: { type: String, required: true, unique: true },
         price: { type: Number, required: true },
         description: { type: String, required: true },
-        image: { type: String, required: true },
+        image: [productPhotosSchema] ,
         stock: { type: Number, required: true, default: 0, min: 0 },
         origin: { type: String},
         composition: { type: String},
@@ -14,7 +20,7 @@ const productsSchema = new mongoose.Schema(
         body: { type: Number, min: 1, max: 5},
     },
     {
-        collection: `products`
+        collection: `Products`
     });
 
-module.exports = mongoose.model('products', productsSchema);
+module.exports = mongoose.model('Products', productsSchema);

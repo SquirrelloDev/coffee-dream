@@ -1,0 +1,15 @@
+@use "../styles/utils" as *;
+.signup{
+  padding: 2em 1em;
+  h1{
+    text-align: center;
+    margin-bottom: 1em;
+  }
+  &-form{
+    display: flex;
+    flex-direction: column;
+    input{
+      font-size: $big;
+    }
+  }
+}

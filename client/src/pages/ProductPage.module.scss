@@ -61,6 +61,9 @@
 }
 .desc-box{
   margin-top: 1em;
+  p{
+    line-height: 26px;
+  }
 }
 .information-box{
   margin-top: 1em;
@@ -81,7 +84,7 @@
   padding-left: 1em;
   padding-right: 1em;
   &__padding{
-    margin-bottom: 4em;
+    margin-bottom: calc(4em + env(safe-area-inset-bottom));
   }
 }
 .modal__sub{

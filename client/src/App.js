@@ -6,6 +6,8 @@ import Profile from "./pages/Profile";
 import ProductPage from "./pages/ProductPage";
 import Shipment from "./pages/Shipment";
 import SignUp from "./pages/SignUp";
+import LogIn from "./pages/LogIn";
+import Confirmation from "./pages/Confirmation";
 class App extends React.Component {
   render(){
     return(
@@ -18,6 +20,8 @@ class App extends React.Component {
                     <Route exact path='/profile' component={Profile}/>
                     <Route exact path='/shipment' component={Shipment}/>
                     <Route exact path='/signup' component={SignUp}/>
+                    <Route exact path='/login' component={LogIn}/>
+                    <Route exact path='/success' component={Confirmation}/>
                     <Route path='*' component={Home}/>
                 </Switch>
             </BrowserRouter>

@@ -59,3 +59,4 @@ router.post(`/orders`, addOrder)
 
 router.put(`/orders/:id`, updateOrderById)
 
+module.exports = router

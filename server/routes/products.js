@@ -5,8 +5,6 @@ require(`dotenv`).config({path: `./config/.env`})
 
 const fs = require(`fs`)
 
-const productsModel = require(`../models/products`)
-
 const multer = require(`multer`)
 const productsModel = require("../models/products")
 const upload = multer({dest: `${process.env.UPLOADED_FILES_FOLDER}`})

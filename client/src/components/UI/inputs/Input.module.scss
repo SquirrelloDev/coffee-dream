@@ -8,6 +8,7 @@
   color: $text-color;
   font-size: $normal;
   outline: none;
+
   &:focus{
     border-color: $cta-color;
     transition: border-color .1s;
@@ -26,4 +27,7 @@
 .textarea{
   min-height: 20vh;
   resize: none;
+}
+.label{
+  margin: 0;
 }

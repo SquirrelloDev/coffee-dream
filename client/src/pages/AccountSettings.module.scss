@@ -1,0 +1,52 @@
+@use '../styles/utils' as *;
+.settings{
+  padding: 2em 1em;
+  h1{
+    margin-top: 1.25em;
+  }
+  &__basic-form{
+    display: flex;
+    flex-direction: column;
+    margin-top: .85em;
+    margin-bottom: 1.5em;
+    input{
+      font-size: $big;
+    }
+  }
+  &__avatar-box{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    button{
+      height: 50px;
+    }
+  }
+  &__credentials{
+    display: flex;
+    flex-direction: column;
+    margin-top: .85em;
+    input{
+      font-size: $big;
+    }
+    &__change{
+      padding: .5em 2em;
+      padding-left: 0;
+      margin-bottom: 1em;
+      width: 30%;
+      background: none;
+      border: 1px solid transparent;
+      color: $cta-color;
+      font-size: $tiny;
+      text-transform: uppercase;
+      text-decoration: underline;
+    }
+  }
+  &__deletion{
+    &__text{
+      line-height: 26px;
+    }
+    &__warning{
+      color: $err-color;
+    }
+  }
+}

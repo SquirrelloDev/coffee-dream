@@ -10,6 +10,7 @@ import LogIn from "./pages/LogIn";
 import Confirmation from "./pages/Confirmation";
 import ConfirmationPage from "./pages/ConfirmationPage";
 import OrdersPage from "./pages/OrdersPage";
+import AccountSettings from "./pages/AccountSettings";
 class App extends React.Component {
   render(){
     return(
@@ -25,6 +26,7 @@ class App extends React.Component {
                     <Route exact path='/login' component={LogIn}/>
                     <Route exact path='/success' component={ConfirmationPage}/>
                     <Route exact path='/orders' component={OrdersPage}/>
+                    <Route exact path='/settings' component={AccountSettings}/>
                     <Route path='*' component={Home}/>
                 </Switch>
             </BrowserRouter>

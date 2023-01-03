@@ -1,0 +1,39 @@
+@use '../../styles/utils' as *;
+.order{
+  padding: 1em;
+  margin: 1.25em 0;
+  background-color: $light-dark;
+  border-radius: 8px;
+  font-family: $secondary;
+  font-size: calc($normal + .2rem);
+  &__main-info{
+    p{
+      margin: .5em 0;
+      &:last-child{
+        font-weight: $bold;
+        & .chevron{
+          color: $cta-color;
+        }
+      }
+    }
+  }
+  &__details{
+    p{
+      margin-bottom: .25em;
+    }
+    hr{
+      margin: .5em 0;
+      background-color: #545454;
+      border: 1px solid transparent;
+    }
+    button{
+      padding: .5em;
+      padding-left: 0;
+      background: none;
+      color: $err-color;
+      font-size: $normal;
+      font-family: $secondary;
+      border: 1px solid transparent;
+    }
+  }
+ }

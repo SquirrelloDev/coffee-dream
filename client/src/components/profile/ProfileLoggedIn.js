@@ -4,6 +4,7 @@ import classes from "../../pages/Profile.module.scss";
 import ActionButton from "./ActionButton";
 import {faBoxes, faGear, faRightFromBracket, faShield} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {Link} from "react-router-dom";
 
 class ProfileLoggedIn extends React.Component{
     constructor(props) {
@@ -16,7 +17,7 @@ class ProfileLoggedIn extends React.Component{
             <section className={classes.logged}>
                 <Avatar label={'my name'}/>
                 <div className={classes.logged__actions}>
-                    <ActionButton icon={faBoxes}>Your orders</ActionButton>
+                    <Link to='/orders'><ActionButton icon={faBoxes}>Your orders</ActionButton></Link>
                     <ActionButton icon={faGear}>Account settings</ActionButton>
                     <ActionButton icon={faShield}>Manage users</ActionButton>
                     <ActionButton logoutVariant={true} icon={faRightFromBracket}>Log out</ActionButton>

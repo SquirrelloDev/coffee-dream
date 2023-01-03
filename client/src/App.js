@@ -8,6 +8,8 @@ import Shipment from "./pages/Shipment";
 import SignUp from "./pages/SignUp";
 import LogIn from "./pages/LogIn";
 import Confirmation from "./pages/Confirmation";
+import ConfirmationPage from "./pages/ConfirmationPage";
+import OrdersPage from "./pages/OrdersPage";
 class App extends React.Component {
   render(){
     return(
@@ -21,7 +23,8 @@ class App extends React.Component {
                     <Route exact path='/shipment' component={Shipment}/>
                     <Route exact path='/signup' component={SignUp}/>
                     <Route exact path='/login' component={LogIn}/>
-                    <Route exact path='/success' component={Confirmation}/>
+                    <Route exact path='/success' component={ConfirmationPage}/>
+                    <Route exact path='/orders' component={OrdersPage}/>
                     <Route path='*' component={Home}/>
                 </Switch>
             </BrowserRouter>

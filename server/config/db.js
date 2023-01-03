@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const autoIncrement = require('mongoose-auto-increment')
 mongoose.set('strictQuery', false);
-mongoose.connect(`mongodb://${process.env.DB_HOST}/${process.env.DB_NAME}`)
+mongoose.connect(`mongodb://${process.env.DB_HOST}/${process.env.DB_NAME}`, {useMongoClient: true})
 
 const db = mongoose.connection
 autoIncrement.initialize(db)

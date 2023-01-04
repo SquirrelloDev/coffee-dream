@@ -8,7 +8,9 @@
   color: $text-color;
   font-size: $normal;
   outline: none;
-
+  &:disabled{
+    color: $grayer-color;
+  }
   &:focus{
     border-color: $cta-color;
     transition: border-color .1s;

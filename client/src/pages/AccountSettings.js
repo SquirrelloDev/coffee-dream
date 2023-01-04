@@ -5,6 +5,11 @@ import Input from "../components/UI/inputs/Input";
 import Avatar from "../components/profile/Avatar";
 import Button from "../components/UI/Button";
 class AccountSettings extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state={changeMailActive: false, changePasswdActive: false}
+    }
+
     render() {
         return (
             <main className={classes.settings}>
@@ -24,9 +29,10 @@ class AccountSettings extends React.Component{
                 </form>
                 <h3>Credentials change</h3>
                 <div className={classes.settings__credentials}>
-                    <Input label={'E-mail address'}/>
+
+                    <Input label={'E-mail address'} defValue={'admin@example.com'} disabled={true}/>
                     <button className={classes.settings__credentials__change}>Change</button>
-                    <Input label={'Password'}/>
+                    <Input label={'Password'} type={'password'} defValue={'supercoolpasswd'} disabled={true}/>
                     <button className={classes.settings__credentials__change}>Change</button>
                 </div>
                 <div className={classes.settings__deletion}>

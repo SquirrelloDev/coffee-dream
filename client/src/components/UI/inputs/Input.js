@@ -6,7 +6,7 @@ class Input extends React.Component{
         this.state={inputState: {
                 stateName: 'NOT-DEFINED',
                 stateText: ''
-            }}
+            }, inputType: 'text'}
     }
     setToSuccess(){
         this.setState({inputState: {
@@ -20,12 +20,15 @@ class Input extends React.Component{
                 stateText: errMsg
             }})
     }
+    componentDidMount() {
+        this.setState({inputType: this.props.type});
+    }
 
     render() {
         return (
             <React.Fragment>
                 {this.props.label && <label className={classes.label}>{this.props.label}</label>}
-                <input className={`${classes.input}`} type={this.props.type === 'number' ? 'number' : 'text'} id={this.props.label} placeholder={this.props.placeholder && this.props.placeholder}/>
+                <input className={`${classes.input}`} type={this.state.inputType} id={this.props.label} placeholder={this.props.placeholder && this.props.placeholder} disabled={this.props.disabled} defaultValue={this.props.defValue}/>
                 {this.state.inputState.stateName === 'ERROR' && <p className={classes['input__error-text']}>Error text</p>}
             </React.Fragment>
         );

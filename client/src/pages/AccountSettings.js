@@ -9,8 +9,38 @@ class AccountSettings extends React.Component{
         super(props);
         this.state={changeMailActive: false, changePasswdActive: false}
     }
+    activateMailHandler(){
+        this.setState({changeMailActive: true});
+    }
+    deactivateMailHandler(){
+        this.setState({changeMailActive: false});
+    }
+    activatePasswordHandler(){
+        this.setState({changePasswdActive: true});
+    }
+    deactivatePasswordHandler(){
+        this.setState({changePasswdActive: false});
+    }
 
     render() {
+        const defaultCredentials = <React.Fragment>
+            <Input label={'E-mail address'} defValue={'admin@example.com'} disabled={true}/>
+            <button onClick={this.activateMailHandler.bind(this)} className={classes.settings__credentials__change}>Change</button>
+            <Input label={'Password'} type={'password'} defValue={'supercoolpasswd'} disabled={true}/>
+            <button onClick={this.activatePasswordHandler.bind(this)} className={classes.settings__credentials__change}>Change</button>
+        </React.Fragment>
+        const emailCredentials = <form className={classes['settings__credential-form']}>
+            <Input label={'New email address'}/>
+            <Input label={'Confirm email address'}/>
+            <Button variant={'fill'}>Save</Button>
+        </form>
+        const passwdCredentials = <form className={classes['settings__credential-form']}>
+            <Input label={'New password'}/>
+            <p>New password should contain at least 8 characters</p>
+            <Input label={'Confirm password'}/>
+            <Button variant={'fill'}>Save</Button>
+        </form>
+
         return (
             <main className={classes.settings}>
                 <BackButton path='/profile' glassZone={20}/>
@@ -29,11 +59,9 @@ class AccountSettings extends React.Component{
                 </form>
                 <h3>Credentials change</h3>
                 <div className={classes.settings__credentials}>
-
-                    <Input label={'E-mail address'} defValue={'admin@example.com'} disabled={true}/>
-                    <button className={classes.settings__credentials__change}>Change</button>
-                    <Input label={'Password'} type={'password'} defValue={'supercoolpasswd'} disabled={true}/>
-                    <button className={classes.settings__credentials__change}>Change</button>
+                    {(!this.state.changeMailActive && !this.state.changePasswdActive) && defaultCredentials}
+                    {this.state.changeMailActive && emailCredentials}
+                    {this.state.changePasswdActive && passwdCredentials}
                 </div>
                 <div className={classes.settings__deletion}>
                     <h3>Account deletion</h3>

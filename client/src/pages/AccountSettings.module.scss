@@ -49,4 +49,12 @@
       color: $err-color;
     }
   }
+  &__credential-form{
+    display: flex;
+    flex-direction: column;
+    p{
+      font-size: $tinier;
+      color: $grayer-color;
+    }
+  }
 }

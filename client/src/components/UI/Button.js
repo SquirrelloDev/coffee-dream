@@ -3,19 +3,33 @@ import classes from "./Button.module.scss";
 class Button extends React.Component{
     constructor(props) {
         super(props);
-        this.state={variant: "fill"}
+        this.state={variant: "fill", styles: ''}
     }
-    static getDerivedStateFromProps(props, state){
-        if(props.variant !== state.variant){
-            return{
-                variant: props.variant
+    componentDidMount() {
+        const variantArr = this.props.variant.split(' ');
+        console.log(variantArr);
+        if(variantArr.includes('fill') && !variantArr.includes('outline')){
+            if(variantArr.includes('danger')){
+                this.setState({styles: `${classes.button} ${classes['button--danger']}`})
+            }
+            else{
+                this.setState({styles: `${classes.button}`})
             }
         }
-        return null;
+        else{
+            if(variantArr.includes('danger')){
+                this.setState({styles: `${classes.button} ${classes['button--outline']} ${classes['button--outline--danger']}`})
+            }
+            else{
+                this.setState({styles: `${classes.button} ${classes['button--outline']}`})
+            }
+        }
+
     }
+
     render() {
         return (
-            <button onClick={this.props.behaviorFn} className={this.state.variant === 'fill' ? `${classes.button}` : `${classes.button} ${classes['button--outline']}`} disabled={this.props.disabled ? true : false}>{this.props.children}</button>
+            <button onClick={this.props.behaviorFn} className={this.state.styles} disabled={this.props.disabled ? true : false}>{this.props.children}</button>
         );
     }
 }

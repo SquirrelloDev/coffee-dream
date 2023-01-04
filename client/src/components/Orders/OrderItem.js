@@ -17,7 +17,6 @@ class OrderItem extends React.Component{
         else{
             chevron.classList.remove(`${classes['chevron--active']}`);
         }
-        console.log(chevron)
         this.setState({expanded: !this.state.expanded});
     }
     render() {

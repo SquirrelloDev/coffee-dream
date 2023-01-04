@@ -18,7 +18,7 @@ class AccountSettings extends React.Component{
                     <div className={classes['settings__avatar-box']}>
                         <Avatar/>
                         <Button variant={'fill'}>Upload</Button>
-                        <Button variant={'outline'}>Delete</Button>
+                        <Button variant={'outline danger'}>Delete</Button>
                     </div>
                     <Button variant={'fill'}>Save</Button>
                 </form>
@@ -33,6 +33,7 @@ class AccountSettings extends React.Component{
                     <h3>Account deletion</h3>
                     <p className={classes.settings__deletion__text}>Are you really want to abandon us? Well... it is your decision and we never try to convince to staying with us. Although, you will lose access to your orders, addresses and newsletter.  Your data will be removed</p>
                     <p className={classes.settings__deletion__warning}>This action is inevitable!</p>
+                    <Button variant={'fill danger'}>Delete account</Button>
                 </div>
             </main>
         );

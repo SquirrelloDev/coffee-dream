@@ -10,13 +10,17 @@
   border: 1px solid transparent;
   cursor: pointer;
   transition: background-color .3s;
+  &--danger{
+    background-color: $err-color;
+
+  }
   &:disabled{
-    background-color: #c08767;
-    color: $grayish-color;
+    background-color: $grayish-color;
+    color: $grayer-color;
     cursor: not-allowed;
   }
   &:disabled:hover{
-    background-color: #c08767;
+    background-color: #b4b1b1;
   }
   &:hover{
     background-color: #e08653;
@@ -24,9 +28,12 @@
   &--outline{
     background-color: $dark-color;
     border: 1px solid $cta-color;
+    &--danger{
+      border-color: $err-color;
+    }
     &:disabled{
       background-color: $dark-color;
-      border: 1px solid #c08767;
+      border: 1px solid $grayish-color;
       color: $grayish-color;
     }
     &:disabled:hover{
@@ -36,4 +43,5 @@
       background-color: $cta-color;
     }
   }
+
 }

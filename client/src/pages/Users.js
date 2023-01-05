@@ -28,7 +28,6 @@ class Users extends React.Component{
                     <p>First name: </p>
                     <p>Lat name: </p>
                     <p>E-mail: </p>
-                    <Button variant={'outline'}>Edit</Button>
                     <Button variant={'outline danger'}>Delete</Button>
                 </Modal>}
                 <div className={classes.users__padding}></div>

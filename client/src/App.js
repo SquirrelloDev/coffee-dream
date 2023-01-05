@@ -12,7 +12,6 @@ import OrdersPage from "./pages/OrdersPage";
 import AccountSettings from "./pages/AccountSettings";
 import Users from "./pages/Users";
 import NewUser from "./pages/NewUser";
-import EditUser from "./pages/EditUser";
 import NewProduct from "./pages/NewProduct";
 import EditProduct from "./pages/EditProduct";
 class App extends React.Component {
@@ -34,7 +33,6 @@ class App extends React.Component {
 
                     <Route exact path='/users' component={Users}/>
                     <Route exact path='/newuser' component={NewUser}/>
-                    <Route exact path='/users/user/:id' component={EditUser}/>
                     <Route exact path='/products' component={NewProduct}/>
                     <Route exact path='/products/product/:id' component={EditProduct}/>
                     <Route path='*' component={Home}/>

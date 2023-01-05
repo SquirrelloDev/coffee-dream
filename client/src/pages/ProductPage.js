@@ -42,7 +42,7 @@ class ProductPage extends React.Component{
                 <section className={`${classes['admin-box']} ${classes.section}`}>
                     <Button behaviorFn={this.openModal.bind(this)} variant={'fill'}>Change stock</Button>
                     <Button variant={'outline'}>Edit product</Button>
-                    <Button variant={'outline'}>Delete</Button>
+                    <Button variant={'outline danger'}>Delete</Button>
                 </section>
                 <section className={`${classes.section} ${classes['action-box']}`}>
                     <QuantityBox labelEnabled={true}/>

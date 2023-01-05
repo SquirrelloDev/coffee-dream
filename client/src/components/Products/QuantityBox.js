@@ -7,7 +7,7 @@ class QuantityBox extends React.Component{
     constructor(props) {
         super(props);
         this.state={
-            count: 10
+            count: 1
         }
         this.addQuantity = this.addQuantity.bind(this);
         this.substractQuantity = this.substractQuantity.bind(this);

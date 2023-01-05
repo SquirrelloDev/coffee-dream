@@ -1,0 +1,20 @@
+.users{
+  padding: 2em 1em;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  h1{
+    margin-left: 1.75em;
+  }
+  & > button{
+    width: 80%;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    text-transform: uppercase;
+  }
+  &__padding{
+    margin-bottom: 2em;
+  }
+}

@@ -1,0 +1,15 @@
+@use "../../../styles/utils" as *;
+.dropdown{
+  margin: 1em 0;
+  padding: .5em;
+  background-color: $light-dark;
+  border: 1px solid $input-border;
+  border-radius: 4px;
+  color: $text-color;
+  font-size: $big;
+  outline: none;
+  &:focus{
+    border-color: $cta-color;
+    transition: border-color .1s;
+  }
+}

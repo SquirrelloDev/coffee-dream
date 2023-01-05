@@ -1,0 +1,35 @@
+@use '../../styles/utils' as *;
+.table{
+  width: 100%;
+  margin-top: 1.5em;
+  background-color: $light-dark;
+  border-radius: 4px;
+  border-collapse: collapse;
+  table-layout: fixed;
+  thead{
+    th{
+      padding: .75em 0;
+    }
+  }
+  tbody{
+    .row{
+      margin: 1em 0;
+      border-bottom: 1px solid $grayer-color;
+      &:last-of-type{
+        border: none;
+      }
+      td{
+        padding: .5em 0;
+        text-align: center;
+      }
+      button{
+        margin: 0.5em;
+        padding: .5em .75em;
+      }
+    }
+  }
+  td{
+    border-collapse: collapse;
+    margin: 25px;
+  }
+}

@@ -4,6 +4,7 @@ const autoIncrement = require('mongoose-auto-increment');
 const OrdersSchema = new mongoose.Schema({
     orderId: { type: String, unique: true, required: true},
     userId: { type: mongoose.Schema.Types.ObjectId, ref: 'Users', required: true },
+    paymentId: { type: mongoose.Schema.Types.ObjectId, ref: 'Payments', required: true },
     products: [{
       productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Products', required: true },
       quantity: { type: Number, required: true } }],

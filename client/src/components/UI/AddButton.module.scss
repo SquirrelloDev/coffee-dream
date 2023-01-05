@@ -1,0 +1,26 @@
+@use "../../styles/utils" as *;
+.add{
+  position: fixed;
+  bottom: 10%;
+  right: 5%;
+  padding: 1.6em;
+  margin-bottom: calc(env(safe-area-inset-bottom));
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: $cta-color;
+  border: 1px solid transparent;
+  color: $text-color;
+  transform: scale(0);
+  transform-origin: center;
+  animation: scale-add .3s forwards;
+}
+@keyframes scale-add {
+    to{
+      transform: scale(1);
+    }
+
+}

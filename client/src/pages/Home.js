@@ -7,6 +7,7 @@ import Button from "../components/UI/Button";
 import Toast from "../components/UI/Toast";
 import Modal from "../components/UI/Modal";
 import TopBar from "../components/navs/TopBar";
+import AddButton from "../components/UI/AddButton";
 class Home extends React.Component{
     constructor(props) {
         super(props);
@@ -43,6 +44,7 @@ class Home extends React.Component{
                 {/*<Toast><span>I'm a wonderful toast!</span></Toast>*/}
                 {/*{this.state.modalOpen && <Modal closeModalFn={this.closeModalHandler}><p>I'm a modal!</p></Modal>}*/}
             </main>
+                <AddButton/>
                 <BottomBar/>
             </React.Fragment>
         )

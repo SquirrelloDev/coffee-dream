@@ -7,7 +7,6 @@ class Button extends React.Component{
     }
     componentDidMount() {
         const variantArr = this.props.variant.split(' ');
-        console.log(variantArr);
         if(variantArr.includes('fill') && !variantArr.includes('outline')){
             if(variantArr.includes('danger')){
                 this.setState({styles: `${classes.button} ${classes['button--danger']}`})

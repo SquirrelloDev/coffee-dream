@@ -30,6 +30,9 @@
     border: 1px solid $cta-color;
     &--danger{
       border-color: $err-color;
+      &:hover{
+        background-color: $err-color;
+      }
     }
     &:disabled{
       background-color: $dark-color;

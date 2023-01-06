@@ -17,6 +17,7 @@
   transform: scale(0);
   transform-origin: center;
   animation: scale-add .3s forwards;
+  cursor: pointer;
 }
 @keyframes scale-add {
     to{

@@ -22,7 +22,6 @@ class NewUser extends React.Component{
                     <Input label={'Product name'}/>
                     <Input label={'Price'} type={'number'}/>
                     <Input label={'Quantity'} type={'number'}/>
-                    <Dropdown/>
                     <h3>Picture</h3>
                     <div className={classes['user__form__avatar']}>
                         <Avatar/>

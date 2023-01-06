@@ -7,7 +7,7 @@
   &__form{
     display: flex;
     flex-direction: column;
-    input{
+    input, select{
       padding: 1em;
     }
     &__avatar{

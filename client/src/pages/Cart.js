@@ -12,7 +12,7 @@ import ModalCart from "../components/Cart/ModalCart";
 class Cart extends React.Component{
     constructor(props) {
         super(props);
-        this.state={modalOpen: true};
+        this.state={modalOpen: false, cartState:[]}; //stan koszyka z localStorage
     }
     closeModal(){
         this.setState({modalOpen: false})
@@ -20,6 +20,11 @@ class Cart extends React.Component{
     openModal(){
         this.setState({modalOpen: true})
     }
+    componentDidMount() {
+        // localStorage.setItem('cartItems', JSON.stringify({items: [{id: 1, name: "Arabica"}]}));
+       this.setState({cartState: JSON.parse(localStorage.getItem('cartItems'))})
+    }
+
     render() {
         return (
             <React.Fragment>
@@ -28,15 +33,6 @@ class Cart extends React.Component{
                     <h1>My cart</h1>
                     <div className={classes.cart__items}>
                         {/*<p>No items in the cart. Go add something!</p>*/}
-                        <CartItem/>
-                        <CartItem/>
-                        <CartItem/>
-                        <CartItem/>
-                        <CartItem/>
-                        <CartItem/>
-                        <CartItem/>
-                        <CartItem/>
-                        <CartItem/>
                         <CartItem/>
                         <PromoCode/>
                         <div className={classes.cart__padding}></div>

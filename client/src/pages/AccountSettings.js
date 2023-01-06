@@ -7,7 +7,7 @@ import Button from "../components/UI/Button";
 class AccountSettings extends React.Component{
     constructor(props) {
         super(props);
-        this.state={changeMailActive: false, changePasswdActive: false}
+        this.state={changeMailActive: false, changePasswdActive: false, mail: '', passwd: ''}
     }
     activateMailHandler(){
         this.setState({changeMailActive: true});
@@ -21,12 +21,15 @@ class AccountSettings extends React.Component{
     deactivatePasswordHandler(){
         this.setState({changePasswdActive: false});
     }
+    componentDidMount() {
+        //fetchowanie użytkownika po id
+    }
 
     render() {
         const defaultCredentials = <React.Fragment>
-            <Input label={'E-mail address'} defValue={'admin@example.com'} disabled={true}/>
+            <Input label={'E-mail address'} defValue={this.state.mail} disabled={true}/>
             <button onClick={this.activateMailHandler.bind(this)} className={classes.settings__credentials__change}>Change</button>
-            <Input label={'Password'} type={'password'} defValue={'supercoolpasswd'} disabled={true}/>
+            <Input label={'Password'} type={'password'} defValue={this.state.passwd} disabled={true}/>
             <button onClick={this.activatePasswordHandler.bind(this)} className={classes.settings__credentials__change}>Change</button>
         </React.Fragment>
         const emailCredentials = <form className={classes['settings__credential-form']}>

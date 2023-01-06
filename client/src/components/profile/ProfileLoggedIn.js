@@ -9,13 +9,17 @@ import {Link} from "react-router-dom";
 class ProfileLoggedIn extends React.Component{
     constructor(props) {
         super(props);
+        this.state={name: '', image: ''}
 
+    }
+    componentDidMount() {
+        //fetchowanie usera po id
     }
 
     render() {
         return (
             <section className={classes.logged}>
-                <Avatar label={'my name'}/>
+                <Avatar label={this.state.name}/>
                 <div className={classes.logged__actions}>
                     <Link to='/orders'><ActionButton icon={faBoxes}>Your orders</ActionButton></Link>
                     <ActionButton icon={faGear}>Account settings</ActionButton>

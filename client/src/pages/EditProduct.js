@@ -9,19 +9,35 @@ import Textarea from "../components/UI/inputs/Textarea";
 class NewUser extends React.Component{
     constructor(props) {
         super(props);
+        this.state={productData: {
+                id: 0,
+                name: '',
+                price: 0.00,
+                description: '',
+                image: '',
+                stock: 0,
+                origin: "",
+                composition: '',
+                aroma: '',
+                intensity: 0,
+                body: 0,
+                sca: 0
+            }}
 
+    }
+    componentDidMount() {
+        //fetchowanie produktu po id
     }
 
     render() {
         return (
             <main className={classes.user}>
-                <BackButton path={'/users'} glassZone={45}/>
+                <BackButton path={`/product/${this.state.productData.id}`} glassZone={45}/>
                 <h1>Editing product</h1>
                 <h3>Basic information</h3>
                 <form className={classes.user__form}>
-                    <Input label={'Product name'}/>
-                    <Input label={'Price'} type={'number'}/>
-                    <Input label={'Quantity'} type={'number'}/>
+                    <Input label={'Product name'} defValue={this.state.productData.name}/>
+                    <Input label={'Price'} type={'number'} defValue={this.state.productData.price}/>
                     <h3>Picture</h3>
                     <div className={classes['user__form__avatar']}>
                         <Avatar/>
@@ -30,12 +46,12 @@ class NewUser extends React.Component{
                     </div>
                     <h3>Extra information</h3>
                     <Textarea/>
-                    <Input label={'Origin'}/>
-                    <Input label={'Composition'}/>
-                    <Input label={'Aroma'}/>
-                    <Input label={'Intensity'} type={'number'}/>
-                    <Input label={'Body'} type={'number'}/>
-                    <Input label={'SCA score'} type={'number'}/>
+                    <Input label={'Origin'} defValue={this.state.productData.origin}/>
+                    <Input label={'Composition'} defValue={this.state.productData.composition}/>
+                    <Input label={'Aroma'} defValue={this.state.productData.aroma}/>
+                    <Input label={'Intensity'} type={'number'} defValue={this.state.productData.intensity}/>
+                    <Input label={'Body'} type={'number'} defValue={this.state.productData.body}/>
+                    <Input label={'SCA score'} type={'number'} defValue={this.state.productData.sca}/>
                     <Button variant={'fill'}>Save</Button>
                 </form>
             </main>

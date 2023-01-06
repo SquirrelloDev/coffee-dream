@@ -17,6 +17,9 @@ class Users extends React.Component{
     closeDetails(){
         this.setState({modalOpen: false, dangerPrompt: false});
     }
+    componentDidMount() {
+        //fetchowaniie wszystkich userów
+    }
 
     render() {
         return (

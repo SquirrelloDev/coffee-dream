@@ -4,6 +4,7 @@ import Toast from "./UI/Toast";
 
 class PayPalBtn extends React.Component{
     constructor(props) {
+        //send product here
         super(props);
         this.state = {paymentCancelled: false, paymentError: false, mgs: ''}
     }
@@ -52,9 +53,7 @@ class PayPalBtn extends React.Component{
                 console.log("Your order:", order);
                 console.log("Your data: ", data);
             }}
-            onError={(err) => {
-                console.error("PayPal error: ", err);
-            }}
+            onError={this.handleError.bind(this)}
              onCancel={this.handleCancel.bind(this)}
             />
                 {(this.state.paymentCancelled || this.state.paymentError) && <Toast>{this.state.msg}</Toast>}

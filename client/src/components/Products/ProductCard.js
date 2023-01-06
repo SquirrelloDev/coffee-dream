@@ -30,7 +30,7 @@ class ProductCard extends React.Component{
                 <img src={image} height={100}/>
                 <p>{this.state.cardTitle}</p>
                 {this.state.inStock ? <p className={`${classes.stock} ${classes['stock--in']}`}>In stock</p> : <p className={`${classes.stock} ${classes['stock--out']}`}>Out of stock</p>}
-                <p><span>$</span> 29.99</p>
+                <p><span>$</span> {this.props.price}</p>
             </Card>
         );
     }

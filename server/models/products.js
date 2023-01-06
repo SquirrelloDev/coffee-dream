@@ -20,7 +20,7 @@ const productsSchema = new mongoose.Schema(
         body: { type: Number, min: 1, max: 5},
     },
     {
-        collection: `Products`
+        collection: `products`
     });
 
-module.exports = mongoose.model('Products', productsSchema);
+module.exports = mongoose.model('products', productsSchema);

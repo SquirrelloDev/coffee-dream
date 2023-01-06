@@ -8,13 +8,17 @@ import Toast from "../components/UI/Toast";
 import Modal from "../components/UI/Modal";
 import TopBar from "../components/navs/TopBar";
 import AddButton from "../components/UI/AddButton";
+import axios from "axios";
+import {SERVER_PATH} from "../config/global_const";
+
 class Home extends React.Component{
     constructor(props) {
         super(props);
         this.state = {modalOpen: true}
-        this.closeModalHandler = () =>{
-            this.setState({modalOpen: false});
-        }
+    }
+    DUMMY_PRODUCTS = {items: [{id: 1, name: "Arabica", price: 22.99, stock: 25},{id: 2, name: "Esspresso", price: 1.99, stock: 0}]};
+    componentDidMount() {
+
     }
 
     render() {
@@ -25,24 +29,21 @@ class Home extends React.Component{
                 <h1 className={classes.homepage__heading}>Hello Derek!</h1>
                 <section>
                     <h2 className={classes['homepage__section-heading']}>Popular</h2>
-                    <HorizontalContainer/>
+                    <HorizontalContainer products={this.DUMMY_PRODUCTS}/>
                 </section>
                 <section>
                     <h2 className={classes['homepage__section-heading']}>Arabica selection</h2>
-                    <HorizontalContainer/>
+                    {/*<HorizontalContainer/>*/}
                 </section>
                 <section>
                     <h2 className={classes['homepage__section-heading']}>Espresso</h2>
-                    <HorizontalContainer/>
+                    {/*<HorizontalContainer/>*/}
                 </section>
                 <section>
                     <h2 className={classes['homepage__section-heading']}>High caffeine ratio</h2>
-                    <HorizontalContainer/>
+                    {/*<HorizontalContainer/>*/}
                 </section>
                 <div className={classes.homepage__padding}></div>
-                {/*<Button behaviorFn={()=>{console.log('siema')}} variant='outline' disabled={false}>Test</Button>*/}
-                {/*<Toast><span>I'm a wonderful toast!</span></Toast>*/}
-                {/*{this.state.modalOpen && <Modal closeModalFn={this.closeModalHandler}><p>I'm a modal!</p></Modal>}*/}
             </main>
                 <AddButton/>
                 <BottomBar/>

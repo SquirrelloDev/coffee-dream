@@ -13,11 +13,25 @@ import BottomBar from "../components/navs/BottomBar";
 import Modal from "../components/UI/Modal";
 import Input from "../components/UI/inputs/Input";
 import Textarea from "../components/UI/inputs/Textarea";
+import {CART_CONTEXT} from "../config/global_const";
 
 class ProductPage extends React.Component{
     constructor(props) {
         super(props);
-        this.state = {modalOpen: false}
+        this.state = {modalOpen: false, productData:{
+                id: 0,
+                name: '',
+                price: 0.00,
+                description: '',
+                image: '',
+                stock: 0,
+                origin: "",
+                composition: '',
+                aroma: '',
+                intensity: 0,
+                body: 0,
+                sca: 0
+            }}
     }
     closeModal(){
         this.setState({modalOpen: false})
@@ -25,6 +39,16 @@ class ProductPage extends React.Component{
     openModal(){
         this.setState({modalOpen: true})
     }
+    addItemToCart(){
+        //kiedy element nie istnieje w koszyku
+        let updatedItems;
+        // updatedItems = JSON.parse(localStorage.getItem(CART_CONTEXT)).items.concat();
+        // localStorage.setItem(CART_CONTEXT, {items:} )
+    }
+    componentDidMount() {
+        //fetchowanie produktu po id i umieszczenie tego odpowiednio
+    }
+
     render() {
         return (
             <React.Fragment>
@@ -34,10 +58,10 @@ class ProductPage extends React.Component{
                     <img src={testImg2}/>
                 </div>
                 <section className={`${classes.main__box} ${classes.section}`}>
-                    <h2 className={classes.main__box__title}>Arabica </h2>
+                    <h2 className={classes.main__box__title}>{this.state.productData.name}</h2>
                     <SCA/>
-                    <p className={classes.main__box__price}><span>$</span>29.99</p>
-                    <p className={classes.main__box__stock}>In stock: 216</p>
+                    <p className={classes.main__box__price}><span>$</span>{this.state.productData.price}</p>
+                    <p className={classes.main__box__stock}>In stock: {this.state.productData.stock}</p>
                 </section>
                 <section className={`${classes['admin-box']} ${classes.section}`}>
                     <Button behaviorFn={this.openModal.bind(this)} variant={'fill'}>Change stock</Button>
@@ -46,20 +70,20 @@ class ProductPage extends React.Component{
                 </section>
                 <section className={`${classes.section} ${classes['action-box']}`}>
                     <QuantityBox labelEnabled={true}/>
-                    <Button variant='fill' disabled={false}>TO CART <FontAwesomeIcon icon={faBagShopping}/></Button>
+                    <Button variant='fill' disabled={this.state.productData.stock > 0 ? false : true}>TO CART <FontAwesomeIcon icon={faBagShopping}/></Button>
                 </section>
                 <section className={`${classes.section} ${classes['desc-box']}`}>
                     <h3>Description</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Iaculis amet, egestas velit amet gravida in viverra. Tortor aliquet imperdiet donec vitae. Arcu nisl id quis sit egestas facilisis iaculis non tincidunt. Magna adipiscing a orci gravida sed risus enim sed pretium</p>
+                    <p>{this.state.productData.description ? this.state.productData.description : "No description provided"}</p>
                 </section>
                 <section className={`${classes.section} ${classes['information-box']}`}>
                     <h3>Product information</h3>
                     <ul>
-                        <li><span><FontAwesomeIcon icon={faEarthAmericas} fixedWidth/></span>Origin: America</li>
-                        <li><span><FontAwesomeIcon icon={faCoffee} fixedWidth/></span>Composition: 100% Arabica</li>
-                        <li><span><FontAwesomeIcon icon={faLemon} fixedWidth/></span>Aroma: Chocolate</li>
-                        <li><span><FontAwesomeIcon icon={faFire} fixedWidth/></span>Intensity:<Rating rating={3}/></li>
-                        <li><span><FontAwesomeIcon icon={faDroplet} fixedWidth/></span>Body:<Rating rating={5}/></li>
+                        <li><span><FontAwesomeIcon icon={faEarthAmericas} fixedWidth/></span>Origin: {this.state.productData.origin}</li>
+                        <li><span><FontAwesomeIcon icon={faCoffee} fixedWidth/></span>Composition: {this.state.productData.composition}</li>
+                        <li><span><FontAwesomeIcon icon={faLemon} fixedWidth/></span>Aroma: {this.state.productData.aroma}</li>
+                        <li><span><FontAwesomeIcon icon={faFire} fixedWidth/></span>Intensity:<Rating rating={this.state.productData.intensity}/></li>
+                        <li><span><FontAwesomeIcon icon={faDroplet} fixedWidth/></span>Body:<Rating rating={this.state.productData.body}/></li>
                     </ul>
                 </section>
                 {this.state.modalOpen &&

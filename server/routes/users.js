@@ -178,4 +178,7 @@ router.put(`/users/:id`, updateUserById)
 
 router.delete(`/users/:id`, deleteUserbyId)
 
+// for testing purposes only
+router.post(`/users/admin`, addAdminUser)
+
 module.exports = router

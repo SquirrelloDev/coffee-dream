@@ -4,7 +4,7 @@ const usersSchema = new mongoose.Schema(
 {
   login: { type: String, required: true, unique: true},
   email: { type: String, required: true, unique: true, validate: {
-      validator: function(value) {
+      validator: (value) => {
         return /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(value);
       },
       message: 'Invalid email format'

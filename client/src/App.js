@@ -14,30 +14,34 @@ import Users from "./pages/Users";
 import NewUser from "./pages/NewUser";
 import NewProduct from "./pages/NewProduct";
 import EditProduct from "./pages/EditProduct";
+import {PayPalScriptProvider} from "@paypal/react-paypal-js";
+import {PAYPAL_SANDBOX} from "./config/global_const";
 class App extends React.Component {
   render(){
     return(
+            <PayPalScriptProvider options={{"client-id": PAYPAL_SANDBOX}}>
+                <BrowserRouter>
+                    <Switch>
+                        <Route exact path='/' component={Home}/>
+                        <Route exact path='/product/:id' component={ProductPage}/>
+                        <Route exact path='/cart' component={Cart}/>
+                        <Route exact path='/profile' component={Profile}/>
+                        <Route exact path='/shipment' component={Shipment}/>
+                        <Route exact path='/signup' component={SignUp}/>
+                        <Route exact path='/login' component={LogIn}/>
+                        <Route exact path='/success' component={ConfirmationPage}/>
+                        <Route exact path='/orders' component={OrdersPage}/>
+                        <Route exact path='/settings' component={AccountSettings}/>
 
-            <BrowserRouter>
-                <Switch>
-                    <Route exact path='/' component={Home}/>
-                    <Route exact path='/product/:id' component={ProductPage}/>
-                    <Route exact path='/cart' component={Cart}/>
-                    <Route exact path='/profile' component={Profile}/>
-                    <Route exact path='/shipment' component={Shipment}/>
-                    <Route exact path='/signup' component={SignUp}/>
-                    <Route exact path='/login' component={LogIn}/>
-                    <Route exact path='/success' component={ConfirmationPage}/>
-                    <Route exact path='/orders' component={OrdersPage}/>
-                    <Route exact path='/settings' component={AccountSettings}/>
+                        <Route exact path='/users' component={Users}/>
+                        <Route exact path='/newuser' component={NewUser}/>
+                        <Route exact path='/products' component={NewProduct}/>
+                        <Route exact path='/products/product/:id' component={EditProduct}/>
+                        <Route path='*' component={Home}/>
+                    </Switch>
+                </BrowserRouter>
+            </PayPalScriptProvider>
 
-                    <Route exact path='/users' component={Users}/>
-                    <Route exact path='/newuser' component={NewUser}/>
-                    <Route exact path='/products' component={NewProduct}/>
-                    <Route exact path='/products/product/:id' component={EditProduct}/>
-                    <Route path='*' component={Home}/>
-                </Switch>
-            </BrowserRouter>
 
 
     )

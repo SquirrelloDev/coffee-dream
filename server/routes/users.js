@@ -66,7 +66,7 @@ const checkIfFileIsImage = (req, res, next) =>
 
 const addNewUser = (req, res, next) =>
 {
-    usersModel.create({login:req.body.login, email:req.body.email, password:req.body.password}, (err, data) => 
+    usersModel.create({name:req.body.name, email:req.body.email, password:req.body.password}, (err, data) => 
     {
         if(err)
         {
@@ -81,21 +81,21 @@ const addNewUser = (req, res, next) =>
             }
 
         
-            return res.json({login:data.login, accessLevel: data.accessLevel, profilePhoto: fileData})
+            return res.json({name:data.name, accessLevel: data.accessLevel, profilePhoto: fileData})
         })
     })
 }
 
 const addAdminUser = (req, res, next) =>
 {
-    usersModel.create({login:`admin`, email:`admin@admin.com`, password:`admin`, accessLevel:parseInt(process.env.ACCESS_LEVEL_ADMIN)}, (err, data) =>
+    usersModel.create({name:`admin`, email:`admin@admin.com`, password:`admin`, accessLevel:parseInt(process.env.ACCESS_LEVEL_ADMIN)}, (err, data) =>
     {
         if(err)
         {
             return next(err)
         }
         
-        return res.json({login:data.login, email:data.email, password:data.password})
+        return res.json({name:data.name, email:data.email, password:data.password})
     })
 }
 
@@ -108,7 +108,7 @@ const returnUsersDetailsAsJSON = (req, res, next) =>
 {  
     if(req.data.profilePhotoFilename)
     {
-        return res.json({login: req.data.login, accessLevel:req.data.accessLevel})  
+        return res.json({name: req.data.name, email: req.data.email, accessLevel:req.data.accessLevel})  
     }    
 }
 

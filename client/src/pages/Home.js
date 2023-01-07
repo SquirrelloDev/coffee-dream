@@ -9,27 +9,34 @@ import Modal from "../components/UI/Modal";
 import TopBar from "../components/navs/TopBar";
 import AddButton from "../components/UI/AddButton";
 import axios from "axios";
-import {SERVER_PATH} from "../config/global_const";
+import {ACCESS_LEVEL, SERVER_PATH} from "../config/global_const";
 
 class Home extends React.Component{
     constructor(props) {
         super(props);
-        this.state = {modalOpen: true}
+        this.state = {modalOpen: true, products: {items: []}}
     }
-    DUMMY_PRODUCTS = {items: [{id: 1, name: "Arabica", price: 22.99, stock: 25},{id: 2, name: "Esspresso", price: 1.99, stock: 0}]};
     componentDidMount() {
-
+        axios.get(`${SERVER_PATH}/users/63b9592ade20c7b2e30c079b`).then(res => localStorage.setItem('currentUser', JSON.stringify({
+            _id: res.data._id,
+            accessLevel: res.data.accessLevel,
+            name: res.data.name,
+            email: res.data.email,
+            password: res.data.password
+        })))
+        axios.get(`${SERVER_PATH}/products`).then(res => this.setState({products: {items: res.data}}));
     }
 
     render() {
+        const currentUser =  JSON.parse(localStorage.getItem('currentUser'));
         return(
             <React.Fragment>
                 <TopBar/>
             <main className={classes.homepage}>
-                <h1 className={classes.homepage__heading}>Hello Derek!</h1>
+                <h1 className={classes.homepage__heading}>Hello {currentUser.name}!</h1>
                 <section>
                     <h2 className={classes['homepage__section-heading']}>Popular</h2>
-                    <HorizontalContainer products={this.DUMMY_PRODUCTS}/>
+                    <HorizontalContainer products={this.state.products}/>
                 </section>
                 <section>
                     <h2 className={classes['homepage__section-heading']}>Arabica selection</h2>
@@ -45,7 +52,7 @@ class Home extends React.Component{
                 </section>
                 <div className={classes.homepage__padding}></div>
             </main>
-                <AddButton/>
+                {currentUser.accessLevel === ACCESS_LEVEL.ADMIN && <AddButton/>}
                 <BottomBar/>
             </React.Fragment>
         )

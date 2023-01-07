@@ -10,16 +10,14 @@ class HorizontalContainer extends React.Component{
 
     }
     componentDidMount() {
-        console.log(this.props)
     }
 
     render() {
         const prodArray = this.props.products;
-        console.log(prodArray.items);
         return (
             <div className={`${classes.container} ${classes['snaps-inline']}`}>
                 {prodArray.items.map(prod =>{
-                    return <Link to={`/product/${prod.id}`} key={prod.id} className={classes.link}><ProductCard price={prod.price} stockValue={prod.stock}>{prod.name}</ProductCard></Link>
+                    return <Link to={{pathname: `/product/${prod._id}`, test: prod._id}} key={prod.id} className={classes.link}><ProductCard key={prod.id} price={prod.price} stockValue={prod.stock}>{prod.name}</ProductCard></Link>
                 })}
 
 

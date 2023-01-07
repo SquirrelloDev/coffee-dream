@@ -13,13 +13,14 @@ import BottomBar from "../components/navs/BottomBar";
 import Modal from "../components/UI/Modal";
 import Input from "../components/UI/inputs/Input";
 import Textarea from "../components/UI/inputs/Textarea";
-import {CART_CONTEXT} from "../config/global_const";
+import {ACCESS_LEVEL, CART_CONTEXT, SERVER_PATH} from "../config/global_const";
+import axios from "axios";
 
 class ProductPage extends React.Component{
     constructor(props) {
         super(props);
         this.state = {modalOpen: false, productData:{
-                id: 0,
+                _id: 0,
                 name: '',
                 price: 0.00,
                 description: '',
@@ -40,6 +41,9 @@ class ProductPage extends React.Component{
         this.setState({modalOpen: true})
     }
     addItemToCart(){
+        //kiedy istnieje
+
+
         //kiedy element nie istnieje w koszyku
         let updatedItems;
         // updatedItems = JSON.parse(localStorage.getItem(CART_CONTEXT)).items.concat();
@@ -47,9 +51,27 @@ class ProductPage extends React.Component{
     }
     componentDidMount() {
         //fetchowanie produktu po id i umieszczenie tego odpowiednio
+        axios.get(`${SERVER_PATH}/products/${this.props.match.params.id}`).then(res => this.setState({
+            productData:{
+                _id: res.data._id,
+                name: res.data.name,
+                price: res.data.price,
+                description: res.data.description,
+                image: res.data.image,
+                stock: res.data.stock,
+                origin: res.data.origin,
+                composition: res.data.composition,
+                aroma: res.data.aroma,
+                intensity: res.data.intensity,
+                body: res.data.body,
+                sca: res.data.sca
+            }
+        }))
+
     }
 
     render() {
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
         return (
             <React.Fragment>
             <main>
@@ -59,15 +81,17 @@ class ProductPage extends React.Component{
                 </div>
                 <section className={`${classes.main__box} ${classes.section}`}>
                     <h2 className={classes.main__box__title}>{this.state.productData.name}</h2>
-                    <SCA/>
+                    <SCA score={this.state.productData.sca}/>
                     <p className={classes.main__box__price}><span>$</span>{this.state.productData.price}</p>
                     <p className={classes.main__box__stock}>In stock: {this.state.productData.stock}</p>
                 </section>
+                {currentUser.accessLevel === ACCESS_LEVEL.ADMIN &&
                 <section className={`${classes['admin-box']} ${classes.section}`}>
                     <Button behaviorFn={this.openModal.bind(this)} variant={'fill'}>Change stock</Button>
                     <Button variant={'outline'}>Edit product</Button>
                     <Button variant={'outline danger'}>Delete</Button>
                 </section>
+                }
                 <section className={`${classes.section} ${classes['action-box']}`}>
                     <QuantityBox labelEnabled={true}/>
                     <Button variant='fill' disabled={this.state.productData.stock > 0 ? false : true}>TO CART <FontAwesomeIcon icon={faBagShopping}/></Button>

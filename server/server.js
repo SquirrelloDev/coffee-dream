@@ -12,7 +12,8 @@ app.use(require(`./routes/users`))
 app.use(require(`./routes/products`))
 app.use(require(`./routes/orders`))
 app.use(require(`./routes/payments`))
-app.use(require(`./models/promocodes`))
+app.use(require(`./routes/promocodes`))
+
 
 app.listen(process.env.SERVER_PORT, () => 
 {

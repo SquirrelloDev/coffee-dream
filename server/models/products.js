@@ -18,6 +18,7 @@ const productsSchema = new mongoose.Schema(
         aroma: { type: String},
         intensity: { type: Number, min: 1, max: 5},
         body: { type: Number, min: 1, max: 5},
+        sca: {type: Number, min: 0, max: 100}
     },
     {
         collection: `products`

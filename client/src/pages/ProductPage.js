@@ -31,7 +31,8 @@ class ProductPage extends React.Component{
                 aroma: '',
                 intensity: 0,
                 body: 0,
-                sca: 0
+                sca: 0,
+                QUANTITY: 1
             }}
     }
     closeModal(){
@@ -41,13 +42,40 @@ class ProductPage extends React.Component{
         this.setState({modalOpen: true})
     }
     addItemToCart(){
-        //kiedy istnieje
-
-
-        //kiedy element nie istnieje w koszyku
+        //pobieramy cały koszyk z localStorage
+        const cart = JSON.parse(localStorage.getItem(CART_CONTEXT));
+        console.log("Current cart", cart);
+        const existingCartItemIdx = cart.items.findIndex(item => item._id === this.state.productData._id);
+        const existingCartItem = cart.items[existingCartItemIdx];
+        console.log(existingCartItemIdx, "item", existingCartItem)
         let updatedItems;
-        // updatedItems = JSON.parse(localStorage.getItem(CART_CONTEXT)).items.concat();
-        // localStorage.setItem(CART_CONTEXT, {items:} )
+        //kiedy istnieje
+        if(existingCartItem){
+            const updatedItem = {
+                ...existingCartItem,
+                QUANTITY: existingCartItem.QUANTITY + this.state.productData.QUANTITY
+            }
+            updatedItems = [...cart.items]
+            updatedItems[existingCartItemIdx] = updatedItem;
+        }
+        else{
+            updatedItems = cart.items.concat(this.state.productData);
+        }
+
+        console.log("Updated arr", updatedItems);
+        localStorage.setItem(CART_CONTEXT, JSON.stringify({items: [...updatedItems]}));
+    }
+    addQuantity(){
+        if(this.state.productData.QUANTITY >= 999){
+            return;
+        }
+        this.setState(prevState => ({productData:{...prevState.productData, QUANTITY: prevState.productData.QUANTITY + 1 }}))
+    }
+    substractQuantity(){
+        if(this.state.count <= 1){
+            return;
+        }
+        this.setState(prevState => ({productData:{...prevState.productData, QUANTITY: prevState.productData.QUANTITY - 1 }}))
     }
     componentDidMount() {
         //fetchowanie produktu po id i umieszczenie tego odpowiednio
@@ -64,10 +92,10 @@ class ProductPage extends React.Component{
                 aroma: res.data.aroma,
                 intensity: res.data.intensity,
                 body: res.data.body,
-                sca: res.data.sca
+                sca: res.data.sca,
+                QUANTITY: 1
             }
         }))
-
     }
 
     render() {
@@ -93,8 +121,8 @@ class ProductPage extends React.Component{
                 </section>
                 }
                 <section className={`${classes.section} ${classes['action-box']}`}>
-                    <QuantityBox labelEnabled={true}/>
-                    <Button variant='fill' disabled={this.state.productData.stock > 0 ? false : true}>TO CART <FontAwesomeIcon icon={faBagShopping}/></Button>
+                    <QuantityBox currentQuantity={this.state.productData.QUANTITY} addHandler={this.addQuantity.bind(this)} subtractHandler={this.substractQuantity.bind(this)}  labelEnabled={true}/>
+                    <Button behaviorFn={this.addItemToCart.bind(this)} variant='fill' disabled={this.state.productData.stock > 0 ? false : true}>TO CART <FontAwesomeIcon icon={faBagShopping}/></Button>
                 </section>
                 <section className={`${classes.section} ${classes['desc-box']}`}>
                     <h3>Description</h3>

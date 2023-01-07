@@ -6,23 +6,12 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 class QuantityBox extends React.Component{
     constructor(props) {
         super(props);
-        this.state={
-            count: 1
-        }
-        this.addQuantity = this.addQuantity.bind(this);
-        this.substractQuantity = this.substractQuantity.bind(this);
     }
-    addQuantity(){
-        if(this.state.count >= 999){
-            return;
-        }
-        this.setState(prevState => ({count: prevState.count + 1,}))
+    add(){
+        this.props.addHandler();
     }
-    substractQuantity(){
-        if(this.state.count <= 1){
-            return;
-        }
-       this.setState(prevState => ({count: prevState.count -1,}))
+    subtract(){
+        this.props.subtractHandler();
     }
 
     render() {
@@ -30,7 +19,7 @@ class QuantityBox extends React.Component{
             <div className={classes.box}>
                 {this.props.labelEnabled && <p className={classes.box__title}>Quantity</p>}
                 <div className={classes.box__container}>
-                    <button onClick={this.substractQuantity}><FontAwesomeIcon icon={faMinus} size={"lg"}/></button><div>{this.state.count}</div><button onClick={this.addQuantity}><FontAwesomeIcon icon={faPlus} size={"lg"}/></button>
+                    <button onClick={this.subtract.bind(this)}><FontAwesomeIcon icon={faMinus} size={"lg"}/></button><div>{this.props.currentQuantity}</div><button onClick={this.add.bind(this)}><FontAwesomeIcon icon={faPlus} size={"lg"}/></button>
                 </div>
             </div>
         );

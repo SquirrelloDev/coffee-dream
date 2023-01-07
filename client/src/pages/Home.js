@@ -9,7 +9,7 @@ import Modal from "../components/UI/Modal";
 import TopBar from "../components/navs/TopBar";
 import AddButton from "../components/UI/AddButton";
 import axios from "axios";
-import {ACCESS_LEVEL, SERVER_PATH} from "../config/global_const";
+import {ACCESS_LEVEL, CART_CONTEXT, SERVER_PATH} from "../config/global_const";
 
 class Home extends React.Component{
     constructor(props) {
@@ -25,6 +25,10 @@ class Home extends React.Component{
             password: res.data.password
         })))
         axios.get(`${SERVER_PATH}/products`).then(res => this.setState({products: {items: res.data}}));
+        if(localStorage.getItem('cartItems') === null){
+            localStorage.setItem(CART_CONTEXT, JSON.stringify({items: []}));
+        }
+
     }
 
     render() {

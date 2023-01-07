@@ -15,6 +15,20 @@ const getPromocode = (req, res, next) =>
     })
 }
 
+const getAllPromocodes = (req, res, next) =>
+{
+    promocodesModel.find({}, (err, data) =>
+    {
+        if(err)
+        {
+            return next(err)
+        }
+
+        res.json(data)
+    })
+}
+
 router.get(`/promocodes/:code`, getPromocode)
+router.get(`/promocodes`, getAllPromocodes)
 
 module.exports = router

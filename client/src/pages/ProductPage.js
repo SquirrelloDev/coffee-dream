@@ -47,7 +47,7 @@ class ProductPage extends React.Component{
         console.log("Current cart", cart);
         const existingCartItemIdx = cart.items.findIndex(item => item._id === this.state.productData._id);
         const existingCartItem = cart.items[existingCartItemIdx];
-        console.log(existingCartItemIdx, "item", existingCartItem)
+        // console.log(existingCartItemIdx, "item", existingCartItem)
         let updatedItems;
         //kiedy istnieje
         if(existingCartItem){
@@ -62,7 +62,7 @@ class ProductPage extends React.Component{
             updatedItems = cart.items.concat(this.state.productData);
         }
 
-        console.log("Updated arr", updatedItems);
+        // console.log("Updated arr", updatedItems);
         localStorage.setItem(CART_CONTEXT, JSON.stringify({items: [...updatedItems]}));
     }
     addQuantity(){
@@ -72,7 +72,7 @@ class ProductPage extends React.Component{
         this.setState(prevState => ({productData:{...prevState.productData, QUANTITY: prevState.productData.QUANTITY + 1 }}))
     }
     substractQuantity(){
-        if(this.state.count <= 1){
+        if(this.state.productData.QUANTITY <= 1){
             return;
         }
         this.setState(prevState => ({productData:{...prevState.productData, QUANTITY: prevState.productData.QUANTITY - 1 }}))
@@ -110,7 +110,7 @@ class ProductPage extends React.Component{
                 <section className={`${classes.main__box} ${classes.section}`}>
                     <h2 className={classes.main__box__title}>{this.state.productData.name}</h2>
                     <SCA score={this.state.productData.sca}/>
-                    <p className={classes.main__box__price}><span>$</span>{this.state.productData.price}</p>
+                    <p className={classes.main__box__price}><span>$</span>{this.state.productData.price}<span>per item</span></p>
                     <p className={classes.main__box__stock}>In stock: {this.state.productData.stock}</p>
                 </section>
                 {currentUser.accessLevel === ACCESS_LEVEL.ADMIN &&

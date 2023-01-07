@@ -31,6 +31,11 @@
     font-weight: $bold;
     span{
       color: $cta-color;
+      &:last-of-type{
+        color: $grayer-color;
+        font-size: $tiny;
+        margin-left: .5em;
+      }
     }
   }
   &__stock{

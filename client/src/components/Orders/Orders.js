@@ -12,7 +12,7 @@ class Orders extends React.Component{
 
     componentDidMount() {
         //fetchowanie orderów wszystkich dla usera
-        axios.get(`${SERVER_PATH}/orders/${this.state.currentUser._id}`).then(res=> console.log(res.data.result))
+        axios.get(`${SERVER_PATH}/orders/${this.state.currentUser._id}`).then(res=> console.log(res.data))
             .then()
             .catch(err=> console.log(err));
     }

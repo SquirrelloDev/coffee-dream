@@ -4,17 +4,25 @@ let createError = require(`http-errors`)
 require(`dotenv`).config({path: `./config/.env`})
 
 const ordersModel = require(`../models/orders`)
-
+const productModel =require('../models/products')
 const getUserOrders = (req, res, next) =>
 {
     ordersModel.find({userId:req.params.userId}, (err, data) =>
     {
-        if(err)
-        {
-            return next(err)
-        }
+        ordersModel.aggregate([{
+            $lookup:{
+                from: "products",
+                localField: "products.productId",
+                foreignField: "_id",
+                as: "joinedProducts"
+            }
+        }]).then(result => res.json(result)).catch(error=> console.log(error))
+        // if(err)
+        // {
+        //     return next(err)
+        // }
 
-        res.json(data)
+        // res.json(data[0])
     })
 }
 

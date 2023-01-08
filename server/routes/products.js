@@ -34,6 +34,7 @@ const addNewProduct = (req, res, next) =>
     productDetails.aroma = req.body.aroma
     productDetails.intensity = req.body.intensity
     productDetails.body = req.body.body
+    productDetails.sca = req.body.sca
 
     productDetails.image = []
 

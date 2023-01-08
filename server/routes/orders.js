@@ -22,13 +22,13 @@ const addOrder = (req, res, next) =>
 {
     let orderDetails = new Object()
 
-    orderDetails.userId = req.body._id
+    orderDetails.userId = req.body.userId
     orderDetails.paymentId = req.body.paymentId
     orderDetails.products = req.body.products
-    orderDetails.totalPrice = req.body.totalPrice
+    orderDetails.total = req.body.total
     orderDetails.address = req.body.address
     orderDetails.city = req.body.city
-    orderDetails.postalCode = req.body.postalCode
+    orderDetails.zipcode = req.body.zipcode
 
     ordersModel.create(orderDetails, (err, data) =>
     {

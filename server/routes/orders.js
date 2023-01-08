@@ -7,7 +7,7 @@ const ordersModel = require(`../models/orders`)
 
 const getUserOrders = (req, res, next) =>
 {
-    ordersModel.find({userId:req.body.userId}, (err, data) =>
+    ordersModel.find({userId:req.params.userId}, (err, data) =>
     {
         if(err)
         {

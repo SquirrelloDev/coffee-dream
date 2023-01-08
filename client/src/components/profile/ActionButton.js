@@ -6,7 +6,6 @@ class ActionButton extends React.Component{
         super(props);
 
     }
-
     render() {
         return (
             <button className={!this.props.logoutVariant ? classes.action : `${classes.action} ${classes['action--logout']}`}><FontAwesomeIcon icon={this.props.icon} size={'xl'}/> <span>{this.props.children}</span></button>

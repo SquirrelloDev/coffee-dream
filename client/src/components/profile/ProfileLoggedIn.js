@@ -9,7 +9,7 @@ import {Link} from "react-router-dom";
 class ProfileLoggedIn extends React.Component{
     constructor(props) {
         super(props);
-        this.state={name: '', image: ''}
+        this.state={name: this.props.currentUser.name, image: ''}
 
     }
     componentDidMount() {

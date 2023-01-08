@@ -22,7 +22,8 @@ const addOrder = (req, res, next) =>
 {
     let orderDetails = new Object()
 
-    orderDetails.userId = req.user._id
+    orderDetails.userId = req.body._id
+    orderDetails.paymentId = req.body.paymentId
     orderDetails.products = req.body.products
     orderDetails.totalPrice = req.body.totalPrice
     orderDetails.address = req.body.address

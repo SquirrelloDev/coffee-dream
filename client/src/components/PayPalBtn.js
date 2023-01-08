@@ -3,12 +3,13 @@ import React from "react";
 import Toast from "./UI/Toast";
 import {CART_CONTEXT, SERVER_PATH} from "../config/global_const";
 import axios from "axios";
+import {Redirect} from "react-router-dom";
 
 class PayPalBtn extends React.Component{
     constructor(props) {
         //send product here
         super(props);
-        this.state = {paymentCancelled: false, paymentError: false, msg: '',
+        this.state = {paymentCancelled: false, paymentError: false, paymentSuccessful: false ,msg: '',
         cartState: JSON.parse(localStorage.getItem(CART_CONTEXT)),
         purchaseUnits: []}
     }
@@ -30,7 +31,8 @@ class PayPalBtn extends React.Component{
             zipcode: `${this.props.customerData.postal}`
         };
         //call backend
-        axios.post(`${SERVER_PATH}/orders`, orderEntry).then(res => console.log(res)).catch(err => console.log(err));
+        axios.post(`${SERVER_PATH}/orders`, orderEntry).then(res => this.setState({paymentSuccessful: true})).catch(err => console.log(err));
+
     }
     handleError(){
         this.setState({paymentError: true, msg: 'Something went wrong'});
@@ -71,6 +73,7 @@ class PayPalBtn extends React.Component{
     render() {
         return (
             <React.Fragment>
+             {this.state.paymentSuccessful && <Redirect to={{pathname: '/success', query:'payment'}}/>}
             <PayPalButtons style={{layout: 'vertical', color:'blue'}}
             createOrder={(data,actions) => {
                 return actions.order.create({

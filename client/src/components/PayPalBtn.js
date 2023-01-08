@@ -1,7 +1,8 @@
 import {PayPalButtons} from "@paypal/react-paypal-js";
 import React from "react";
 import Toast from "./UI/Toast";
-import {CART_CONTEXT} from "../config/global_const";
+import {CART_CONTEXT, SERVER_PATH} from "../config/global_const";
+import axios from "axios";
 
 class PayPalBtn extends React.Component{
     constructor(props) {
@@ -11,9 +12,25 @@ class PayPalBtn extends React.Component{
         cartState: JSON.parse(localStorage.getItem(CART_CONTEXT)),
         purchaseUnits: []}
     }
-    handleApprove(){
-        const orderEntry = {};
+    handleApprove(order){
+        const userCredentials = JSON.parse(localStorage.getItem('currentUser'));
+        const productsForApi = this.state.cartState.items.map(item => {
+            return {
+                productId: item._id,
+                quantity: item.QUANTITY
+            }
+        })
+        const orderEntry = {
+            userId:  userCredentials._id,
+            paymentId: order.id,
+            products: [...productsForApi],
+            total: this.props.orderValue.totalOrderValue,
+            address: `${this.props.customerData.name} ${this.props.customerData.lastName} ${this.props.customerData.street}`,
+            city: `${this.props.customerData.city}`,
+            zipcode: `${this.props.customerData.postal}`
+        };
         //call backend
+        axios.post(`${SERVER_PATH}/orders`, orderEntry).then(res => console.log(res)).catch(err => console.log(err));
     }
     handleError(){
         this.setState({paymentError: true, msg: 'Something went wrong'});
@@ -64,8 +81,7 @@ class PayPalBtn extends React.Component{
             }}
             onApprove={async (data, actions) => {
                 const order = await actions.order.capture();
-                console.log("Your order:", order);
-                console.log("Your data: ", data);
+                this.handleApprove(order);
             }}
             onError={this.handleError.bind(this)}
              onCancel={this.handleCancel.bind(this)}

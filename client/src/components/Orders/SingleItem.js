@@ -9,10 +9,10 @@ class SingleItem extends React.Component{
     render() {
         return (
             <React.Fragment>
-                <p>Product name: name</p>
-                <p>Quantity: 2</p>
-                <p>Price: $23,99</p>
-                <p>Value: $46,98</p>
+                <p>Product name: {this.props.productObj.name}</p>
+                <p>Quantity: {this.props.prodQuantity}</p>
+                <p>Price: ${this.props.productObj.price}</p>
+                <p>Value: ${this.props.productObj.price * this.props.prodQuantity}</p>
                 <hr/>
             </React.Fragment>
         );

@@ -12,16 +12,14 @@ class Orders extends React.Component{
 
     componentDidMount() {
         //fetchowanie orderów wszystkich dla usera
-        axios.get(`${SERVER_PATH}/orders/${this.state.currentUser._id}`).then(res=> console.log(res.data))
-            .then()
+        axios.get(`${SERVER_PATH}/orders/${this.state.currentUser._id}`).then(res=> this.setState({orders: [...res.data]}))
             .catch(err=> console.log(err));
     }
 
     render() {
         return (
             <section className={classes['order-list']}>
-                <OrderItem/>
-                <OrderItem/>
+                {this.state.orders.map(order => <OrderItem key={order._id} orderObj={order}/>)}
             </section>
         );
     }

@@ -18,6 +18,7 @@ class Cart extends React.Component{
             cartState: JSON.parse(localStorage.getItem(CART_CONTEXT)), //stan koszyka z localStorage
             itemsValue: 0,
             discountValue: 0,
+            discountPrice: 0,
             codeUsed: false
             };
     }
@@ -27,8 +28,8 @@ class Cart extends React.Component{
     openModal(){
         this.setState({modalOpen: true})
     }
-    setCodeUsed(){
-        this.setState({codeUsed: true});
+    setCodeUsed(codeValue){
+        this.setState({codeUsed: true, discountValue: (codeValue/100)});
     }
     resetCodeUsed(){
         this.setState({codeUsed: false});
@@ -37,7 +38,8 @@ class Cart extends React.Component{
         const itemsVal = this.state.cartState.items.reduce((previousValue, itemValue) => {
             return previousValue += (itemValue.price * itemValue.QUANTITY);
         }, 0);
-        this.setState({itemsValue: itemsVal})
+        const discountVal = itemsVal * this.state.discountValue;
+        this.setState({itemsValue: itemsVal, discountPrice: discountVal})
     }
     componentDidMount() {
         this.sumUp();
@@ -62,12 +64,15 @@ class Cart extends React.Component{
         localStorage.setItem(CART_CONTEXT, JSON.stringify({items: [...updatedItems]}));
         this.setState({cartState: {items: updatedItems}});
     }
+    proceedToOrder(){
+
+    }
     componentDidUpdate(prevProps, prevState) {
         if(prevState.cartState !== this.state.cartState){
             this.sumUp();
         }
         if((prevState.codeUsed !== this.state.codeUsed) && this.state.codeUsed){
-            this.setState({discountValue: 5})
+            this.sumUp()
         }
     }
 
@@ -83,7 +88,7 @@ class Cart extends React.Component{
                         {this.state.cartState.items.length === 0 || <PromoCode codeStatus={this.state.codeUsed} setCode={this.setCodeUsed.bind(this)} resetCode={this.resetCodeUsed.bind(this)}/>}
                         <div className={classes.cart__padding}></div>
                     </div>
-                <Summary itemsValue={this.state.itemsValue} discountValue={this.state.discountValue} loginPrompt={this.openModal.bind(this)}/>
+                <Summary itemsValue={this.state.itemsValue} discountValue={this.state.discountPrice} loginPrompt={this.openModal.bind(this)}/>
                 </main>
                 <BottomBar/>
                 {this.state.modalOpen && <Modal closeModalFn={this.closeModal.bind(this)}><ModalCart/></Modal> }

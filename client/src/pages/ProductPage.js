@@ -78,7 +78,6 @@ class ProductPage extends React.Component{
         this.setState(prevState => ({productData:{...prevState.productData, QUANTITY: prevState.productData.QUANTITY - 1 }}))
     }
     componentDidMount() {
-        //fetchowanie produktu po id i umieszczenie tego odpowiednio
         axios.get(`${SERVER_PATH}/products/${this.props.match.params.id}`).then(res => this.setState({
             productData:{
                 _id: res.data._id,

@@ -9,9 +9,11 @@ class Summary extends React.Component{
     }
     checkUserRole(){
         const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        if(currentUser.accessLevel < ACCESS_LEVEL.USER){
+        if(currentUser.accessLevel > ACCESS_LEVEL.USER){
             this.props.loginPrompt();
+            return;
         }
+
     }
 
     render() {

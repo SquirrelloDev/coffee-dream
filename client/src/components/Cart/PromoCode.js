@@ -2,13 +2,14 @@ import Input from "../UI/inputs/Input";
 import Button from "../UI/Button";
 import React from "react";
 import classes from "./PromoCode.module.scss";
-import {PROMO_CODE} from "../../config/global_const";
+import {PROMO_CODE, SERVER_PATH} from "../../config/global_const";
 import Toast from "../UI/Toast";
+import axios from "axios";
 
 class PromoCode extends React.Component{
     constructor(props) {
         super(props);
-        this.state={promoValue: '', displayToast: false}
+        this.state={promoValue: '', displayToast: false, promoData: []}
     }
     setPromoValue(inputText){
         this.setState({promoValue: inputText})
@@ -20,20 +21,28 @@ class PromoCode extends React.Component{
             this.setState({displayToast: true})
             return;
         }
-        if(this.state.promoValue === PROMO_CODE){
-            console.log('KOD GIT!')
-            this.props.setCode();
+        const promoEntry = this.state.promoData.find(promo => {
+            return promo.code === this.state.promoValue;
+        })
+        if(!promoEntry){
+            console.warn('KOD niepoprawny')
+            return;
         }
         else{
-            console.warn('KOD niepoprawny')
+            console.log('KOD GIT!')
+            this.props.setCode(promoEntry.discount);
         }
     }
+    componentDidMount() {
+        axios.get(`${SERVER_PATH}/promocodes`).then(res => this.setState({promoData: [...res.data]}));
+    }
+
     render() {
         return (
             <div className={classes.promo}>
                 <Input getValue={this.setPromoValue.bind(this)} placeholder={'Enter promo code'}/>
                 <Button behaviorFn={this.checkPromo.bind(this)} variant={'fill'}>Apply</Button>
-                {this.state.displayToast && <Toast> Code already used</Toast>}
+                {this.state.displayToast && <Toast> You can use only one code</Toast>}
             </div>
         );
     }

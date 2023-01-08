@@ -8,33 +8,61 @@ class Shipment extends React.Component{
 
     constructor(props) {
         super(props);
-        this.state={
-            name: '',
-            lastName: '',
-            phone: '',
-            street: '',
-            postal: '',
-            city: '',
-            totalOrderValue: JSON.parse(localStorage.getItem('totalOrder'))}
+        this.state={customerData:{
+                name: '',
+                lastName: '',
+                phone: '',
+                street: '',
+                postal: '',
+                city: ''
+            },
+            totalOrderValue: JSON.parse(localStorage.getItem('totalOrder')),
+            btnsAvailable: false}
     }
     setName(inputText){
-        this.setState({name: inputText});
+        this.setState(prevState => {
+            return {customerData: {...prevState.customerData, name: inputText}}
+        });
     }
     setLastName(inputText){
-        this.setState({lastName: inputText});
+        this.setState(prevState =>{
+            return {customerData: {...prevState.customerData, lastName: inputText}}
+        } );
     }
     setPhone(inputText){
-        this.setState({phone: inputText});
+        this.setState(prevState => {
+            return {customerData: {...prevState.customerData, phone: inputText}}
+        });
     }
     setStreet(inputText){
-        this.setState({street: inputText});
+        this.setState(prevState => {
+            return {customerData: {...prevState.customerData, street: inputText}}
+        });
     }
     setPostal(inputText){
-        this.setState({postal: inputText});
+        this.setState(prevState =>{
+            return {customerData: {...prevState.customerData, postal: inputText}}
+        } );
     }
     setCity(inputText){
-        this.setState({city: inputText});
+        this.setState(prevState => {
+            return {customerData: {...prevState.customerData, city: inputText}}
+        });
     }
+    checkFormValidation(){
+        for (const customerDataKey in this.state.customerData) {
+            if(this.state.customerData[customerDataKey] === ''){
+                return;
+            }
+        }
+        this.setState({btnsAvailable: true})
+    }
+    componentDidUpdate(prevProps, prevState) {
+        if(prevState.customerData !== this.state.customerData){
+            this.checkFormValidation();
+        }
+    }
+
     render() {
         return (
             <main className={classes.shipment}>
@@ -47,8 +75,7 @@ class Shipment extends React.Component{
                     <Input getValue={this.setStreet.bind(this)} label={'Street'}/>
                     <Input getValue={this.setPostal.bind(this)} label={'Postal code'}/>
                     <Input getValue={this.setCity.bind(this)} label={'City'}/>
-
-                    <PayPalBtn orderValue={this.state.totalOrderValue}/>
+                    {this.state.btnsAvailable && <PayPalBtn orderValue={this.state.totalOrderValue} customerData={this.state.customerData}/>}
                 </form>
             </main>
         );

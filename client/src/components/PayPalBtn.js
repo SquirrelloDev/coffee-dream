@@ -12,6 +12,7 @@ class PayPalBtn extends React.Component{
         purchaseUnits: []}
     }
     handleApprove(){
+        const orderEntry = {};
         //call backend
     }
     handleError(){
@@ -57,22 +58,6 @@ class PayPalBtn extends React.Component{
             createOrder={(data,actions) => {
                 return actions.order.create({
                     intent: 'CAPTURE',
-                    // purchase_units: [
-                    //     {
-                    //         reference_id: '12345',
-                    //         description: 'Whole order as one payment',
-                    //         amount:{
-                    //             value: this.props.orderValue
-                    //         }
-                    //     },
-                    //     {
-                    //         reference_id: '4321',
-                    //         description: 'dsfsf',
-                    //         amount: {
-                    //             value: '50.00'
-                    //         }
-                    //     }
-                    // ]
                     purchase_units: [...this.state.purchaseUnits]
 
                 })

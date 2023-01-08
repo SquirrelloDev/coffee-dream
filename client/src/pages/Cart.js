@@ -39,6 +39,7 @@ class Cart extends React.Component{
             return previousValue += (itemValue.price * itemValue.QUANTITY);
         }, 0);
         const discountVal = itemsVal * this.state.discountValue;
+        localStorage.setItem('totalOrder',JSON.stringify( {totalOrderValue: (itemsVal - discountVal).toFixed(2), appliedDiscountValue: this.state.discountValue}));
         this.setState({itemsValue: itemsVal, discountPrice: discountVal})
     }
     componentDidMount() {

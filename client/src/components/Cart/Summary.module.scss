@@ -45,6 +45,15 @@
   }
   button{
     grid-area: 4 / 1 / 5 / 3;
+    width: 100%;
     min-height: 50px;
   }
+  &__checkout{
+    grid-area: 4 / 1 / 5 / 3;
+    button{
+      width: 100%;
+      min-height: 50px;
+    }
+  }
+
 }

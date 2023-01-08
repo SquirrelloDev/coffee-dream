@@ -8,7 +8,32 @@ class Shipment extends React.Component{
 
     constructor(props) {
         super(props);
-
+        this.state={
+            name: '',
+            lastName: '',
+            phone: '',
+            street: '',
+            postal: '',
+            city: '',
+            totalOrderValue: JSON.parse(localStorage.getItem('totalOrder'))}
+    }
+    setName(inputText){
+        this.setState({name: inputText});
+    }
+    setLastName(inputText){
+        this.setState({lastName: inputText});
+    }
+    setPhone(inputText){
+        this.setState({phone: inputText});
+    }
+    setStreet(inputText){
+        this.setState({street: inputText});
+    }
+    setPostal(inputText){
+        this.setState({postal: inputText});
+    }
+    setCity(inputText){
+        this.setState({city: inputText});
     }
     render() {
         return (
@@ -16,14 +41,14 @@ class Shipment extends React.Component{
                 <BackButton path='/cart' glassZone={40}/>
                 <h1>Shipment details</h1>
                 <form className={classes.shipment__inputs}>
-                    <Input label={'Name'}/>
-                    <Input label={'Last name'}/>
-                    <Input label={'Phone number'}/>
-                    <Input label={'Street'}/>
-                    <Input label={'Postal code'}/>
-                    <Input label={'City'}/>
+                    <Input getValue={this.setName.bind(this)} label={'Name'}/>
+                    <Input getValue={this.setLastName.bind(this)} label={'Last name'}/>
+                    <Input getValue={this.setPhone.bind(this)} label={'Phone number'}/>
+                    <Input getValue={this.setStreet.bind(this)} label={'Street'}/>
+                    <Input getValue={this.setPostal.bind(this)} label={'Postal code'}/>
+                    <Input getValue={this.setCity.bind(this)} label={'City'}/>
 
-                    <PayPalBtn/>
+                    <PayPalBtn orderValue={this.state.totalOrderValue}/>
                 </form>
             </main>
         );

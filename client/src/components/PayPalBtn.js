@@ -1,12 +1,15 @@
 import {PayPalButtons} from "@paypal/react-paypal-js";
 import React from "react";
 import Toast from "./UI/Toast";
+import {CART_CONTEXT} from "../config/global_const";
 
 class PayPalBtn extends React.Component{
     constructor(props) {
         //send product here
         super(props);
-        this.state = {paymentCancelled: false, paymentError: false, mgs: ''}
+        this.state = {paymentCancelled: false, paymentError: false, msg: '',
+        cartState: JSON.parse(localStorage.getItem(CART_CONTEXT)),
+        purchaseUnits: []}
     }
     handleApprove(){
         //call backend
@@ -17,6 +20,21 @@ class PayPalBtn extends React.Component{
     handleCancel(){
         this.setState({paymentCancelled: true, msg: 'Payment cancelled by the user'});
     }
+    componentDidMount() {
+        console.log(this.props.orderValue);
+        const units = this.state.cartState.items.map(item => {
+            return{
+                reference_id: item._id,
+                description: item.name,
+                amount: {
+                    currency_code: 'USD',
+                    value: ((item.price * item.QUANTITY) * (1-this.props.orderValue.appliedDiscountValue)).toFixed(2)
+                }
+            }
+        })
+        this.setState({purchaseUnits: [...units]});
+    }
+
     componentDidUpdate(prevProps, prevState) {
         if((prevState.paymentCancelled !== this.state.paymentCancelled) && this.state.paymentCancelled){
             let toastTimeout = setTimeout(()=>{
@@ -38,14 +56,25 @@ class PayPalBtn extends React.Component{
             <PayPalButtons style={{layout: 'vertical', color:'blue'}}
             createOrder={(data,actions) => {
                 return actions.order.create({
-                    purchase_units: [
-                        {
-                            description: 'Whole order as one payment',
-                            amount:{
-                                value: '45.23'
-                            }
-                        }
-                    ]
+                    intent: 'CAPTURE',
+                    // purchase_units: [
+                    //     {
+                    //         reference_id: '12345',
+                    //         description: 'Whole order as one payment',
+                    //         amount:{
+                    //             value: this.props.orderValue
+                    //         }
+                    //     },
+                    //     {
+                    //         reference_id: '4321',
+                    //         description: 'dsfsf',
+                    //         amount: {
+                    //             value: '50.00'
+                    //         }
+                    //     }
+                    // ]
+                    purchase_units: [...this.state.purchaseUnits]
+
                 })
             }}
             onApprove={async (data, actions) => {

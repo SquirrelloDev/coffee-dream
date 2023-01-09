@@ -67,6 +67,19 @@ const getAllProducts = (req, res, next) =>
     })
 }
 
+const getProductsByComposition = (req, res, next) =>
+{
+    productsModel.find({composition: req.params.composition}, (err, data) =>
+    {
+        if(err)
+        {
+            return next(err)
+        }
+
+        res.json(data)
+    })
+}
+
 const getProductPhotoAsBase64 = (req, res, next) =>
 {
     fs.readFile(`${process.env.UPLOADED_FILES_FOLDER}/${req.params.filename}`, (err, fileData) =>
@@ -131,6 +144,8 @@ router.get(`/products`, getAllProducts)
 router.get(`/products/photo/:filename`, getProductPhotoAsBase64)
 
 router.get(`/products/:id`, getProductById)
+
+router.get(`/products/:composition`, getProductsByComposition)
 
 router.post(`/products`, checkIfUserIsAdmin, upload.array("productPhotos", parseInt(process.env.MAX_NUMBER_OF_UPLOAD_FILES_ALLOWED)), addNewProduct)
 

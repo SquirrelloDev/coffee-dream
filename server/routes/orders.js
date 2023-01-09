@@ -49,6 +49,19 @@ const addOrder = (req, res, next) =>
     })
 }
 
+const refundOrderById = (req, res, next) =>
+{
+    ordersModel.findByIdAndUpdate({_id:req.params.id}, {status: `refund requested`}, {new:true}, (err, data) =>
+    {
+        if(err)
+        {
+            return next(err)
+        }
+
+        res.json(data)
+    })
+}
+
 const updateOrderById = (req, res, next) =>
 {
     ordersModel.findOneAndUpdate({_id:req.params.id}, req.body, {new:true}, (err, data) =>
@@ -67,5 +80,7 @@ router.get(`/orders/:userId`, getUserOrders)
 router.post(`/orders`, addOrder)
 
 router.put(`/orders/:id`, updateOrderById)
+
+router.put(`/orders/refund/:id`, refundOrderById)
 
 module.exports = router

@@ -18,12 +18,6 @@ class OrderItem extends React.Component{
                 street: 'Groove str. 33',
                 postal: '69-420 Los Santos'
             },
-            // orderItems: [{
-            //     name: 'name',
-            //     quantity: 0,
-            //     price: 22.99,
-            //     value: 0
-            // }]
                 orderItems: [...this.props.orderObj.joinedProducts]
             }}
     }
@@ -37,7 +31,23 @@ class OrderItem extends React.Component{
         }
         this.setState({expanded: !this.state.expanded});
     }
+    componentDidMount() {
+        const addressArr = this.props.orderObj.address.split(' ');
+        console.log(addressArr);
+        this.setState(prevState => {
+            return {orderData:{
+                    ...prevState.orderData,
+                    billing:{
+                    name: `${addressArr[0]} ${addressArr[1]}`,
+                    street: addressArr[2],
+                    postal: `${this.props.orderObj.city} ${this.props.orderObj.zipcode}`
+                    }
+                }}
+        })
+    }
+
     render() {
+
         return (
             <div className={classes.order}>
                 <div className={classes['order__main-info']}>
@@ -56,7 +66,7 @@ class OrderItem extends React.Component{
                     <p>Items:</p>
                     <hr/>
                     {/*mapowanie itemów*/}
-                    {this.state.orderData.orderItems.map((orderItem, idx) => <SingleItem key={orderItem._id} productObj={orderItem} prodQuantity={this.props.orderObj.products[idx].quantity}/>)}
+                    {this.state.orderData.orderItems.map((orderItem, idx) => <SingleItem key={orderItem._id} productObj={orderItem} billingObj={this.state.orderData.billing} prodQuantity={this.props.orderObj.products[idx].quantity}/>)}
                     <button>Request a refund</button>
                 </div>
                 }

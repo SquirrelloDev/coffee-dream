@@ -44,10 +44,8 @@ class ProductPage extends React.Component{
     addItemToCart(){
         //pobieramy cały koszyk z localStorage
         const cart = JSON.parse(localStorage.getItem(CART_CONTEXT));
-        console.log("Current cart", cart);
         const existingCartItemIdx = cart.items.findIndex(item => item._id === this.state.productData._id);
         const existingCartItem = cart.items[existingCartItemIdx];
-        // console.log(existingCartItemIdx, "item", existingCartItem)
         let updatedItems;
         //kiedy istnieje
         if(existingCartItem){
@@ -61,8 +59,6 @@ class ProductPage extends React.Component{
         else{
             updatedItems = cart.items.concat(this.state.productData);
         }
-
-        // console.log("Updated arr", updatedItems);
         localStorage.setItem(CART_CONTEXT, JSON.stringify({items: [...updatedItems]}));
     }
     addQuantity(){

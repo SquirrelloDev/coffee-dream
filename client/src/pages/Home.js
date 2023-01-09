@@ -24,6 +24,7 @@ class Home extends React.Component{
             email: res.data.email,
             password: res.data.password
         })))
+
         axios.get(`${SERVER_PATH}/products`).then(res => this.setState({products: {items: res.data}}));
         if(localStorage.getItem('cartItems') === null){
             localStorage.setItem(CART_CONTEXT, JSON.stringify({items: []}));

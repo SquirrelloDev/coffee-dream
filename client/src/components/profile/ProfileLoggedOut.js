@@ -3,6 +3,7 @@ import ProfilePerk from "./ProfilePerk";
 import classes from "../../pages/Profile.module.scss";
 import {faBookmark, faPhone, faNewspaper, faWifi, faEllipsis} from "@fortawesome/free-solid-svg-icons";
 import Button from "../UI/Button";
+import {Link} from "react-router-dom";
 class ProfileLoggedOut extends React.Component{
     constructor(props) {
         super(props);
@@ -43,8 +44,8 @@ class ProfileLoggedOut extends React.Component{
                     <h2>Ready to start?</h2>
                     <div className={classes.hero}></div>
                     <div className={classes['profile__sign-box__butons']}>
-                        <Button variant={'fill'}>Sign Up</Button>
-                        <Button variant={'outline'}>Log In</Button>
+                        <Link to={'/signup'}><Button variant={'fill'}>Sign Up</Button></Link>
+                        <Link to={'/login'}> <Button variant={'outline'}>Log In</Button></Link>
                     </div>
                 </div>
                 <div className={classes.profile__padding}></div>

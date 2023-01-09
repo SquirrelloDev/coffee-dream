@@ -11,7 +11,6 @@ class Orders extends React.Component{
     }
 
     componentDidMount() {
-        //fetchowanie orderów wszystkich dla usera
         axios.get(`${SERVER_PATH}/orders/${this.state.currentUser._id}`).then(res=> this.setState({orders: [...res.data]}))
             .catch(err=> console.log(err));
     }

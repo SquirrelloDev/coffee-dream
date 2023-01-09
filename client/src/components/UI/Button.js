@@ -28,7 +28,7 @@ class Button extends React.Component{
 
     render() {
         return (
-            <button onClick={this.props.behaviorFn} className={this.state.styles} disabled={this.props.disabled ? true : false}>{this.props.children}</button>
+            <button type={this.props.type ? this.props.type : 'button'} onClick={this.props.behaviorFn} className={this.state.styles} disabled={this.props.disabled ? true : false}>{this.props.children}</button>
         );
     }
 }

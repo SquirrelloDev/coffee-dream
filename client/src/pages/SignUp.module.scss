@@ -11,5 +11,10 @@
     input{
       font-size: $big;
     }
+    p{
+      margin-top: -0.5em;
+      color: $grayer-color;
+      font-size: $tiny;
+    }
   }
 }

@@ -13,10 +13,9 @@ class OrderItem extends React.Component{
             status: this.props.orderObj.status,
             orderValue: this.props.orderObj.total,
             billing:{
-                //trzeba będzie pobawić się rozdzieleniem przy użyciu .split(' ')
-                name: 'John Doe',
-                street: 'Groove str. 33',
-                postal: '69-420 Los Santos'
+                name: '',
+                street: '',
+                postal: ''
             },
                 orderItems: [...this.props.orderObj.joinedProducts]
             }}
@@ -65,7 +64,6 @@ class OrderItem extends React.Component{
                     <p>{this.state.orderData.billing.postal}</p>
                     <p>Items:</p>
                     <hr/>
-                    {/*mapowanie itemów*/}
                     {this.state.orderData.orderItems.map((orderItem, idx) => <SingleItem key={orderItem._id} productObj={orderItem} billingObj={this.state.orderData.billing} prodQuantity={this.props.orderObj.products[idx].quantity}/>)}
                     <button>Request a refund</button>
                 </div>

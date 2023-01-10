@@ -105,10 +105,7 @@ const logout = (req, res, next) =>
 
 const returnUsersDetailsAsJSON = (req, res, next) =>
 {  
-    if(req.data.profilePhotoFilename)
-    {
-        return res.json({name: req.data.name, email: req.data.email, accessLevel:req.data.accessLevel})  
-    }    
+    return res.json({name: req.data.name, email: req.data.email, accessLevel:req.data.accessLevel})   
 }
 
 const showUsersList = (req, res, next) =>

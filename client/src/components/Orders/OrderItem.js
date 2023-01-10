@@ -3,6 +3,8 @@ import {faChevronDown, faChevronUp} from "@fortawesome/free-solid-svg-icons";
 import SingleItem from "./SingleItem";
 import classes from "./OrderItem.module.scss";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import axios from "axios";
+import {SERVER_PATH} from "../../config/global_const";
 
 class OrderItem extends React.Component{
     constructor(props) {
@@ -17,7 +19,7 @@ class OrderItem extends React.Component{
                 street: '',
                 postal: ''
             },
-                orderItems: [...this.props.orderObj.joinedProducts]
+                orderItems: [...this.props.orderObj.joinedProducts],
             }}
     }
     changeDetailsHandler(){
@@ -44,6 +46,9 @@ class OrderItem extends React.Component{
                 }}
         })
     }
+    returnOrder(){
+        axios.put(`${SERVER_PATH}/orders/refund/${this.props.orderObj._id}`).then(res => this.props.resetOrderHandler());
+    }
 
     render() {
 
@@ -65,7 +70,7 @@ class OrderItem extends React.Component{
                     <p>Items:</p>
                     <hr/>
                     {this.state.orderData.orderItems.map((orderItem, idx) => <SingleItem key={orderItem._id} productObj={orderItem} billingObj={this.state.orderData.billing} prodQuantity={this.props.orderObj.products[idx].quantity}/>)}
-                    <button>Request a refund</button>
+                    <button onClick={this.returnOrder.bind(this)}>Request a refund</button>
                 </div>
                 }
             </div>

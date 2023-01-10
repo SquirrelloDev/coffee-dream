@@ -74,15 +74,19 @@ class AccountSettings extends React.Component{
 
             axios.put(`${SERVER_PATH}/users/${this.state.id}`, formData,{headers: {"Content-type": "multipart/form-data"}}).then(res=>{
                 console.log(res.data);
-                localStorage.setItem('currentUser', JSON.stringify({
-                    _id: res.data._id,
-                    accessLevel: res.data.accessLevel,
-                    name: res.data.name,
-                    email: res.data.email,
-                    password: res.data.password,
-                    profilePhotoFilename: res.data.profilePhotoFilename
-                }));
-                this.setState({redirectToProfile: true})
+                axios.get(`${SERVER_PATH}/users/${res.data._id}`).then(response => {
+                    console.log(response.data);
+                    localStorage.setItem('currentUser', JSON.stringify({
+                        _id: response.data._id,
+                        accessLevel: response.data.accessLevel,
+                        name: response.data.name,
+                        email: response.data.email,
+                        password: response.data.password,
+                        profilePhotoFilename: response.data.profilePhoto
+                    }));
+                    this.setState({redirectToProfile: true})
+                });
+
             })
         }
 

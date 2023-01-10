@@ -212,7 +212,7 @@ router.post(`/users/login/:email/:password`, checkIfUserExists, returnUsersDetai
 
 router.post(`/users/logout`, logout)
 
-router.put(`/users/:id`, upload.single("profilePhoto"), updateUserById)
+router.put(`/users/:id`, upload.single("profilePhoto"), updateUserById, getUserById)
 
 router.delete(`/users/:id`, deleteUserbyId)
 

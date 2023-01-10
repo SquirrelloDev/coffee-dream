@@ -4,11 +4,21 @@ import classes from "./AccountSettings.module.scss";
 import Input from "../components/UI/inputs/Input";
 import Avatar from "../components/profile/Avatar";
 import Button from "../components/UI/Button";
+import axios from "axios";
+import {SERVER_PATH} from "../config/global_const";
 class AccountSettings extends React.Component{
     constructor(props) {
         super(props);
-        this.state={changeMailActive: false, changePasswdActive: false, name: '', lastName:'', mail: '', passwd: '', mailConfirm:'', passwdConfirm: '',
-        nameErr: false, lastErr: false, mailErr: false, passwdErr:false}
+        this.state={changeMailActive: false, changePasswdActive: false,
+            id: (JSON.parse(localStorage.getItem('currentUser')))._id,
+            name: ((JSON.parse(localStorage.getItem('currentUser'))).name).split(' ')[0],
+            lastName: ((JSON.parse(localStorage.getItem('currentUser'))).name).split(' ')[1],
+            mail: (JSON.parse(localStorage.getItem('currentUser'))).email,
+            passwd: (JSON.parse(localStorage.getItem('currentUser'))).password,
+            mailConfirm:'',
+            passwdConfirm: '',
+            newImage: null,
+            nameErr: false, lastErr: false, mailErr: false, passwdErr:false}
     }
     activateMailHandler(){
         this.setState({changeMailActive: true});
@@ -43,6 +53,24 @@ class AccountSettings extends React.Component{
     validateBasicInfo(e){
         e.preventDefault();
         let nameIsInvalid = true;
+        let lastNameIsInvalid = true;
+        if(this.state.name !== ''){
+            nameIsInvalid = false;
+        }
+        if(this.state.lastName !==''){
+            lastNameIsInvalid = false;
+        }
+        if(!nameIsInvalid && !lastNameIsInvalid){
+            //put data
+            const updateUserObj = {
+                name: `${this.state.name} ${this.state.lastName}`,
+                email: 'fghffgh@dfdfg.com',
+                password: '1234567890',
+                accessLevel: 1,
+                profilePhotoFilename: this.state.newImage
+            }
+            axios.put(`${SERVER_PATH}/users/${this.state.id}`, updateUserObj).then(res=>console.log(res))
+        }
 
     }
     validateMail(e){
@@ -85,7 +113,7 @@ class AccountSettings extends React.Component{
                     <h3>Avatar</h3>
                     <div className={classes['settings__avatar-box']}>
                         <Avatar/>
-                        <Button variant={'fill'}>Upload</Button>
+                        <input type={'file'} onChange={(e) => this.setState({newImage: e.target.files[0]})} name={'photoFile'}/>
                         <Button variant={'outline danger'}>Delete</Button>
                     </div>
                     <Button type={'submit'} variant={'fill'}>Save</Button>

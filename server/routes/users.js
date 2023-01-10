@@ -18,9 +18,8 @@ const checkIfUserExists = (req, res, next) =>
         if(err)
         {
             return next(err)
-        }        
-
-        req.data = data            
+        }
+        res.data = data
         return next()        
     })    
 }

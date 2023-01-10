@@ -5,6 +5,7 @@ import classes from "./SignUp.module.scss";
 import axios from "axios";
 import defaultProfilePicture from '../img/profile-loggedout-s.jpg';
 import {SERVER_PATH} from "../config/global_const";
+import {Redirect} from "react-router-dom";
 class SignUp extends React.Component{
     constructor(props) {
         super(props);
@@ -17,7 +18,8 @@ class SignUp extends React.Component{
             nameErr: false,
             lastErr: false,
             emailErr: false,
-            passwordErr: false
+            passwordErr: false,
+            redirectToLogin: false
         }
     }
     setName(inputText){
@@ -35,7 +37,7 @@ class SignUp extends React.Component{
     setProfilePic(e){
         this.setState({profilePic: e.target.files[0]})
     }
-    loginProcess(e){
+     loginProcess(e){
         e.preventDefault();
         let nameIsInvalid=true;
         let lastNameIsInvalid = true;
@@ -60,8 +62,8 @@ class SignUp extends React.Component{
             console.log('Sending data server');
             const formData = new FormData();
             formData.append("profilePhoto", this.state.profilePic);
-            axios.post(`${SERVER_PATH}/users/register/${this.state.name}/${this.state.email}/${this.state.password}`, formData, {headers: {"Content-type": "multipart/form-data"}}).then(res => console.log(res));
-            this.setState({nameErr: false, lastErr: false, emailErr: false, passwordErr: false})
+            axios.post(`${SERVER_PATH}/users/register/${this.state.name + " " + this.state.lastName}/${this.state.email}/${this.state.password}`, formData, {headers: {"Content-type": "multipart/form-data"}}).catch(err => console.log(err));
+            this.setState({nameErr: false, lastErr: false, emailErr: false, passwordErr: false, redirectToLogin: true})
         }
         else{
             this.setState({nameErr: nameIsInvalid, lastErr: lastNameIsInvalid, emailErr: emailIsInvalid, passwordErr: passwdIsInvalid})
@@ -71,6 +73,7 @@ class SignUp extends React.Component{
     render() {
         return (
             <main className={classes.signup}>
+                {this.state.redirectToLogin && <Redirect to={'/login'}/>}
                 <h1>Getting started</h1>
                 <form onSubmit={this.loginProcess.bind(this)} className={classes['signup-form']}>
                     <Input errStatus={this.state.nameErr} errValue={'Name cannot be empty'} getValue={this.setName.bind(this)} label={'Name'}/>
@@ -78,6 +81,7 @@ class SignUp extends React.Component{
                     <Input errStatus={this.state.emailErr} errValue={"This doesn't look like a valid email"} getValue={this.setMail.bind(this)} label={'E-mail address'}/>
                     <Input errStatus={this.state.passwordErr} errValue={'Your password is too short'} getValue={this.setPassword.bind(this)} type={'password'} label={'Password'}/>
                     <p className={classes['signup-form__password']}>Password should contain at least 8 characters</p>
+                    <p>Profile photo</p>
                     <input type={'file'} onChange={this.setProfilePic.bind(this)} name={'profilePhoto'}/>
                     <Button type={'submit'} variant={'fill'}>Sign up</Button>
                 </form>

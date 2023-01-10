@@ -65,7 +65,7 @@ class AccountSettings extends React.Component{
             //put data
             const formData = new FormData();
             formData.append('name', `${this.state.name} ${this.state.lastName}`);
-            formData.append('email', this.state.email);
+            formData.append('email', this.state.mail);
             formData.append('password', this.state.passwd);
             formData.append('accessLevel', this.state.accessLevel);
             formData.append("profilePhoto", this.state.newImage);

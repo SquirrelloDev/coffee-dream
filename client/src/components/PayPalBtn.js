@@ -31,7 +31,10 @@ class PayPalBtn extends React.Component{
             zipcode: `${this.props.customerData.postal}`
         };
         //call backend
-        axios.post(`${SERVER_PATH}/orders`, orderEntry).then(res => this.setState({paymentSuccessful: true})).catch(err => console.log(err));
+        axios.post(`${SERVER_PATH}/orders`, orderEntry).then(res => {
+            axios.put(`${SERVER_PATH}/products`, {products: [...productsForApi]});
+            this.setState({paymentSuccessful: true});
+        }).catch(err => console.log(err));
 
     }
     handleError(){

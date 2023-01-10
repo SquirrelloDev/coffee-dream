@@ -168,7 +168,7 @@ const updateProductsStock = (req, res, next) =>
         return {
             updateOne: {
                 filter: {
-                    _id: obj._id
+                    _id: obj.productId
                 },
                 update: {
                     $inc: { stock: -obj.quantity }

@@ -205,7 +205,7 @@ router.get(`/products/:id`, getProductById)
 
 router.get(`/products/:composition`, getProductsByComposition)
 
-router.post(`/products`, checkIfUserIsAdmin, upload.array("productPhotos", parseInt(process.env.MAX_NUMBER_OF_UPLOAD_FILES_ALLOWED)), addNewProduct)
+router.post(`/products`, checkIfUserIsAdmin, upload.single("productPhoto"), addNewProduct)
 
 router.put(`/products`, updateProductsStock)
 

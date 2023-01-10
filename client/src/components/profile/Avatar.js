@@ -16,7 +16,7 @@ class Avatar extends React.Component{
     render() {
         return (
             <div className={classes['avatar-box']}>
-                <img src={`data:;base64,${this.state.image}`} className={classes['avatar-box__image']}/>
+                <img src={this.state.image ? `data:;base64,${this.state.image}` : defaultAvatar} className={classes['avatar-box__image']}/>
                 {this.props.label && <p>{this.props.label}</p>}
             </div>
         );

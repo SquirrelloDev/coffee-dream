@@ -7,7 +7,8 @@ import Button from "../components/UI/Button";
 class AccountSettings extends React.Component{
     constructor(props) {
         super(props);
-        this.state={changeMailActive: false, changePasswdActive: false, mail: '', passwd: ''}
+        this.state={changeMailActive: false, changePasswdActive: false, name: '', lastName:'', mail: '', passwd: '', mailConfirm:'', passwdConfirm: '',
+        nameErr: false, lastErr: false, mailErr: false, passwdErr:false}
     }
     activateMailHandler(){
         this.setState({changeMailActive: true});
@@ -21,27 +22,56 @@ class AccountSettings extends React.Component{
     deactivatePasswordHandler(){
         this.setState({changePasswdActive: false});
     }
-    componentDidMount() {
-        //fetchowanie użytkownika po id
+    setName(inputText){
+        this.setState({name: inputText});
+    }
+    setLastName(inputText){
+        this.setState({lastName: inputText});
+    }
+    setMail(inputText){
+        this.setState({mail: inputText});
+    }
+    setConfirmMail(inputText){
+        this.setState({mailConfirm: inputText});
+    }
+    setPassword(inputText){
+        this.setState({passwd: inputText});
+    }
+    setConfirmPassword(inputText){
+        this.setState({passwdConfirm: inputText});
+    }
+    validateBasicInfo(e){
+        e.preventDefault();
+        let nameIsInvalid = true;
+
+    }
+    validateMail(e){
+        e.preventDefault();
+
+    }
+    validatePassword(e){
+        e.preventDefault();
+
     }
 
     render() {
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
         const defaultCredentials = <React.Fragment>
-            <Input label={'E-mail address'} defValue={this.state.mail} disabled={true}/>
+            <Input label={'E-mail address'} defValue={currentUser.email} disabled={true}/>
             <button onClick={this.activateMailHandler.bind(this)} className={classes.settings__credentials__change}>Change</button>
-            <Input label={'Password'} type={'password'} defValue={this.state.passwd} disabled={true}/>
+            <Input label={'Password'} type={'password'} defValue={currentUser.password} disabled={true}/>
             <button onClick={this.activatePasswordHandler.bind(this)} className={classes.settings__credentials__change}>Change</button>
         </React.Fragment>
-        const emailCredentials = <form className={classes['settings__credential-form']}>
-            <Input label={'New email address'}/>
-            <Input label={'Confirm email address'}/>
-            <Button variant={'fill'}>Save</Button>
+        const emailCredentials = <form onSubmit={this.validateMail.bind(this)} className={classes['settings__credential-form']}>
+            <Input getValue={this.setMail.bind(this)} label={'New email address'}/>
+            <Input getValue={this.setConfirmMail.bind(this)} label={'Confirm email address'}/>
+            <Button type={'submit'} variant={'fill'}>Save</Button>
         </form>
-        const passwdCredentials = <form className={classes['settings__credential-form']}>
-            <Input label={'New password'}/>
+        const passwdCredentials = <form onSubmit={this.validatePassword.bind(this)} className={classes['settings__credential-form']}>
+            <Input getValue={this.setPassword.bind(this)} label={'New password'}/>
             <p>New password should contain at least 8 characters</p>
-            <Input label={'Confirm password'}/>
-            <Button variant={'fill'}>Save</Button>
+            <Input getValue={this.setConfirmPassword.bind(this)} label={'Confirm password'}/>
+            <Button type={'submit'} variant={'fill'}>Save</Button>
         </form>
 
         return (
@@ -49,16 +79,16 @@ class AccountSettings extends React.Component{
                 <BackButton path='/profile' glassZone={20}/>
                 <h1>Account settings</h1>
                 <h3>Basic information</h3>
-                <form className={classes['settings__basic-form']}>
-                    <Input label={'First name'}/>
-                    <Input label={'Last name'}/>
+                <form onSubmit={this.validateBasicInfo.bind(this)} className={classes['settings__basic-form']}>
+                    <Input getValue={this.setName.bind(this)} label={'First name'} defValue={(currentUser.name).split(' ')[0]}/>
+                    <Input getValue={this.setLastName.bind(this)} label={'Last name'} defValue={(currentUser.name).split(' ')[1]}/>
                     <h3>Avatar</h3>
                     <div className={classes['settings__avatar-box']}>
                         <Avatar/>
                         <Button variant={'fill'}>Upload</Button>
                         <Button variant={'outline danger'}>Delete</Button>
                     </div>
-                    <Button variant={'fill'}>Save</Button>
+                    <Button type={'submit'} variant={'fill'}>Save</Button>
                 </form>
                 <h3>Credentials change</h3>
                 <div className={classes.settings__credentials}>

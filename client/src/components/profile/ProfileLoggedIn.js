@@ -25,8 +25,8 @@ class ProfileLoggedIn extends React.Component{
                 <Avatar label={this.state.name}/>
                 <div className={classes.logged__actions}>
                     <Link to='/orders'><ActionButton icon={faBoxes}>Your orders</ActionButton></Link>
-                    <ActionButton icon={faGear}>Account settings</ActionButton>
-                    <ActionButton icon={faShield}>Manage users</ActionButton>
+                    <Link to='/settings'><ActionButton icon={faGear}>Account settings</ActionButton></Link>
+                    <Link to='/users'> <ActionButton icon={faShield}>Manage users</ActionButton></Link>
                     <ActionButton onClick={this.logOut.bind(this)} logoutVariant={true} icon={faRightFromBracket}>Log out</ActionButton>
                 </div>
                 <div className={classes.profile__padding}></div>

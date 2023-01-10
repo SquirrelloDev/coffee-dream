@@ -19,7 +19,7 @@ const checkIfUserExists = (req, res, next) =>
         {
             return next(err)
         }
-        res.data = data
+        req.data = data
         return next()        
     })    
 }
@@ -107,7 +107,7 @@ const returnUsersDetailsAsJSON = (req, res, next) =>
 {  
     if(req.data.profilePhotoFilename)
     {
-        return res.json({name: req.data.name, email: req.data.email, accessLevel:req.data.accessLevel})  
+        return res.json({id: req.data.id, name: req.data.name, email: req.data.email, password: req.data.password, accessLevel:req.data.accessLevel})
     }    
 }
 

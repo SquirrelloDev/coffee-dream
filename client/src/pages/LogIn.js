@@ -39,6 +39,19 @@ class LogIn extends React.Component{
             //good, fetch user from server
             axios.post(`${SERVER_PATH}/users/login/${this.state.email}/${this.state.password}`).then(res => {
                 console.log(res.data);
+                if(this.state.password === res.data.password){
+                    console.log('correct');
+                    axios.get(`${SERVER_PATH}/users/${res.data.id}`).then(response => {
+                        localStorage.setItem('currentUser', JSON.stringify({
+                            _id: response.data._id,
+                            accessLevel: response.data.accessLevel,
+                            name: response.data.name,
+                            email: response.data.email,
+                            password: response.data.password
+                        }));
+                    });
+
+                }
             }).catch(err => console.log(err));
         }
         else{

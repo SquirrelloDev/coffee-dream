@@ -65,7 +65,7 @@ const checkIfFileIsImage = (req, res, next) =>
 
 const addNewUser = (req, res, next) =>
 {
-    usersModel.create({name:req.params.name, email:req.params.email, password:req.params.password}, (err, data) =>
+    usersModel.create({name:req.params.name, email:req.params.email, password:req.params.password, profilePhotoFilename: req.file.filename}, (err, data) =>
     {
         if(err)
         {

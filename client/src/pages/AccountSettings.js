@@ -15,6 +15,7 @@ class AccountSettings extends React.Component{
             lastName: ((JSON.parse(localStorage.getItem('currentUser'))).name).split(' ')[1],
             mail: (JSON.parse(localStorage.getItem('currentUser'))).email,
             passwd: (JSON.parse(localStorage.getItem('currentUser'))).password,
+            accessLevel: (JSON.parse(localStorage.getItem('currentUser'))).accessLevel,
             mailConfirm:'',
             passwdConfirm: '',
             newImage: null,
@@ -62,14 +63,20 @@ class AccountSettings extends React.Component{
         }
         if(!nameIsInvalid && !lastNameIsInvalid){
             //put data
-            const updateUserObj = {
-                name: `${this.state.name} ${this.state.lastName}`,
-                email: 'fghffgh@dfdfg.com',
-                password: '1234567890',
-                accessLevel: 1,
-                profilePhotoFilename: this.state.newImage
-            }
-            axios.put(`${SERVER_PATH}/users/${this.state.id}`, updateUserObj).then(res=>console.log(res))
+            const formData = new FormData();
+            formData.append('name', `${this.state.name} ${this.state.lastName}`);
+            formData.append('email', this.state.email);
+            formData.append('password', this.state.passwd);
+            formData.append('accessLevel', this.state.accessLevel);
+            formData.append("profilePhoto", this.state.newImage);
+            // const updateUserObj = {
+            //     name: `${this.state.name} ${this.state.lastName}`,
+            //     email: 'fghffgh@dfdfg.com',
+            //     password: '1234567890',
+            //     accessLevel: 1,
+            //
+            // }
+            axios.put(`${SERVER_PATH}/users/${this.state.id}`, formData,{headers: {"Content-type": "multipart/form-data"}}).then(res=>console.log(res))
         }
 
     }

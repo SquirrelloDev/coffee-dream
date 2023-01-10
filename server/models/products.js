@@ -1,17 +1,11 @@
 const mongoose = require('mongoose');
 
-const productPhotosSchema = new mongoose.Schema(
-    {
-        filename: { type: String },
-    })
-
-
 const productsSchema = new mongoose.Schema(
     {
         name: { type: String, required: true, unique: true },
         price: { type: Number, required: true },
         description: { type: String, required: true },
-        image: [productPhotosSchema] ,
+        imageFileName: { type: String } ,
         stock: { type: Number, required: true, default: 0, min: 0 },
         origin: { type: String},
         composition: { type: String},

@@ -7,7 +7,6 @@ const fs = require(`fs`)
 
 const multer = require(`multer`)
 const productsModel = require("../models/products")
-const { Mongoose } = require("mongoose")
 const upload = multer({dest: `${process.env.UPLOADED_FILES_FOLDER}`})
 
 const checkIfUserIsAdmin = (req, res, next) =>
@@ -29,6 +28,7 @@ const addNewProduct = (req, res, next) =>
     productDetails.name = req.body.name
     productDetails.price = req.body.price
     productDetails.description = req.body.description
+    productDetails.imageFileName = req.file.filename
     productDetails.stock = req.body.stock
     productDetails.origin = req.body.origin
     productDetails.composition = req.body.composition
@@ -36,13 +36,6 @@ const addNewProduct = (req, res, next) =>
     productDetails.intensity = req.body.intensity
     productDetails.body = req.body.body
     productDetails.sca = req.body.sca
-
-    productDetails.image = []
-
-    req.files.map((file, index) =>
-    {
-        productDetails.image[index] = {filename:`${file.filename}`}
-    })
 
     productsModel.create(productDetails, (err, data) =>
     {
@@ -72,10 +65,31 @@ const getProductsByComposition = (req, res, next) =>
 {
     productsModel.find({composition: req.params.composition}, (err, data) =>
     {
-        if(err)
-        {
-            return next(err)
-        }
+        data.map((product) => {
+            if(product.imageFileName)
+            {
+                fs.readFile(`${process.env.UPLOADED_FILES_FOLDER}/${product.imageFileName}`, (err, fileData) =>
+                {
+                    if(err)
+                    {
+                        return next(err)
+                    }
+        
+                    if(fileData)
+                    {
+                        product.imageFileName = fileData
+                    }
+                    else
+                    {
+                        product.imageFileName = null
+                    }
+                })
+            }
+            else
+            {
+                product.imageFileName = null
+            }
+        })
 
         res.json(data)
     })
@@ -105,12 +119,33 @@ const getProductById = (req, res, next) =>
 {
     productsModel.findById(req.params.id, (err, data) =>
     {
-        if(err)
+        if(data.imageFileName)
         {
-            return next(err)
-        }
+            fs.readFile(`${process.env.UPLOADED_FILES_FOLDER}/${data.imageFileName}`, (err, fileData) => 
+            {
+                if(err)
+                {
+                    return next(err)
+                }
 
-        res.json(data)
+                if(filedata)
+                {
+                    data.imageFileName = fileData
+                    return res.json(data)
+                }
+                else
+                {
+                    data.imageFileName = null
+                    return res.json(data)
+                }
+
+            })
+        }
+        else
+        {
+            data.imageFileName = null
+            return res.json(data)
+        }
     })
 }
 
@@ -129,7 +164,7 @@ const updateProductById = (req, res, next) =>
 
 const updateProductsStock = (req, res, next) =>
 {
-    const ops = req.body.map(obj => {
+    const ops = req.body.products.map(obj => {
         return {
             updateOne: {
                 filter: {

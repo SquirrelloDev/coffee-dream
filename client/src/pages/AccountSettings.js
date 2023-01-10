@@ -6,6 +6,7 @@ import Avatar from "../components/profile/Avatar";
 import Button from "../components/UI/Button";
 import axios from "axios";
 import {SERVER_PATH} from "../config/global_const";
+import {Redirect} from "react-router-dom";
 class AccountSettings extends React.Component{
     constructor(props) {
         super(props);
@@ -19,6 +20,7 @@ class AccountSettings extends React.Component{
             mailConfirm:'',
             passwdConfirm: '',
             newImage: null,
+            redirectToProfile: false,
             nameErr: false, lastErr: false, mailErr: false, passwdErr:false}
     }
     activateMailHandler(){
@@ -69,14 +71,19 @@ class AccountSettings extends React.Component{
             formData.append('password', this.state.passwd);
             formData.append('accessLevel', this.state.accessLevel);
             formData.append("profilePhoto", this.state.newImage);
-            // const updateUserObj = {
-            //     name: `${this.state.name} ${this.state.lastName}`,
-            //     email: 'fghffgh@dfdfg.com',
-            //     password: '1234567890',
-            //     accessLevel: 1,
-            //
-            // }
-            axios.put(`${SERVER_PATH}/users/${this.state.id}`, formData,{headers: {"Content-type": "multipart/form-data"}}).then(res=>console.log(res))
+
+            axios.put(`${SERVER_PATH}/users/${this.state.id}`, formData,{headers: {"Content-type": "multipart/form-data"}}).then(res=>{
+                console.log(res.data);
+                localStorage.setItem('currentUser', JSON.stringify({
+                    _id: res.data._id,
+                    accessLevel: res.data.accessLevel,
+                    name: res.data.name,
+                    email: res.data.email,
+                    password: res.data.password,
+                    profilePhotoFilename: res.data.profilePhotoFilename
+                }));
+                this.setState({redirectToProfile: true})
+            })
         }
 
     }
@@ -111,6 +118,7 @@ class AccountSettings extends React.Component{
 
         return (
             <main className={classes.settings}>
+                {this.state.redirectToProfile && <Redirect to={'/profile'}/>}
                 <BackButton path='/profile' glassZone={20}/>
                 <h1>Account settings</h1>
                 <h3>Basic information</h3>

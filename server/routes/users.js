@@ -161,7 +161,7 @@ const updateUserById = (req, res, next) =>
         req.body.profilePhotoFilename = req.file.filename
     }
     
-    usersModel.findByIdAndUpdate(req.params.id, {$set: req.body}, (err, data) =>
+    usersModel.findByIdAndUpdate(req.params.id, {$set: req.body}, {new: true}, (err, data) =>
     {
         if(err)
         {

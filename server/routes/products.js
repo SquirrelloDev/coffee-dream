@@ -7,6 +7,7 @@ const fs = require(`fs`)
 
 const multer = require(`multer`)
 const productsModel = require("../models/products")
+const { Mongoose } = require("mongoose")
 const upload = multer({dest: `${process.env.UPLOADED_FILES_FOLDER}`})
 
 const checkIfUserIsAdmin = (req, res, next) =>
@@ -126,6 +127,28 @@ const updateProductById = (req, res, next) =>
     })
 }
 
+const updateProductsStock = (req, res, next) =>
+{
+    const ops = req.body.map(obj => {
+        return {
+            updateOne: {
+                filter: {
+                    _id: obj._id
+                },
+                update: {
+                    $inc: { stock: -obj.quantity }
+                }
+            }
+        }
+    })
+
+    productsModel.bulkWrite(ops)
+    .then((res) => {
+        console.log("Documents Updated", res.modifiedCount)
+    })
+    .catch((err) => console.log(err))
+}
+
 const deleteProductbyId = (req, res, next) =>
 {
     productsModel.findByIdAndRemove(req.params.id, (err, data) =>
@@ -148,6 +171,8 @@ router.get(`/products/:id`, getProductById)
 router.get(`/products/:composition`, getProductsByComposition)
 
 router.post(`/products`, checkIfUserIsAdmin, upload.array("productPhotos", parseInt(process.env.MAX_NUMBER_OF_UPLOAD_FILES_ALLOWED)), addNewProduct)
+
+router.put(`/products`, updateProductsStock)
 
 router.put(`/products/:id`, checkIfUserIsAdmin, updateProductById)
 

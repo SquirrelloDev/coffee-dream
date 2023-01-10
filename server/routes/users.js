@@ -54,6 +54,11 @@ const checkIfFileIsUploaded = (req, res, next) =>
 
 const checkIfFileIsImage = (req, res, next) =>
 {
+    if(!req.file)
+    {
+        return next()
+    }
+
     if(req.file.mimetype !== `image/jpeg` && req.file.mimetype !== `image/png` && req.file.mimetype !== `image/jpg`)
     {
         fs.unlink(`${process.env.UPLOADED_FILES_FOLDER}/${req.file.filename}`, (err) => {return next(err)})
@@ -181,7 +186,7 @@ router.get(`/users`, showUsersList)
 
 router.get(`/users/:id`, getUserById)
 
-router.post(`/users/register/:name/:email/:password`, upload.single("profilePhoto"), checkIfFileIsUploaded, checkIfFileIsImage, checkIfUserNotAlreadyInCollection, addNewUser)
+router.post(`/users/register/:name/:email/:password`, upload.single("profilePhoto"), checkIfFileIsImage, checkIfUserNotAlreadyInCollection, addNewUser)
 
 router.post(`/users/login/:email/:password`, checkIfUserExists, returnUsersDetailsAsJSON)
 

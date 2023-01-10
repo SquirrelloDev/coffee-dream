@@ -156,6 +156,11 @@ const deleteUserbyId = (req, res, next) =>
 
 const updateUserById = (req, res, next) =>
 {
+    if(req.file)
+    {
+        req.body.profilePhotoFilename = req.file.filename
+    }
+    
     usersModel.findByIdAndUpdate(req.params.id, {$set: req.body}, (err, data) =>
     {
         if(err)

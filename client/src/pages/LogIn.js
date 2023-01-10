@@ -44,13 +44,14 @@ class LogIn extends React.Component{
                         localStorage.removeItem(CART_CONTEXT);
                     }
                     axios.get(`${SERVER_PATH}/users/${res.data.id}`).then(response => {
+                        console.log(response.data);
                         localStorage.setItem('currentUser', JSON.stringify({
                             _id: response.data._id,
                             accessLevel: response.data.accessLevel,
                             name: response.data.name,
                             email: response.data.email,
                             password: response.data.password,
-                            profilePhotoFilename: response.data.profilePhotoFilename
+                            profilePhotoFilename: response.data.profilePhoto
                         }));
                         this.setState({redirectToHome: true})
                     });

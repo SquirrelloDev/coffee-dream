@@ -151,12 +151,29 @@ const getUserById = (req, res, next) =>
 {
     usersModel.findById(req.params.id, (err, data) =>
     {
-        if(err)
+        if(data.profilePhotoFilename)
         {
-            return next(err)
+            fs.readFile(`${process.env.UPLOADED_FILES_FOLDER}/${data.profilePhotoFilename}`, 'base64', (err, fileData) =>
+            {
+                if(err)
+                {
+                    return next(err)
+                }
+
+                if(data)
+                {
+                    return res.json({_id:data._id, name:data.name, email:data.email, password:data.password, accessLevel:data.accessLevel, profilePhoto: fileData})
+                }
+                else
+                {
+                    res.json({_id:data._id, name:data.name, email:data.email, password:data.password, accessLevel:data.accessLevel, profilePhoto: null})
+                }
+            })
         }
-        
-        return res.json(data)
+        else
+        {
+            return res.json({_id:data._id, name:data.name, email:data.email, password:data.password, accessLevel:data.accessLevel, profilePhoto: null})
+        }
     })
 }
 

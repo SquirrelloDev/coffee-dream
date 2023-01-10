@@ -4,7 +4,8 @@ import Button from "../components/UI/Button";
 import classes from "./SignUp.module.scss";
 import Toast from "../components/UI/Toast";
 import axios from "axios";
-import {SERVER_PATH} from "../config/global_const";
+import {CART_CONTEXT, GUEST_ID, SERVER_PATH} from "../config/global_const";
+import {Redirect} from "react-router-dom";
 class LogIn extends React.Component{
     constructor(props) {
         super(props);
@@ -14,7 +15,6 @@ class LogIn extends React.Component{
             emailErr: false,
             passwordErr: false,
             redirectToHome: false,
-            serverRes: null
         }
     }
     setMail(inputText){
@@ -38,17 +38,21 @@ class LogIn extends React.Component{
         if(!emailIsInvalid && !passwdIsInvalid){
             //good, fetch user from server
             axios.post(`${SERVER_PATH}/users/login/${this.state.email}/${this.state.password}`).then(res => {
-                console.log(res.data);
                 if(this.state.password === res.data.password){
                     console.log('correct');
+                    if(JSON.parse(localStorage.getItem('currentUser'))._id === GUEST_ID){
+                        localStorage.removeItem(CART_CONTEXT);
+                    }
                     axios.get(`${SERVER_PATH}/users/${res.data.id}`).then(response => {
                         localStorage.setItem('currentUser', JSON.stringify({
                             _id: response.data._id,
                             accessLevel: response.data.accessLevel,
                             name: response.data.name,
                             email: response.data.email,
-                            password: response.data.password
+                            password: response.data.password,
+                            profilePhotoFilename: response.data.profilePhotoFilename
                         }));
+                        this.setState({redirectToHome: true})
                     });
 
                 }
@@ -61,6 +65,7 @@ class LogIn extends React.Component{
     render() {
         return (
             <main className={classes.signup}>
+                {this.state.redirectToHome && <Redirect to={'/home'}/>}
                 <h1>Welcome back</h1>
                 <form onSubmit={this.validateLogin.bind(this)} className={classes['signup-form']}>
                     <Input getValue={this.setMail.bind(this)} errStatus={this.state.emailErr} errValue={"This doesn't look like a valid email"} label={'E-mail address'}/>

@@ -10,7 +10,7 @@ import {ACCESS_LEVEL, CART_CONTEXT, GUEST_ID, SERVER_PATH} from "../config/globa
 class Home extends React.Component{
     constructor(props) {
         super(props);
-        this.state = {modalOpen: true, products: {items: []}, user:{}}
+        this.state = {modalOpen: true, products: {items: []}}
     }
     componentDidMount() {
         //log in as guest for first visit
@@ -24,14 +24,7 @@ class Home extends React.Component{
                     name: res.data.name,
                     email: res.data.email,
                     password: res.data.password
-                }));
-                return this.setState({user:{
-                        _id: res.data._id,
-                        accessLevel: res.data.accessLevel,
-                        name: res.data.name,
-                        email: res.data.email,
-                        password: res.data.password
-                }})})
+                }))})
         }
 
         axios.get(`${SERVER_PATH}/products`).then(res => this.setState({products: {items: res.data}}));
@@ -43,11 +36,21 @@ class Home extends React.Component{
 
     render() {
         const currentUser =  JSON.parse(localStorage.getItem('currentUser'));
+        console.log(currentUser);
+        let content, access;
+        if(!currentUser){
+            content = "Guest";
+            access = 0;
+        }
+        else{
+            content = (currentUser.name).split(' ')[0];
+            access = currentUser.accessLevel;
+        }
         return(
             <React.Fragment>
                 <TopBar/>
             <main className={classes.homepage}>
-                <h1 className={classes.homepage__heading}>Hello {currentUser.name ? currentUser.name : this.state.user.name}!</h1>
+                <h1 className={classes.homepage__heading}>Hello {content}!</h1>
                 <section>
                     <h2 className={classes['homepage__section-heading']}>Popular</h2>
                     <HorizontalContainer products={this.state.products}/>
@@ -66,7 +69,7 @@ class Home extends React.Component{
                 </section>
                 <div className={classes.homepage__padding}></div>
             </main>
-                {this.state.user.accessLevel === ACCESS_LEVEL.ADMIN && <AddButton/>}
+                {access === ACCESS_LEVEL.ADMIN && <AddButton/>}
                 <BottomBar/>
             </React.Fragment>
         )

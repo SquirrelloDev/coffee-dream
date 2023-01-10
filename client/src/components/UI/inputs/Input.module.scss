@@ -22,6 +22,8 @@
   border-color: $success-color;
   }
   &__error-text{
+    margin-top: -1em;
+    margin-bottom: 1em;
     font-size: $tiny;
     color: $err-color;
   }

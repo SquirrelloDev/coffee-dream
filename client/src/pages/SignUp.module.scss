@@ -11,7 +11,7 @@
     input{
       font-size: $big;
     }
-    p{
+    &__password{
       margin-top: -0.5em;
       color: $grayer-color;
       font-size: $tiny;

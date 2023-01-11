@@ -9,9 +9,36 @@ import Textarea from "../components/UI/inputs/Textarea";
 class NewUser extends React.Component{
     constructor(props) {
         super(props);
+        this.state={
+            name: '',
+            price: 0,
+            quantity: 0,
+            productImage: null,
+            origin: '',
+            composition:'',
+            aroma: '',
+            intensity: 0,
+            body: 0,
+            sca: 0,
+            errObj:{
+                nameErr: false,
+                priceErr: false,
+                quantityErr: false,
+                productImageErr: false,
+                originErr: false,
+                compositionErr: false,
+                aromaErr: false,
+                intensityErr: false,
+                bodyErr: false,
+                scaErr: false,
+            }
 
+        }
     }
-
+    validate(e){
+        e.preventDefault();
+        let nameInvalid, priceInvalid, quantityInvalid, imageInvalid, originInvalid, compositionInvalid, aromaInvalid, intensityInvalid, bodyInvalid, scaInvalid
+    }
     render() {
         return (
             <main className={classes.user}>

@@ -6,6 +6,7 @@ import TopBar from "../components/navs/TopBar";
 import AddButton from "../components/UI/AddButton";
 import axios from "axios";
 import {ACCESS_LEVEL, CART_CONTEXT, GUEST_ID, SERVER_PATH} from "../config/global_const";
+import {Link} from "react-router-dom";
 
 class Home extends React.Component{
     constructor(props) {
@@ -69,7 +70,7 @@ class Home extends React.Component{
                 </section>
                 <div className={classes.homepage__padding}></div>
             </main>
-                {access === ACCESS_LEVEL.ADMIN && <AddButton/>}
+                {access === ACCESS_LEVEL.ADMIN &&  <Link to={'/products'}><AddButton/></Link>}
                 <BottomBar/>
             </React.Fragment>
         )

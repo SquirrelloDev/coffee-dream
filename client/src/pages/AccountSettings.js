@@ -94,7 +94,27 @@ class AccountSettings extends React.Component{
     }
     validateMail(e){
         e.preventDefault();
-
+        let mailIsInvalid = true;
+        let confirmIsInvalid = true;
+        const emailRegEx =  /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+        if((this.state.mail).toLowerCase().match(emailRegEx)){
+            mailIsInvalid = false;
+        }
+        if(this.state.mail !== this.state.mailConfirm){
+            confirmIsInvalid = true;
+        }
+        if(!mailIsInvalid && !confirmIsInvalid){
+            //put
+        }
+        else if(mailIsInvalid){
+            //errors on two
+            this.setState({mailErr: true});
+            return;
+        }
+        else if(confirmIsInvalid){
+            //error on confirm
+            this.setState({mailErr: true});
+        }
     }
     validatePassword(e){
         e.preventDefault();
@@ -123,30 +143,21 @@ class AccountSettings extends React.Component{
 
     render() {
         const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        let tempMail, tempPasswd, tempName;
-        if(!currentUser){
-            tempMail = 'guest@example.com';
-            tempPasswd='12345678';
-
-        }
-        else{
-
-        }
         const defaultCredentials = <React.Fragment>
-            <Input label={'E-mail address'} defValue={currentUser ? currentUser.mail : tempMail} disabled={true}/>
+            <Input label={'E-mail address'} defValue={currentUser ? currentUser.email : ''} disabled={true}/>
             <button onClick={this.activateMailHandler.bind(this)} className={classes.settings__credentials__change}>Change</button>
-            <Input label={'Password'} type={'password'} defValue={currentUser ? currentUser.password : tempPasswd} disabled={true}/>
+            <Input label={'Password'} type={'password'} defValue={currentUser ? currentUser.password : ''} disabled={true}/>
             <button onClick={this.activatePasswordHandler.bind(this)} className={classes.settings__credentials__change}>Change</button>
         </React.Fragment>
         const emailCredentials = <form onSubmit={this.validateMail.bind(this)} className={classes['settings__credential-form']}>
-            <Input getValue={this.setMail.bind(this)} label={'New email address'}/>
-            <Input getValue={this.setConfirmMail.bind(this)} label={'Confirm email address'}/>
+            <Input errStatus={this.state.mailErr} errValue={"This doesn't look like a valid email"} getValue={this.setMail.bind(this)} label={'New email address'}/>
+            <Input errStatus={this.state.mailErr} errValue={"Emails don't match"} getValue={this.setConfirmMail.bind(this)} label={'Confirm email address'}/>
             <Button type={'submit'} variant={'fill'}>Save</Button>
         </form>
         const passwdCredentials = <form onSubmit={this.validatePassword.bind(this)} className={classes['settings__credential-form']}>
-            <Input getValue={this.setPassword.bind(this)} label={'New password'}/>
+            <Input errStatus={this.state.passwdErr} getValue={this.setPassword.bind(this)} label={'New password'}/>
             <p>New password should contain at least 8 characters</p>
-            <Input getValue={this.setConfirmPassword.bind(this)} label={'Confirm password'}/>
+            <Input errStatus={this.state.passwdErr} getValue={this.setConfirmPassword.bind(this)} label={'Confirm password'}/>
             <Button type={'submit'} variant={'fill'}>Save</Button>
         </form>
 
@@ -158,8 +169,8 @@ class AccountSettings extends React.Component{
                 <h1>Account settings</h1>
                 <h3>Basic information</h3>
                 <form onSubmit={this.validateBasicInfo.bind(this)} className={classes['settings__basic-form']}>
-                    <Input getValue={this.setName.bind(this)} label={'First name'} defValue={currentUser ? (currentUser.name).split(' ')[0] : tempName}/>
-                    <Input getValue={this.setLastName.bind(this)} label={'Last name'} defValue={currentUser ? (currentUser.name).split(' ')[1] : tempName}/>
+                    <Input getValue={this.setName.bind(this)} label={'First name'} defValue={currentUser ? (currentUser.name).split(' ')[0] : ''}/>
+                    <Input getValue={this.setLastName.bind(this)} label={'Last name'} defValue={currentUser ? (currentUser.name).split(' ')[1] : ''}/>
                     <h3>Avatar</h3>
                     <div className={classes['settings__avatar-box']}>
                         <Avatar/>

@@ -151,7 +151,12 @@ const getProductById = (req, res, next) =>
 
 const updateProductById = (req, res, next) =>
 {
-    productsModel.findByIdAndUpdate(req.params.id, {$set: req.body}, (err, data) =>
+    if(req.file)
+    {
+        req.body.imageFileName = req.file.filename
+    }
+
+    productsModel.findByIdAndUpdate(req.params.id, {$set: req.body}, {new:true}, (err, data) =>
     {
         if(err)
         {
@@ -209,7 +214,7 @@ router.post(`/products`, checkIfUserIsAdmin, upload.single("productPhoto"), addN
 
 router.put(`/products`, updateProductsStock)
 
-router.put(`/products/:id`, checkIfUserIsAdmin, updateProductById)
+router.put(`/products/:id`, checkIfUserIsAdmin, upload.single("productPhoto"), updateProductById)
 
 router.delete(`/products/:id`, checkIfUserIsAdmin, deleteProductbyId)
 

@@ -6,6 +6,8 @@ import classes from "./UserForm.module.scss";
 import Avatar from "../components/profile/Avatar";
 import Button from "../components/UI/Button";
 import Textarea from "../components/UI/inputs/Textarea";
+import axios from "axios";
+import {SERVER_PATH} from "../config/global_const";
 class NewProduct extends React.Component{
     constructor(props) {
         super(props);
@@ -154,7 +156,19 @@ class NewProduct extends React.Component{
             scaInvalid = false;
         }
         if(!nameInvalid && !priceInvalid && !quantityInvalid && !originInvalid && !compositionInvalid && !aromaInvalid && !intensityInvalid && !bodyInvalid && !scaInvalid){
-            //post
+            const formData = new FormData();
+            formData.append('name', `${this.state.name}`);
+            formData.append('price', this.state.price);
+            formData.append('stock', this.state.quantity);
+            formData.append('filename', this.state.productImage);
+            formData.append("description", this.state.description);
+            formData.append('origin', this.state.origin);
+            formData.append('composition', this.state.composition);
+            formData.append('aroma', this.state.aroma);
+            formData.append('intensity', this.state.intensity);
+            formData.append('body', this.state.body);
+            formData.append('sca', this.state.sca);
+            axios.post(`${SERVER_PATH}/products`, formData, {headers:{"Content-type": "multipart/form-data"}}).then(res=> console.log(res.data)).catch(err => console.log(err));
         }
         else{
             this.setState({errorObj:{

@@ -11,16 +11,17 @@ class AccountSettings extends React.Component{
     constructor(props) {
         super(props);
         this.state={changeMailActive: false, changePasswdActive: false,
-            id: (JSON.parse(localStorage.getItem('currentUser')))._id,
-            name: ((JSON.parse(localStorage.getItem('currentUser'))).name).split(' ')[0],
-            lastName: ((JSON.parse(localStorage.getItem('currentUser'))).name).split(' ')[1],
-            mail: (JSON.parse(localStorage.getItem('currentUser'))).email,
-            passwd: (JSON.parse(localStorage.getItem('currentUser'))).password,
-            accessLevel: (JSON.parse(localStorage.getItem('currentUser'))).accessLevel,
+            id: '',
+            name: '',
+            lastName: '',
+            mail: '',
+            passwd: '',
+            accessLevel: '',
             mailConfirm:'',
             passwdConfirm: '',
             newImage: null,
             redirectToProfile: false,
+            redirectToHome: false,
             nameErr: false, lastErr: false, mailErr: false, passwdErr:false}
     }
     activateMailHandler(){
@@ -99,13 +100,42 @@ class AccountSettings extends React.Component{
         e.preventDefault();
 
     }
+    deleteAccount(){
+        // console.log('test')
+        axios.delete(`${SERVER_PATH}/users/${this.state.id}`).then(res => {
+            localStorage.removeItem('currentUser');
+            this.setState({redirectToHome: true});
+        })
+    }
+    componentDidMount() {
+        if(JSON.parse(localStorage.getItem('currentUser'))){
+            this.setState({
+                id: (JSON.parse(localStorage.getItem('currentUser')))._id,
+                name: ((JSON.parse(localStorage.getItem('currentUser'))).name).split(' ')[0],
+                lastName: ((JSON.parse(localStorage.getItem('currentUser'))).name).split(' ')[1],
+                mail: (JSON.parse(localStorage.getItem('currentUser'))).email,
+                passwd: (JSON.parse(localStorage.getItem('currentUser'))).password,
+                accessLevel: (JSON.parse(localStorage.getItem('currentUser'))).accessLevel
+            })
+        }
+
+    }
 
     render() {
         const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        let tempMail, tempPasswd, tempName;
+        if(!currentUser){
+            tempMail = 'guest@example.com';
+            tempPasswd='12345678';
+
+        }
+        else{
+
+        }
         const defaultCredentials = <React.Fragment>
-            <Input label={'E-mail address'} defValue={currentUser.email} disabled={true}/>
+            <Input label={'E-mail address'} defValue={currentUser ? currentUser.mail : tempMail} disabled={true}/>
             <button onClick={this.activateMailHandler.bind(this)} className={classes.settings__credentials__change}>Change</button>
-            <Input label={'Password'} type={'password'} defValue={currentUser.password} disabled={true}/>
+            <Input label={'Password'} type={'password'} defValue={currentUser ? currentUser.password : tempPasswd} disabled={true}/>
             <button onClick={this.activatePasswordHandler.bind(this)} className={classes.settings__credentials__change}>Change</button>
         </React.Fragment>
         const emailCredentials = <form onSubmit={this.validateMail.bind(this)} className={classes['settings__credential-form']}>
@@ -123,12 +153,13 @@ class AccountSettings extends React.Component{
         return (
             <main className={classes.settings}>
                 {this.state.redirectToProfile && <Redirect to={'/profile'}/>}
+                {this.state.redirectToHome && <Redirect to={'/home'}/>}
                 <BackButton path='/profile' glassZone={20}/>
                 <h1>Account settings</h1>
                 <h3>Basic information</h3>
                 <form onSubmit={this.validateBasicInfo.bind(this)} className={classes['settings__basic-form']}>
-                    <Input getValue={this.setName.bind(this)} label={'First name'} defValue={(currentUser.name).split(' ')[0]}/>
-                    <Input getValue={this.setLastName.bind(this)} label={'Last name'} defValue={(currentUser.name).split(' ')[1]}/>
+                    <Input getValue={this.setName.bind(this)} label={'First name'} defValue={currentUser ? (currentUser.name).split(' ')[0] : tempName}/>
+                    <Input getValue={this.setLastName.bind(this)} label={'Last name'} defValue={currentUser ? (currentUser.name).split(' ')[1] : tempName}/>
                     <h3>Avatar</h3>
                     <div className={classes['settings__avatar-box']}>
                         <Avatar/>
@@ -147,7 +178,7 @@ class AccountSettings extends React.Component{
                     <h3>Account deletion</h3>
                     <p className={classes.settings__deletion__text}>Are you really want to abandon us? Well... it is your decision and we never try to convince to staying with us. Although, you will lose access to your orders, addresses and newsletter.  Your data will be removed</p>
                     <p className={classes.settings__deletion__warning}>This action is inevitable!</p>
-                    <Button variant={'fill danger'}>Delete account</Button>
+                    <Button behaviorFn={this.deleteAccount.bind(this)} variant={'fill danger'}>Delete account</Button>
                 </div>
             </main>
         );

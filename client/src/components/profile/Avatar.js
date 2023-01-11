@@ -8,8 +8,11 @@ class Avatar extends React.Component{
 
     }
     componentDidMount() {
-        const userPhoto = JSON.parse(localStorage.getItem('currentUser')).profilePhotoFilename;
-        this.setState({image: userPhoto});
+        const userPhoto = JSON.parse(localStorage.getItem('currentUser'));
+        if(!userPhoto){
+            return;
+        }
+        this.setState({image: userPhoto.profilePhotoFilename});
     }
 
     render() {

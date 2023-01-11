@@ -5,12 +5,14 @@ class Textarea extends React.Component{
         super(props);
 
     }
-
+    getInputValue(e){
+        this.props.getValue(e.target.value);
+    }
     render() {
         return (
             <React.Fragment>
                 {this.props.label && <p>{this.props.label}</p>}
-                <textarea className={classes.textarea}></textarea>
+                <textarea onInput={this.getInputValue.bind(this)} className={classes.textarea}></textarea>
             </React.Fragment>
         );
     }

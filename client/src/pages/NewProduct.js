@@ -160,7 +160,7 @@ class NewProduct extends React.Component{
             formData.append('name', `${this.state.name}`);
             formData.append('price', this.state.price);
             formData.append('stock', this.state.quantity);
-            formData.append('filename', this.state.productImage);
+            formData.append('productPhoto', this.state.productImage);
             formData.append("description", this.state.description);
             formData.append('origin', this.state.origin);
             formData.append('composition', this.state.composition);
@@ -200,11 +200,12 @@ class NewProduct extends React.Component{
                     <h3>Picture</h3>
                     <div className={classes['user__form__avatar']}>
                         <Avatar/>
-                        <Button variant={'fill'}>Upload</Button>
+                        {/*<Button variant={'fill'}>Upload</Button>*/}
+                        <input type={'file'} name={'productPhoto'} onChange={this.setImage.bind(this)}/>
                         <Button variant={'outline danger'}>Delete</Button>
                     </div>
                     <h3>Extra information</h3>
-                    <Textarea/>
+                    <Textarea getValue={this.setDescription.bind(this)}/>
                     <Input errStatus={this.state.errorObj.originErr} errValue={'Provide origin'} getValue={this.setOrigin.bind(this)} label={'Origin'}/>
                     <Input errStatus={this.state.errorObj.compositionErr} errValue={'Provide composition'} getValue={this.setComposition.bind(this)} label={'Composition'}/>
                     <Input errStatus={this.state.errorObj.aromaErr} errValue={'Provide aroma'} getValue={this.setAroma.bind(this)} label={'Aroma'}/>

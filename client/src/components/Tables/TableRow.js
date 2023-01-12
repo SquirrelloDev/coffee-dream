@@ -1,7 +1,6 @@
 import Button from "../UI/Button";
 import React from "react";
 import classes from "./Table.module.scss";
-import Modal from "../UI/Modal";
 class TableRow extends React.Component{
     constructor(props) {
         super(props);

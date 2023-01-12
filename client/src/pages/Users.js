@@ -6,7 +6,7 @@ import Modal from "../components/UI/Modal";
 import Button from "../components/UI/Button";
 import WarningPrompt from "../components/UI/WarningPrompt";
 import axios from "axios";
-import {SERVER_PATH} from "../config/global_const";
+import {ACCESS_LEVEL, SERVER_PATH} from "../config/global_const";
 class Users extends React.Component{
     constructor(props) {
         super(props);
@@ -19,10 +19,16 @@ class Users extends React.Component{
     closeDetails(){
         this.setState({modalOpen: false, dangerPrompt: false});
     }
-
+    filterOutDeleted(userId){
+        const newUsersState = this.state.users.filter(usr => usr._id !== userId);
+        this.setState({users: newUsersState});
+    }
     componentDidMount() {
         //fetchowaniie wszystkich userów
-        axios.get(`${SERVER_PATH}/users`).then(res => this.setState({users: res.data})).catch(err => console.log(err));
+        axios.get(`${SERVER_PATH}/users`).then(res => {
+            const onlyUsers = res.data.filter(user => user.accessLevel === ACCESS_LEVEL.USER);
+            this.setState({users: onlyUsers})
+        }).catch(err => console.log(err));
     }
 
     render() {
@@ -40,7 +46,7 @@ class Users extends React.Component{
                     <Button behaviorFn={() => this.setState({dangerPrompt: true})} variant={'outline danger'}>Delete</Button>
                 </Modal>}
                 {(this.state.modalOpen && this.state.dangerPrompt) && <Modal closeModalFn={this.closeDetails.bind(this)}>
-                    <WarningPrompt/>
+                    <WarningPrompt id={this.state.users[this.state.userIdx]._id} closeModal={this.closeDetails.bind(this)} filterFn={this.filterOutDeleted.bind(this)}/>
                 </Modal>}
             </main>
         );

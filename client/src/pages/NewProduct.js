@@ -146,10 +146,10 @@ class NewProduct extends React.Component{
         if(this.state.aroma !==''){
             aromaInvalid = false;
         }
-        if(this.state.intensity >= 0 || this.state.intensity <= 5){
+        if(this.state.intensity >= 1 || this.state.intensity <= 5){
             intensityInvalid = false;
         }
-        if(this.state.body >= 0 || this.state.body <= 5){
+        if(this.state.body >= 1 || this.state.body <= 5){
             bodyInvalid = false;
         }
         if(this.state.sca >= 0 || this.state.sca <= 100){
@@ -209,8 +209,8 @@ class NewProduct extends React.Component{
                     <Input errStatus={this.state.errorObj.originErr} errValue={'Provide origin'} getValue={this.setOrigin.bind(this)} label={'Origin'}/>
                     <Input errStatus={this.state.errorObj.compositionErr} errValue={'Provide composition'} getValue={this.setComposition.bind(this)} label={'Composition'}/>
                     <Input errStatus={this.state.errorObj.aromaErr} errValue={'Provide aroma'} getValue={this.setAroma.bind(this)} label={'Aroma'}/>
-                    <Input errStatus={this.state.errorObj.intensityErr} errValue={'Invalid range'} getValue={this.setIntensity.bind(this)} label={'Intensity'} type={'number'} min={0} max={5} defValue={this.state.intensity}/>
-                    <Input errStatus={this.state.errorObj.bodyErr} errValue={'Invalid range'} getValue={this.setBody.bind(this)} label={'Body'} type={'number'} min={0} max={5} defValue={this.state.body}/>
+                    <Input errStatus={this.state.errorObj.intensityErr} errValue={'Invalid range'} getValue={this.setIntensity.bind(this)} label={'Intensity'} type={'number'} min={1} max={5} defValue={this.state.intensity}/>
+                    <Input errStatus={this.state.errorObj.bodyErr} errValue={'Invalid range'} getValue={this.setBody.bind(this)} label={'Body'} type={'number'} min={1} max={5} defValue={this.state.body}/>
                     <Input errStatus={this.state.errorObj.scaErr} errValue={'Invalid range'} getValue={this.setSca.bind(this)} label={'SCA score'} type={'number'} min={0} max={100} defValue={this.state.sca}/>
                     <Button type={'submit'} variant={'fill'}>Save</Button>
                 </form>

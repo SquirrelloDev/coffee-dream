@@ -12,7 +12,6 @@ import Rating from "../components/Products/Rating";
 import BottomBar from "../components/navs/BottomBar";
 import Modal from "../components/UI/Modal";
 import Input from "../components/UI/inputs/Input";
-import Textarea from "../components/UI/inputs/Textarea";
 import {ACCESS_LEVEL, CART_CONTEXT, SERVER_PATH} from "../config/global_const";
 import axios from "axios";
 
@@ -80,7 +79,7 @@ class ProductPage extends React.Component{
                 name: res.data.name,
                 price: res.data.price,
                 description: res.data.description,
-                image: res.data.image,
+                image: res.data.image, //here
                 stock: res.data.stock,
                 origin: res.data.origin,
                 composition: res.data.composition,
@@ -110,7 +109,7 @@ class ProductPage extends React.Component{
                 </section>
                 {currentUser.accessLevel === ACCESS_LEVEL.ADMIN &&
                 <section className={`${classes['admin-box']} ${classes.section}`}>
-                    <Button behaviorFn={this.openModal.bind(this)} variant={'fill'}>Change stock</Button>
+                    {/*<Button behaviorFn={this.openModal.bind(this)} variant={'fill'}>Change stock</Button>*/}
                     <Button variant={'outline'}>Edit product</Button>
                     <Button variant={'outline danger'}>Delete</Button>
                 </section>

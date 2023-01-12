@@ -130,7 +130,7 @@ const getProductById = (req, res, next) =>
                     return next(err)
                 }
 
-                if(filedata)
+                if(fileData)
                 {
                     data.imageFileName = fileData
                     return res.json(data)

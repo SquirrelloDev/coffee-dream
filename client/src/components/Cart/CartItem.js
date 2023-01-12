@@ -35,7 +35,7 @@ class CartItem extends React.Component{
         return (
             <div className={classes['cart-item']}>
                 <button onClick={this.removeItem.bind(this)} className={classes['cart-item__close']}><FontAwesomeIcon icon={faXmark} fixedWidth={true}/></button>
-                <img src={cartImg} className={classes['cart-item__image']}/>
+                <img src={this.state.productData.image ? `data:;base64,${this.state.productData.image}` : cartImg} className={classes['cart-item__image']}/>
                 <h2 className={classes['cart-item__heading']}>{this.state.productData.name}</h2>
                 <p className={classes['cart-item__price']}><span>$</span>{(this.state.productData.price * this.state.productData.QUANTITY).toFixed(2)}</p>
                 <QuantityCart quantity={this.state.productData.QUANTITY} addHandler={this.addQuantity.bind(this)} subtractHandler={this.substractQuantity.bind(this)}/>

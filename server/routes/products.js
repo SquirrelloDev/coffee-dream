@@ -67,33 +67,18 @@ const getProductsByComposition = (req, res, next) =>
 {
     productsModel.find({composition: req.params.composition}, (err, data) =>
     {
-        data.map((product) => {
-            if(product.imageFileName)
-            {
-                fs.readFile(`${process.env.UPLOADED_FILES_FOLDER}/${product.imageFileName}`, 'base64', (err, fileData) =>
-                {
-                    if(err)
-                    {
-                        return next(err)
-                    }
-        
-                    if(fileData)
-                    {
-                        product.imageFileName = fileData
-                    }
-                    else
-                    {
-                        product.imageFileName = null
-                    }
-                })
-            }
-            else
-            {
-                product.imageFileName = null
-            }
+        const readBuf = [];
+        data.forEach(product =>{
+            let stream = '';
+            stream = fs.readFileSync(`${process.env.UPLOADED_FILES_FOLDER}/${product.imageFileName}`, {encoding: 'base64'}).toString()
+            readBuf.push(stream);
         })
-
-        res.json(data)
+        const result = data.map((product, idx) =>{
+            const jsonProd = product.toJSON();
+            jsonProd.imageFileName = readBuf[idx];
+            return jsonProd;
+        })
+        res.json(result);
     })
 }
 
@@ -210,7 +195,7 @@ router.get(`/products/photo/:filename`, getProductPhotoAsBase64)
 
 router.get(`/products/:id`, getProductById)
 
-router.get(`/products/:composition`, getProductsByComposition)
+router.get(`/products/composition/:composition`, getProductsByComposition)
 
 router.post(`/products`, upload.single("productPhoto"), addNewProduct)
 

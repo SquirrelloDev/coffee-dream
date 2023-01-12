@@ -28,7 +28,7 @@ class Home extends React.Component{
                 }))})
         }
 
-        axios.get(`${SERVER_PATH}/products/`).then(res => this.setState({products: {items: res.data}}));
+        axios.get(`${SERVER_PATH}/products/composition/Arabica`).then(res => this.setState({products: {items: res.data}})).catch(err => console.log(err));
         if(localStorage.getItem('cartItems') === null){
             localStorage.setItem(CART_CONTEXT, JSON.stringify({items: []}));
         }

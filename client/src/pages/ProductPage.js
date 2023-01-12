@@ -80,7 +80,7 @@ class ProductPage extends React.Component{
                 name: res.data.name,
                 price: res.data.price,
                 description: res.data.description,
-                image: res.data.image, //here
+                image: res.data.imageFileName, //here
                 stock: res.data.stock,
                 origin: res.data.origin,
                 composition: res.data.composition,
@@ -108,7 +108,7 @@ class ProductPage extends React.Component{
                 {this.state.redirectToHome && <Redirect to={'/home'}/>}
                 <BackButton path='/home' glassZone={250}/>
                 <div className={classes['image-box']}>
-                    <img src={testImg2}/>
+                    <img src={`data:;base64,${this.state.productData.image}`}/>
                 </div>
                 <section className={`${classes.main__box} ${classes.section}`}>
                     <h2 className={classes.main__box__title}>{this.state.productData.name}</h2>

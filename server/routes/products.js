@@ -218,6 +218,6 @@ router.put(`/products`, updateProductsStock)
 
 router.put(`/products/:id`, upload.single("productPhoto"), updateProductById)
 
-router.delete(`/products/:id`, checkIfUserIsAdmin, deleteProductbyId)
+router.delete(`/products/:id`, deleteProductbyId)
 
 module.exports = router

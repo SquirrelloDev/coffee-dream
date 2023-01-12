@@ -65,9 +65,6 @@ class Cart extends React.Component{
         localStorage.setItem(CART_CONTEXT, JSON.stringify({items: [...updatedItems]}));
         this.setState({cartState: {items: updatedItems}});
     }
-    proceedToOrder(){
-
-    }
     componentDidUpdate(prevProps, prevState) {
         if(prevState.cartState !== this.state.cartState){
             this.sumUp();

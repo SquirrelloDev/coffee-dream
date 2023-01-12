@@ -14,12 +14,12 @@ import Modal from "../components/UI/Modal";
 import Input from "../components/UI/inputs/Input";
 import {ACCESS_LEVEL, CART_CONTEXT, SERVER_PATH} from "../config/global_const";
 import axios from "axios";
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 
 class ProductPage extends React.Component{
     constructor(props) {
         super(props);
-        this.state = {modalOpen: false, productData:{
+        this.state = {modalOpen: false, redirectToHome: false,productData:{
                 _id: 0,
                 name: '',
                 price: 0.00,
@@ -92,12 +92,20 @@ class ProductPage extends React.Component{
             }
         }))
     }
+    productDeletionProcess(itemId){
+        let updatedItems;
+        const cart = JSON.parse(localStorage.getItem(CART_CONTEXT));
+        updatedItems = cart.items.filter(item => item._id !== itemId);
+        localStorage.setItem(CART_CONTEXT, JSON.stringify({items: [...updatedItems]}));
+        axios.delete(`${SERVER_PATH}/products/${this.state.productData._id}`).then(res => this.setState({redirectToHome: true})).catch(err => console.log(err));
 
+    }
     render() {
         const currentUser = JSON.parse(localStorage.getItem('currentUser'));
         return (
             <React.Fragment>
             <main>
+                {this.state.redirectToHome && <Redirect to={'/home'}/>}
                 <BackButton path='/home' glassZone={250}/>
                 <div className={classes['image-box']}>
                     <img src={testImg2}/>
@@ -112,7 +120,7 @@ class ProductPage extends React.Component{
                 <section className={`${classes['admin-box']} ${classes.section}`}>
                     {/*<Button behaviorFn={this.openModal.bind(this)} variant={'fill'}>Change stock</Button>*/}
                     <Link to={`/products/product/${this.props.match.params.id}`}><Button variant={'outline'}>Edit product</Button></Link>
-                    <Button variant={'outline danger'}>Delete</Button>
+                    <Button behaviorFn={this.openModal.bind(this)} variant={'outline danger'}>Delete</Button>
                 </section>
                 }
                 <section className={`${classes.section} ${classes['action-box']}`}>
@@ -135,10 +143,11 @@ class ProductPage extends React.Component{
                 </section>
                 {this.state.modalOpen &&
                     <Modal closeModalFn={this.closeModal.bind(this)}>
-                        <h3>Enter new stock value</h3>
-                        <p className={classes.modal__sub}>Enter a positive number to add or negative to subtract</p>
-                        <Input type={'number'}/>
-                        <Button variant={'fill'}>Confirm</Button>
+                        <h3>Warning!</h3>
+                        <p className={classes.modal__sub}>You're going to delete product: {this.state.productData.name}</p>
+                        <p className={classes.modal__sub}>Product and it's data will be lost and will be removed from cart</p>
+                        <p className={classes.modal__sub}>Are you wish to proceed?</p>
+                        <Button behaviorFn={this.productDeletionProcess.bind(this, this.state.productData._id)} variant={'fill danger'}>Confirm deletion</Button>
                 </Modal>}
                 <div className={classes.section__padding}></div>
             </main>

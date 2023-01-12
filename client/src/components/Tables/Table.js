@@ -12,14 +12,10 @@ class Table  extends React.Component{
         return (
             <table className={classes.table}>
                 <thead>
-                <tr><th>Id</th><th>Name</th><th>Mail</th><th>Actions</th></tr>
+                <tr><th>Name</th><th>Mail</th><th>Actions</th></tr>
                 </thead>
                 <tbody>
-                <TableRow openModalFn={this.props.openModalFn}/>
-                <TableRow/>
-                <TableRow/>
-                <TableRow/>
-                <TableRow/>
+                {this.props.users.map((userObj,idx) =><TableRow key={userObj._id} idx={idx} userData={userObj} openModalFn={this.props.openModalFn}/>)}
                 </tbody>
             </table>
         );

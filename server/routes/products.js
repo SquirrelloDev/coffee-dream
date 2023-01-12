@@ -216,7 +216,7 @@ router.post(`/products`, upload.single("productPhoto"), addNewProduct)
 
 router.put(`/products`, updateProductsStock)
 
-router.put(`/products/:id`, checkIfUserIsAdmin, upload.single("productPhoto"), updateProductById)
+router.put(`/products/:id`, upload.single("productPhoto"), updateProductById)
 
 router.delete(`/products/:id`, checkIfUserIsAdmin, deleteProductbyId)
 

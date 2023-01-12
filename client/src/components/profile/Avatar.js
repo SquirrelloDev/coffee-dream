@@ -1,6 +1,7 @@
 import React from "react";
 import defaultAvatar from '../../img/blank-avatar.png';
 import classes from "./Avatar.module.scss";
+import ProductPage from "../../pages/ProductPage";
 class Avatar extends React.Component{
     constructor(props) {
         super(props);
@@ -8,11 +9,17 @@ class Avatar extends React.Component{
 
     }
     componentDidMount() {
-        const userPhoto = JSON.parse(localStorage.getItem('currentUser'));
-        if(!userPhoto){
-            return;
+        if(this.props.flag === 'PRODUCT'){
+            this.setState({image: this.props.img});
         }
-        this.setState({image: userPhoto.profilePhotoFilename});
+        else {
+            const userPhoto = JSON.parse(localStorage.getItem('currentUser'));
+            if(!userPhoto){
+                return;
+            }
+            this.setState({image: userPhoto.profilePhotoFilename});
+        }
+
     }
 
     render() {

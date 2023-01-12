@@ -190,7 +190,7 @@ class NewProduct extends React.Component{
     render() {
         return (
             <main className={classes.user}>
-                <BackButton path={'/users'} glassZone={45}/>
+                <BackButton path={'/home'} glassZone={45}/>
                 <h1>New product</h1>
                 <h3>Basic information</h3>
                 <form onSubmit={this.validate.bind(this)} className={classes.user__form}>

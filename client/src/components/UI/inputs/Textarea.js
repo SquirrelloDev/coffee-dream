@@ -12,7 +12,7 @@ class Textarea extends React.Component{
         return (
             <React.Fragment>
                 {this.props.label && <p>{this.props.label}</p>}
-                <textarea onInput={this.getInputValue.bind(this)} className={classes.textarea}></textarea>
+                <textarea onInput={this.getInputValue.bind(this)} className={classes.textarea} defaultValue={this.props.defValue}></textarea>
             </React.Fragment>
         );
     }

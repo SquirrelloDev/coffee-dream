@@ -14,6 +14,7 @@ import Modal from "../components/UI/Modal";
 import Input from "../components/UI/inputs/Input";
 import {ACCESS_LEVEL, CART_CONTEXT, SERVER_PATH} from "../config/global_const";
 import axios from "axios";
+import {Link} from "react-router-dom";
 
 class ProductPage extends React.Component{
     constructor(props) {
@@ -110,7 +111,7 @@ class ProductPage extends React.Component{
                 {currentUser.accessLevel === ACCESS_LEVEL.ADMIN &&
                 <section className={`${classes['admin-box']} ${classes.section}`}>
                     {/*<Button behaviorFn={this.openModal.bind(this)} variant={'fill'}>Change stock</Button>*/}
-                    <Button variant={'outline'}>Edit product</Button>
+                    <Link to={`/products/product/${this.props.match.params.id}`}><Button variant={'outline'}>Edit product</Button></Link>
                     <Button variant={'outline danger'}>Delete</Button>
                 </section>
                 }

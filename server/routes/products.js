@@ -70,7 +70,7 @@ const getProductsByComposition = (req, res, next) =>
         data.map((product) => {
             if(product.imageFileName)
             {
-                fs.readFile(`${process.env.UPLOADED_FILES_FOLDER}/${product.imageFileName}`, (err, fileData) =>
+                fs.readFile(`${process.env.UPLOADED_FILES_FOLDER}/${product.imageFileName}`, 'base64', (err, fileData) =>
                 {
                     if(err)
                     {
@@ -99,7 +99,7 @@ const getProductsByComposition = (req, res, next) =>
 
 const getProductPhotoAsBase64 = (req, res, next) =>
 {
-    fs.readFile(`${process.env.UPLOADED_FILES_FOLDER}/${req.params.filename}`, (err, fileData) =>
+    fs.readFile(`${process.env.UPLOADED_FILES_FOLDER}/${req.params.filename}`, 'base64', (err, fileData) =>
     {
         if(err)
         {
@@ -123,7 +123,7 @@ const getProductById = (req, res, next) =>
     {
         if(data.imageFileName)
         {
-            fs.readFile(`${process.env.UPLOADED_FILES_FOLDER}/${data.imageFileName}`, (err, fileData) => 
+            fs.readFile(`${process.env.UPLOADED_FILES_FOLDER}/${data.imageFileName}`, 'base64', (err, fileData) => 
             {
                 if(err)
                 {

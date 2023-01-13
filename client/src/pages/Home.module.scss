@@ -1,6 +1,9 @@
 .homepage{
   padding: 2em 0;
+  display: flex;
+  flex-direction: column;
 
+  max-width: 1200px;
   &__heading{
     margin-left: .8em;
     margin-bottom: 1em;
@@ -13,5 +16,13 @@
   &__padding{
     width: 100%;
     padding-bottom: 2em;
+  }
+}
+@media (min-width: 992px) {
+  .homepage{
+    align-items: center;
+  }
+  .wrapper{
+    width: 80%;
   }
 }

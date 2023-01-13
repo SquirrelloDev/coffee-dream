@@ -9,6 +9,9 @@
   background: linear-gradient(320deg, rgba(41,37,37,1) 0%, rgba(48,48,48,1) 85%);
   border-radius: 10px;
   box-shadow: 0px 4px 4px rgba(0,0,0,.25);
+  p:first-child{
+    font-weight: $bold;
+  }
   .stock{
     font-size: $tiny;
 
@@ -22,10 +25,34 @@
   img{
     position: relative;
     justify-self: center;
+    height: 100px;
     object-fit: contain;
   }
   span{
     color: $cta-color;
     font-weight: $medium;
+  }
+}
+.wrapper{
+
+}
+@media (min-width: 768px) {
+  .card{
+    width: 325px;
+    min-height: 180px;
+    flex-direction: row;
+    img{
+      width: 140px;
+      height: 140px;
+      margin-right: .75em;
+    }
+    div{
+      margin-top: .5em;
+      font-size: calc($big + .2rem);
+      .stock{
+        font-size: $normal;
+      }
+    }
+
   }
 }

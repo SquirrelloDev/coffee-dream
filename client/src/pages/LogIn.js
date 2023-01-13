@@ -65,16 +65,19 @@ class LogIn extends React.Component{
     }
     render() {
         return (
-            <main className={classes.signup}>
-                {this.state.redirectToHome && <Redirect to={'/home'}/>}
-                <h1>Welcome back</h1>
-                <form onSubmit={this.validateLogin.bind(this)} className={classes['signup-form']}>
-                    <Input getValue={this.setMail.bind(this)} errStatus={this.state.emailErr} errValue={"This doesn't look like a valid email"} label={'E-mail address'}/>
-                    <Input getValue={this.setPassword.bind(this)} errStatus={this.state.passwordErr} errValue={'Enter password'} label={'Password'} type={'password'}/>
-                    <Button type={'submit'} variant={'fill'}>Log in</Button>
-                </form>
-                {/*<Toast> Incorrect password</Toast>*/}
+            <main className={classes.container}>
+                <section className={classes.signup}>
+                    {this.state.redirectToHome && <Redirect to={'/home'}/>}
+                    <h1>Welcome back</h1>
+                    <form onSubmit={this.validateLogin.bind(this)} className={classes['signup-form']}>
+                        <Input getValue={this.setMail.bind(this)} errStatus={this.state.emailErr} errValue={"This doesn't look like a valid email"} label={'E-mail address'}/>
+                        <Input getValue={this.setPassword.bind(this)} errStatus={this.state.passwordErr} errValue={'Enter password'} label={'Password'} type={'password'}/>
+                        <Button type={'submit'} variant={'fill'}>Log in</Button>
+                    </form>
+                </section>
+                <div className={classes.container__image}></div>
             </main>
+
         );
     }
 }

@@ -3,17 +3,21 @@ import Card from "./Card";
 import classes from "./HorizontalContainer.module.scss";
 import ProductCard from "../Products/ProductCard";
 import {Link} from "react-router-dom";
+import axios from "axios";
+import {SERVER_PATH} from "../../config/global_const";
 
 class HorizontalContainer extends React.Component{
     constructor(props) {
         super(props);
-
+        this.state={products:{items: []}}
     }
     componentDidMount() {
+        axios.get(`${SERVER_PATH}/products/composition/${this.props.composition}`).then(res => this.setState({products: {items: res.data}})).catch(err => console.log(err));
+        //a może tu fetchowanie?
     }
 
     render() {
-        const prodArray = this.props.products;
+        const prodArray = this.state.products;
         return (
             <div className={`${classes.container} ${classes['snaps-inline']}`}>
                 {prodArray.items.map(prod =>{

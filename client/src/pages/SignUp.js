@@ -72,20 +72,24 @@ class SignUp extends React.Component{
     }
     render() {
         return (
-            <main className={classes.signup}>
-                {this.state.redirectToLogin && <Redirect to={'/login'}/>}
-                <h1>Getting started</h1>
-                <form onSubmit={this.loginProcess.bind(this)} className={classes['signup-form']}>
-                    <Input errStatus={this.state.nameErr} errValue={'Name cannot be empty'} getValue={this.setName.bind(this)} label={'Name'}/>
-                    <Input errStatus={this.state.lastErr} errValue={'Last name cannot be empty'} getValue={this.setLast.bind(this)} label={'Last name'}/>
-                    <Input errStatus={this.state.emailErr} errValue={"This doesn't look like a valid email"} getValue={this.setMail.bind(this)} label={'E-mail address'}/>
-                    <Input errStatus={this.state.passwordErr} errValue={'Your password is too short'} getValue={this.setPassword.bind(this)} type={'password'} label={'Password'}/>
-                    <p className={classes['signup-form__password']}>Password should contain at least 8 characters</p>
-                    <p>Profile photo</p>
-                    <input type={'file'} onChange={this.setProfilePic.bind(this)} name={'profilePhoto'}/>
-                    <Button type={'submit'} variant={'fill'}>Sign up</Button>
-                </form>
+            <main className={classes.container}>
+                <section className={classes.signup}>
+                    {this.state.redirectToLogin && <Redirect to={'/login'}/>}
+                    <h1>Getting started</h1>
+                    <form onSubmit={this.loginProcess.bind(this)} className={classes['signup-form']}>
+                        <Input errStatus={this.state.nameErr} errValue={'Name cannot be empty'} getValue={this.setName.bind(this)} label={'Name'}/>
+                        <Input errStatus={this.state.lastErr} errValue={'Last name cannot be empty'} getValue={this.setLast.bind(this)} label={'Last name'}/>
+                        <Input errStatus={this.state.emailErr} errValue={"This doesn't look like a valid email"} getValue={this.setMail.bind(this)} label={'E-mail address'}/>
+                        <Input errStatus={this.state.passwordErr} errValue={'Your password is too short'} getValue={this.setPassword.bind(this)} type={'password'} label={'Password'}/>
+                        <p className={classes['signup-form__password']}>Password should contain at least 8 characters</p>
+                        <p>Profile photo</p>
+                        <input type={'file'} onChange={this.setProfilePic.bind(this)} name={'profilePhoto'}/>
+                        <Button type={'submit'} variant={'fill'}>Sign up</Button>
+                    </form>
+                </section>
+                <div className={classes.container__image}></div>
             </main>
+
         );
     }
 }

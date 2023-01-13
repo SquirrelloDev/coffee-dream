@@ -51,24 +51,27 @@ class Home extends React.Component{
             <React.Fragment>
                 <TopBar/>
             <main className={classes.homepage}>
-                <h1 className={classes.homepage__heading}>Hello {content}!</h1>
-                <section>
-                    <h2 className={classes['homepage__section-heading']}>Popular</h2>
-                    <HorizontalContainer products={this.state.products}/>
-                </section>
-                <section>
-                    <h2 className={classes['homepage__section-heading']}>Arabica selection</h2>
-                    {/*<HorizontalContainer/>*/}
-                </section>
-                <section>
-                    <h2 className={classes['homepage__section-heading']}>Espresso</h2>
-                    {/*<HorizontalContainer/>*/}
-                </section>
-                <section>
-                    <h2 className={classes['homepage__section-heading']}>High caffeine ratio</h2>
-                    {/*<HorizontalContainer/>*/}
-                </section>
-                <div className={classes.homepage__padding}></div>
+                <div className={classes.wrapper}>
+                    <h1 className={classes.homepage__heading}>Hello {content}!</h1>
+                    <section>
+                        <h2 className={classes['homepage__section-heading']}>Arabica selection</h2>
+                        <HorizontalContainer composition={'Arabica'}/>
+                    </section>
+                    <section>
+                        <h2 className={classes['homepage__section-heading']}>Espresso</h2>
+                        <HorizontalContainer composition={'Espresso'}/>
+                    </section>
+                    <section>
+                        <h2 className={classes['homepage__section-heading']}>Americano</h2>
+                        <HorizontalContainer composition={'Americano'}/>
+                    </section>
+                    <section>
+                        <h2 className={classes['homepage__section-heading']}>Robusta</h2>
+                        <HorizontalContainer composition={'Robusta'}/>
+                    </section>
+                    <div className={classes.homepage__padding}></div>
+                </div>
+
             </main>
                 {access === ACCESS_LEVEL.ADMIN &&  <Link to={'/products'}><AddButton/></Link>}
                 <BottomBar/>

@@ -27,10 +27,13 @@ class ProductCard extends React.Component{
     render() {
         return (
             <Card>
-                <img src={this.state.image ? `data:;base64,${this.state.image}` : image} height={100}/>
-                <p>{this.state.cardTitle}</p>
-                {this.state.inStock ? <p className={`${classes.stock} ${classes['stock--in']}`}>In stock</p> : <p className={`${classes.stock} ${classes['stock--out']}`}>Out of stock</p>}
-                <p><span>$</span> {(this.props.price).toFixed(2)}</p>
+                <img src={this.state.image ? `data:;base64,${this.state.image}` : image}/>
+                <div>
+                    <p>{this.state.cardTitle}</p>
+                    {this.state.inStock ? <p className={`${classes.stock} ${classes['stock--in']}`}>In stock</p> : <p className={`${classes.stock} ${classes['stock--out']}`}>Out of stock</p>}
+                    <p><span>$</span> {(this.props.price).toFixed(2)}</p>
+                </div>
+
             </Card>
         );
     }

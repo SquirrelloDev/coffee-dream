@@ -8,7 +8,7 @@ class TopBar extends React.Component{
     render() {
         return (
             <nav className={classes.nav}>
-                <p className={classes.company}>Coffee Inc.</p>
+                <p className={classes.company}>CoffeeDream</p>
                 <div className={classes.links}>
                     <Link to='/home' className={classes.link}> <FontAwesomeIcon icon={faHouse} size={'xl'}/><span>Home</span></Link>
                     <Link to='/cart' className={classes.link}><FontAwesomeIcon icon={faCartShopping} size={'xl'}/><span>Cart</span></Link>

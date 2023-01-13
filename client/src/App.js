@@ -16,13 +16,15 @@ import NewProduct from "./pages/NewProduct";
 import EditProduct from "./pages/EditProduct";
 import {PayPalScriptProvider} from "@paypal/react-paypal-js";
 import {PAYPAL_SANDBOX} from "./config/global_const";
+import WelcomePage from "./pages/WelcomePage";
 class App extends React.Component {
   render(){
     return(
             <PayPalScriptProvider options={{"client-id": PAYPAL_SANDBOX}}>
                 <BrowserRouter>
                     <Switch>
-                        <Route exact path='/' component={Home}/>
+                        <Route exact path='/' component={WelcomePage}/>
+                        <Route exact path='/home' component={Home}/>
                         <Route exact path='/product/:id' component={ProductPage}/>
                         <Route exact path='/cart' component={Cart}/>
                         <Route exact path='/profile' component={Profile}/>

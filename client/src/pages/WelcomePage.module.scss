@@ -1,0 +1,67 @@
+@use '../styles/utils' as *;
+.welcome{
+  min-height: 100vh;
+  //position: relative;
+  z-index: -10;
+  background-image: url('../img/welcome.jpg');
+  background-size: cover;
+  background-position: center;
+  &__shadow{
+    position: absolute;
+    bottom: 0;
+    z-index: 10;
+    width: 100%;
+    min-height: 70vh;
+    background: rgb(0,0,0);
+    background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.700717787114846) 40%, rgba(0,0,0,0) 100%);
+  }
+  &__content{
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+
+    z-index: 100;
+    width: 100%;
+
+    max-width: 1440px;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: translate(-50%,20%);
+    opacity: 0;
+    animation: slide-in .3s linear .8s forwards;
+    p{
+      text-align: center;
+    }
+    &__link{
+      width: 100%;
+      padding: 0 1.5em;
+      button{
+        width: 100%;
+        margin: .7em 0;
+        padding: 1em;
+      }
+    }
+    &__browse{
+      background: none;
+      border: 1px solid transparent;
+      color: $text-color;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .welcome{
+    background-image: url('../img/welcome-m.jpg');
+  }
+  
+}
+@keyframes slide-in {
+    to{
+      transform: translate(-50%, 0);
+      opacity: 1;
+    }
+}

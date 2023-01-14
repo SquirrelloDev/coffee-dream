@@ -7,3 +7,15 @@
     text-transform: uppercase;
   }
 }
+@media (min-width: 992px) {
+  .promo{
+    position: fixed;
+    top: 50%;
+    //left: 65%;
+    right: 20%;
+    transform: translateX(50%);
+    div{
+      bottom: -200%;
+    }
+  }
+}

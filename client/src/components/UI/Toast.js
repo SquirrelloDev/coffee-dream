@@ -19,7 +19,6 @@ class Toast extends React.Component{
     }
 
     render() {
-        let classContent;
         return (
             <div className={!this.state.active ? classes['toast--disabled'] : classes.toast}>
                 <FontAwesomeIcon icon={faCircleInfo} size="xl"/>{this.props.children}

@@ -12,3 +12,17 @@
     padding-bottom: 19em;
   }
 }
+@media (min-width: 992px) {
+    .cart{
+      display: flex;
+      max-width: 1440px;
+      &__items{
+        margin-top: 4em;
+        width: 50%;
+      }
+      h1{
+        position: absolute;
+      }
+
+    }
+}

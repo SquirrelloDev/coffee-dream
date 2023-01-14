@@ -15,6 +15,7 @@ import Input from "../components/UI/inputs/Input";
 import {ACCESS_LEVEL, CART_CONTEXT, SERVER_PATH} from "../config/global_const";
 import axios from "axios";
 import {Link, Redirect} from "react-router-dom";
+import TopBar from "../components/navs/TopBar";
 
 class ProductPage extends React.Component{
     constructor(props) {
@@ -104,7 +105,8 @@ class ProductPage extends React.Component{
         const currentUser = JSON.parse(localStorage.getItem('currentUser'));
         return (
             <React.Fragment>
-            <main>
+             <TopBar/>
+            <main className={classes.product}>
                 {this.state.redirectToHome && <Redirect to={'/home'}/>}
                 <BackButton path='/home' glassZone={250}/>
                 <div className={classes['image-box']}>
@@ -116,17 +118,17 @@ class ProductPage extends React.Component{
                     <p className={classes.main__box__price}><span>$</span>{this.state.productData.price}<span>per item</span></p>
                     <p className={classes.main__box__stock}>In stock: {this.state.productData.stock}</p>
                 </section>
-                {currentUser.accessLevel === ACCESS_LEVEL.ADMIN &&
-                <section className={`${classes['admin-box']} ${classes.section}`}>
-                    {/*<Button behaviorFn={this.openModal.bind(this)} variant={'fill'}>Change stock</Button>*/}
-                    <Link to={`/products/product/${this.props.match.params.id}`}><Button variant={'outline'}>Edit product</Button></Link>
-                    <Button behaviorFn={this.openModal.bind(this)} variant={'outline danger'}>Delete</Button>
-                </section>
-                }
                 <section className={`${classes.section} ${classes['action-box']}`}>
                     <QuantityBox currentQuantity={this.state.productData.QUANTITY} addHandler={this.addQuantity.bind(this)} subtractHandler={this.substractQuantity.bind(this)}  labelEnabled={true}/>
                     <Button behaviorFn={this.addItemToCart.bind(this)} variant='fill' disabled={this.state.productData.stock > 0 ? false : true}>TO CART <FontAwesomeIcon icon={faBagShopping}/></Button>
                 </section>
+                {currentUser.accessLevel === ACCESS_LEVEL.ADMIN &&
+                <section className={`${classes['admin-box']} ${classes.section}`}>
+                    {/*<Button behaviorFn={this.openModal.bind(this)} variant={'fill'}>Change stock</Button>*/}
+                    <Link to={`/products/product/${this.props.match.params.id}`} className={classes.link}><Button variant={'outline'}>Edit product</Button></Link>
+                    <Button behaviorFn={this.openModal.bind(this)} variant={'outline danger'}>Delete</Button>
+                </section>
+                }
                 <section className={`${classes.section} ${classes['desc-box']}`}>
                     <h3>Description</h3>
                     <p>{this.state.productData.description ? this.state.productData.description : "No description provided"}</p>

@@ -23,3 +23,11 @@
 
   }
 }
+@media (min-width: 992px) {
+    .box{
+      margin-top: 1em;
+      div{
+        font-size: $big;
+      }
+    }
+}

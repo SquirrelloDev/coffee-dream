@@ -75,7 +75,7 @@ class PayPalBtn extends React.Component{
 
     render() {
         return (
-            <React.Fragment>
+            <div>
              {this.state.paymentSuccessful && <Redirect to={{pathname: '/success', query:'payment'}}/>}
             <PayPalButtons style={{layout: 'vertical', color:'blue'}}
             createOrder={(data,actions) => {
@@ -93,7 +93,7 @@ class PayPalBtn extends React.Component{
              onCancel={this.handleCancel.bind(this)}
             />
                 {(this.state.paymentCancelled || this.state.paymentError) && <Toast>{this.state.msg}</Toast>}
-            </React.Fragment>
+            </div>
         );
     }
 

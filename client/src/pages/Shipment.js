@@ -75,8 +75,8 @@ class Shipment extends React.Component{
                     <Input getValue={this.setStreet.bind(this)} label={'Street'}/>
                     <Input getValue={this.setPostal.bind(this)} label={'Postal code'}/>
                     <Input getValue={this.setCity.bind(this)} label={'City'}/>
-                    {this.state.btnsAvailable && <PayPalBtn orderValue={this.state.totalOrderValue} customerData={this.state.customerData}/>}
                 </form>
+                {this.state.btnsAvailable && <PayPalBtn orderValue={this.state.totalOrderValue} customerData={this.state.customerData}/>}
             </main>
         );
     }

@@ -36,7 +36,6 @@ class PromoCode extends React.Component{
     componentDidMount() {
         axios.get(`${SERVER_PATH}/promocodes`).then(res => this.setState({promoData: [...res.data]}));
     }
-
     render() {
         return (
             <div className={classes.promo}>

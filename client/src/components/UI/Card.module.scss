@@ -36,6 +36,11 @@
 .wrapper{
 
 }
+@media (min-width: 376px) {
+  .card{
+    width: 100%;
+  }
+}
 @media (min-width: 768px) {
   .card{
     width: 325px;

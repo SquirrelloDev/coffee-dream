@@ -1,7 +1,9 @@
 @use "../../../styles/utils" as *;
+
 .input, .textarea{
   margin: 1em 0;
   padding: .5em;
+  width: 100%;
   background-color: $light-dark;
   border: 1px solid $input-border;
   border-radius: 4px;
@@ -33,5 +35,6 @@
   resize: none;
 }
 .label{
+  display: block;
   margin: 0;
 }

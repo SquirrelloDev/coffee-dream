@@ -53,3 +53,17 @@
     }
   }
 }
+@media (min-width: 992px) {
+  .cart-item{
+    &__image{
+      width: 150px;
+      height: 150px;
+    }
+    &__heading{
+      font-size: calc($big + 1rem);
+    }
+    &__price{
+      font-size: calc($big + .7rem);
+    }
+  }
+}

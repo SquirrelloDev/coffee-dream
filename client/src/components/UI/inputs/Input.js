@@ -45,12 +45,12 @@ class Input extends React.Component{
 
     render() {
         return (
-            <React.Fragment>
+            <div className={classes['input-box']}>
                 {this.props.label && <label className={classes.label}>{this.props.label}</label>}
                 {this.state.inputType !== 'number' && <input onInput={this.getInputValue.bind(this)} className={this.state.inputState.stateName === 'ERROR' ? `${classes.input} ${classes['input--error']}` : `${classes.input}`} type={this.state.inputType ? this.state.inputType : 'text'} id={this.props.label} placeholder={this.props.placeholder && this.props.placeholder} disabled={this.props.disabled} defaultValue={this.props.defValue}/>}
                 {this.state.inputType ==='number' && <input onInput={this.getInputValue.bind(this)} className={this.state.inputState.stateName === 'ERROR' ? `${classes.input} ${classes['input--error']}` : `${classes.input}`} type={this.state.inputType} min={this.props.min} max={this.props.max} id={this.props.label} placeholder={this.props.placeholder && this.props.placeholder} disabled={this.props.disabled} defaultValue={this.props.defValue}/>}
                 {this.state.inputState.stateName === 'ERROR' && <p className={classes['input__error-text']}>{this.state.inputState.stateText}</p>}
-            </React.Fragment>
+            </div>
         );
     }
 }

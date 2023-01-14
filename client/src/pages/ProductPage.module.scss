@@ -55,9 +55,6 @@
   button:nth-child(2){
     grid-area: 1 / 2 / 2 / 3;
   }
-  //button:nth-child(3){
-  //  grid-area: 2 / 2 / 3 / 3;
-  //}
 }
 .action-box{
   display: flex;
@@ -95,4 +92,39 @@
 .modal__sub{
   font-size: $tiny;
   color: $grayish-color;
+}
+.link{
+  button{
+    width: 100%;
+  }
+}
+@media (min-width: 992px) {
+  .product{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    padding: 3em;
+    max-width: 1440px;
+    margin: 0 auto;
+    .image-box{
+      grid-area: 1 / 1 / 3 / 2;
+      width: 420px;
+      height: 420px;
+    }
+    .main__box{
+      grid-area: 1 / 2 / 2 / 3;
+    }
+    .action-box{
+      grid-area: 2 / 2 / 3 / 3;
+    }
+    .admin-box{
+
+    }
+    .desc-box{
+      grid-area: 3 / 1 / 4 / 2;
+    }
+    .information-box{
+      grid-area: 3 / 2 / 4 / 3;
+    }
+  }
 }

@@ -5,7 +5,7 @@ import ActionButton from "./ActionButton";
 import {faBoxes, faGear, faRightFromBracket, faShield} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Link, Redirect} from "react-router-dom";
-import {CART_CONTEXT} from "../../config/global_const";
+import {ACCESS_LEVEL, CART_CONTEXT} from "../../config/global_const";
 
 class ProfileLoggedIn extends React.Component{
     constructor(props) {
@@ -26,7 +26,7 @@ class ProfileLoggedIn extends React.Component{
                 <div className={classes.logged__actions}>
                     <Link to='/orders'><ActionButton icon={faBoxes}>Your orders</ActionButton></Link>
                     <Link to='/settings'><ActionButton icon={faGear}>Account settings</ActionButton></Link>
-                    <Link to='/users'> <ActionButton icon={faShield}>Manage users</ActionButton></Link>
+                    {this.props.currentUser.accessLevel === ACCESS_LEVEL.ADMIN && <Link to='/users'> <ActionButton icon={faShield}>Manage users</ActionButton></Link>}
                     <ActionButton onClick={this.logOut.bind(this)} logoutVariant={true} icon={faRightFromBracket}>Log out</ActionButton>
                 </div>
                 <div className={classes.profile__padding}></div>

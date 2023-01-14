@@ -11,7 +11,6 @@ class OrderItem extends React.Component{
         super(props);
         this.state = {expanded: false, orderData:{
             id: this.props.orderObj.orderId,
-            date: (Date.now()).toLocaleString(),
             status: this.props.orderObj.status,
             orderValue: this.props.orderObj.total,
             billing:{
@@ -34,7 +33,6 @@ class OrderItem extends React.Component{
     }
     componentDidMount() {
         const addressArr = this.props.orderObj.address.split(' ');
-        console.log(addressArr);
         this.setState(prevState => {
             return {orderData:{
                     ...prevState.orderData,
@@ -56,7 +54,6 @@ class OrderItem extends React.Component{
             <div className={classes.order}>
                 <div className={classes['order__main-info']}>
                     <p>Order: {this.state.orderData.id}</p>
-                    <p>Date: {this.state.orderData.date}</p>
                     <p>Status: {this.state.orderData.status}</p>
                     <p>Order value: ${this.state.orderData.orderValue}</p>
                     <p>Details: <FontAwesomeIcon id={'chevron'} icon={this.state.expanded ? faChevronUp : faChevronDown} onClick={this.changeDetailsHandler.bind(this)} className={classes.chevron}/></p>

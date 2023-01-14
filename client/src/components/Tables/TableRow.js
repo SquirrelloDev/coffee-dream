@@ -9,15 +9,6 @@ class TableRow extends React.Component{
     openDetails(){
         this.props.openModalFn(this.props.idx);
     }
-    //TO DO: ADD TRIMMING MECHANISM FOR MAIL AND NAME on RESIZE
-    componentDidMount() {
-        if(this.props.userData.email.trim().length > 8){
-            this.setState({email: this.props.userData.email.trim().substring(0,8)+"..."})
-        }
-        if(this.props.userData.name.trim().length > 8){
-            this.setState({name: this.props.userData.name.trim().substring(0,8)+"..."})
-        }
-    }
 
     render() {
         return (

@@ -39,6 +39,7 @@
       font-size: $tiny;
       text-transform: uppercase;
       text-decoration: underline;
+      cursor: pointer;
     }
   }
   &__deletion{
@@ -55,6 +56,31 @@
     p{
       font-size: $tinier;
       color: $grayer-color;
+    }
+  }
+}
+@media (min-width: 992px) {
+  .settings{
+    max-width: 1440px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: .3fr 1fr 1fr;
+    gap: 4em;
+    h1{
+      grid-area: 1 / 1 / 2 / 2;
+    }
+    &__basic{
+      grid-area: 2 / 1 / 4 / 2;
+    }
+    &__credentials{
+      grid-area: 2 / 2 / 4 / 3;
+    }
+    &__basic, &__credentials{
+
+    }
+    &__deletion{
+      grid-area: 4 / 1 / 5 / 3;
     }
   }
 }

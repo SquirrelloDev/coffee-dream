@@ -24,7 +24,7 @@ class BackButton extends React.Component{
 
     render() {
         return (
-            <Link to={this.props.path === '' ? '/home' : this.props.path}><button id={'backbtn'} className={classes.backbtn}><FontAwesomeIcon icon={faChevronLeft} className={classes.icon} size={'2xl'}/></button></Link>
+            <Link to={this.props.path === '' ? '/home' : this.props.path} className={classes.link}><button id={'backbtn'} className={classes.backbtn}><FontAwesomeIcon icon={faChevronLeft} className={classes.icon} size={'2xl'}/></button></Link>
         );
     }
 }

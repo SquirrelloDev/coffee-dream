@@ -13,6 +13,7 @@
         font-weight: $bold;
         & .chevron{
           color: $cta-color;
+          cursor: pointer;
         }
       }
     }
@@ -34,6 +35,7 @@
       font-size: $normal;
       font-family: $secondary;
       border: 1px solid transparent;
+      cursor: pointer;
     }
   }
  }

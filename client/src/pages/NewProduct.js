@@ -199,8 +199,6 @@ class NewProduct extends React.Component{
                     <Input errStatus={this.state.errorObj.quantityErr} errValue={'Enter a valid quantity'} getValue={this.setQuantity.bind(this)} label={'Quantity'} type={'number'} defValue={this.state.quantity}/>
                     <h3>Picture</h3>
                     <div className={classes['user__form__avatar']}>
-                        <Avatar/>
-                        {/*<Button variant={'fill'}>Upload</Button>*/}
                         <input type={'file'} name={'productPhoto'} onChange={this.setImage.bind(this)}/>
                         <Button variant={'outline danger'}>Delete</Button>
                     </div>

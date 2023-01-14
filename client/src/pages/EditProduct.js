@@ -14,16 +14,16 @@ class EditProduct extends React.Component{
         super(props);
         this.state={
             name: '',
-            price: 0,
-            quantity: 0,
+            price: '',
+            quantity: '',
             productImage: null,
             description: '',
             origin: '',
             composition:'',
             aroma: '',
-            intensity: 0,
-            body: 0,
-            sca: 0,
+            intensity: '',
+            body: '',
+            sca: '',
             errorObj:{
                 nameErr: false,
                 priceErr: false,
@@ -194,7 +194,7 @@ class EditProduct extends React.Component{
             name: res.data.name,
             price: res.data.price,
             description: res.data.description,
-            image: res.data.imageFileName, //here
+            image: res.data.imageFileName,
             stock: res.data.stock,
             origin: res.data.origin,
             composition: res.data.composition,
@@ -218,10 +218,7 @@ class EditProduct extends React.Component{
                     <Input errStatus={this.state.errorObj.quantityErr} errValue={'Enter a valid quantity'} getValue={this.setQuantity.bind(this)} label={'Quantity'} type={'number'} defValue={this.state.quantity}/>
                     <h3>Picture</h3>
                     <div className={classes['user__form__avatar']}>
-                        <Avatar flag={'PRODUCT'} img={this.state.image}/>
-                        {/*<Button variant={'fill'}>Upload</Button>*/}
                         <input type={'file'} name={'productPhoto'} onChange={this.setImage.bind(this)}/>
-                        <Button variant={'outline danger'}>Delete</Button>
                     </div>
                     <h3>Extra information</h3>
                     <Textarea getValue={this.setDescription.bind(this)} defValue={this.state.description}/>

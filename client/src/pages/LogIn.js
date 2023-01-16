@@ -63,6 +63,13 @@ class LogIn extends React.Component{
             this.setState({emailErr: emailIsInvalid, passwordErr: passwdIsInvalid})
         }
     }
+    componentDidMount() {
+        const user = localStorage.getItem('currentUser');
+        if (!user){
+            localStorage.setItem('currentUser', JSON.stringify({}));
+        }
+    }
+
     render() {
         return (
             <main className={classes.container}>

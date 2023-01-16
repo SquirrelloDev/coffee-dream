@@ -70,6 +70,13 @@ class SignUp extends React.Component{
         }
 
     }
+    componentDidMount() {
+        const user = localStorage.getItem('currentUser');
+        if (!user){
+            localStorage.setItem('currentUser', JSON.stringify({}));
+        }
+    }
+
     render() {
         return (
             <main className={classes.container}>

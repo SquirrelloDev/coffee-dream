@@ -1,11 +1,26 @@
 import React from "react";
 import classes from "./WelcomePage.module.scss";
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import Button from "../components/UI/Button";
+import {ACCESS_LEVEL} from "../config/global_const";
 class WelcomePage extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state={redirectToHome: false}
+    }
+
+    componentDidMount() {
+        const user = JSON.parse(localStorage.getItem('currentUser'));
+        if(user && user.accessLevel >= ACCESS_LEVEL.USER){
+           this.setState({redirectHome: true});
+            return;
+        }
+    }
+
     render() {
         return (
             <main className={classes.welcome}>
+                {this.state.redirectHome &&  <Redirect to={'/home'}/>}
              <div className={classes.welcome__shadow}></div>
                 <div className={classes.welcome__content}>
                     <h1>CoffeDream</h1>

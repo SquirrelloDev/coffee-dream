@@ -28,9 +28,7 @@ const addNewProduct = (req, res, next) =>
     productDetails.name = req.body.name
     productDetails.price = req.body.price
     productDetails.description = req.body.description
-    console.log('dotąd git');
     productDetails.imageFileName = req.file.filename
-    console.log('plik przeszedł');
     productDetails.stock = req.body.stock
     productDetails.origin = req.body.origin
     productDetails.composition = req.body.composition

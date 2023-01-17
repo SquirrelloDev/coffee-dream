@@ -7,22 +7,14 @@ const ordersModel = require(`../models/orders`)
 const productModel =require('../models/products')
 const getUserOrders = (req, res, next) =>
 {
-    ordersModel.find({userId:req.params.userId}, (err, data) =>
+    ordersModel.find({userId:req.params.userId}).populate('products.productId').exec((err, data) =>
     {
-        ordersModel.aggregate([{
-            $lookup:{
-                from: "products",
-                localField: "products.productId",
-                foreignField: "_id",
-                as: "joinedProducts"
-            }
-        }]).then(result => res.json(result)).catch(error=> console.log(error))
-        // if(err)
-        // {
-        //     return next(err)
-        // }
+        if(err)
+        {
+            return next(err)
+        }
 
-        // res.json(data[0])
+        res.json(data)
     })
 }
 

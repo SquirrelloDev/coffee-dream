@@ -18,7 +18,7 @@ class OrderItem extends React.Component{
                 street: '',
                 postal: ''
             },
-                orderItems: [...this.props.orderObj.joinedProducts],
+                orderItems: [...this.props.orderObj.products],
             }}
     }
     changeDetailsHandler(){

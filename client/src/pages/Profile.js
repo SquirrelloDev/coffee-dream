@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
 import BottomBar from "../components/navs/BottomBar";
 import TopBar from "../components/navs/TopBar";
 import classes from "./Profile.module.scss";

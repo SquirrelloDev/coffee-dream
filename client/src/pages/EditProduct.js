@@ -1,14 +1,11 @@
 import BackButton from "../components/UI/BackButton";
 import Input from "../components/UI/inputs/Input";
-import Dropdown from "../components/UI/inputs/Dropdown";
 import React from "react";
 import classes from "./UserForm.module.scss";
-import Avatar from "../components/profile/Avatar";
 import Button from "../components/UI/Button";
 import Textarea from "../components/UI/inputs/Textarea";
 import axios from "axios";
 import {ACCESS_LEVEL, SERVER_PATH} from "../config/global_const";
-import logIn from "./LogIn";
 import {Redirect} from "react-router-dom";
 class EditProduct extends React.Component{
     constructor(props) {

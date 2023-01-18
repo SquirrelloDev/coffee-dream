@@ -3,7 +3,6 @@ import Avatar from "./Avatar";
 import classes from "../../pages/Profile.module.scss";
 import ActionButton from "./ActionButton";
 import {faBoxes, faGear, faRightFromBracket, faShield} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Link, Redirect} from "react-router-dom";
 import {ACCESS_LEVEL, CART_CONTEXT} from "../../config/global_const";
 

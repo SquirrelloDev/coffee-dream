@@ -1,7 +1,6 @@
 import React from "react";
 import defaultAvatar from '../../img/blank-avatar.png';
 import classes from "./Avatar.module.scss";
-import ProductPage from "../../pages/ProductPage";
 class Avatar extends React.Component{
     constructor(props) {
         super(props);

@@ -1,7 +1,5 @@
 import React from "react";
 import BackButton from "../components/UI/BackButton";
-import testImg from "../img/coffebag2.png";
-import testImg2 from '../img/coffebag1.png';
 import classes from "./ProductPage.module.scss";
 import SCA from "../components/Products/SCA";
 import QuantityBox from "../components/Products/QuantityBox";
@@ -11,7 +9,6 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Rating from "../components/Products/Rating";
 import BottomBar from "../components/navs/BottomBar";
 import Modal from "../components/UI/Modal";
-import Input from "../components/UI/inputs/Input";
 import {ACCESS_LEVEL, CART_CONTEXT, SERVER_PATH} from "../config/global_const";
 import axios from "axios";
 import {Link, Redirect} from "react-router-dom";

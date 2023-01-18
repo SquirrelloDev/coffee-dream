@@ -2,7 +2,7 @@ import Input from "../UI/inputs/Input";
 import Button from "../UI/Button";
 import React from "react";
 import classes from "./PromoCode.module.scss";
-import {PROMO_CODE, SERVER_PATH} from "../../config/global_const";
+import {SERVER_PATH} from "../../config/global_const";
 import Toast from "../UI/Toast";
 import axios from "axios";
 

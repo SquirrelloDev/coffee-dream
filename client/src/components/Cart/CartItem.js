@@ -1,6 +1,5 @@
 import React from "react";
 import classes from "./CartItem.module.scss";
-import QuantityBox from "../Products/QuantityBox";
 import cartImg from "../../img/coffebag1.png"
 import QuantityCart from "./QuantityCart";
 import {faXmark} from "@fortawesome/free-solid-svg-icons";

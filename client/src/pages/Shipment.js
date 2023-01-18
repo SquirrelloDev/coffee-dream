@@ -2,7 +2,6 @@ import React from "react";
 import BackButton from "../components/UI/BackButton";
 import classes from "./Shipment.module.scss";
 import Input from "../components/UI/inputs/Input";
-import {PAYPAL_SANDBOX} from "../config/global_const";
 import PayPalBtn from "../components/PayPalBtn";
 import {Redirect} from "react-router-dom";
 class Shipment extends React.Component{

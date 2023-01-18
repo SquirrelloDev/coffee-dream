@@ -1,6 +1,5 @@
 import React from "react";
 import classes from "./Table.module.scss";
-import Button from "../UI/Button";
 import TableRow from "./TableRow";
 class Table  extends React.Component{
     constructor(props) {

@@ -2,7 +2,6 @@ import React from "react";
 import Card from "../UI/Card";
 import classes from "../UI/Card.module.scss";
 import image from '../../img/coffebag1.png';
-import defaultAvatar from "../../img/blank-avatar.png";
 class ProductCard extends React.Component{
     constructor(props) {
         super(props);

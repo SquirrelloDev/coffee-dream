@@ -2,7 +2,6 @@ import React from "react";
 import BackButton from "../components/UI/BackButton";
 import classes from "./AccountSettings.module.scss";
 import Input from "../components/UI/inputs/Input";
-import Avatar from "../components/profile/Avatar";
 import Button from "../components/UI/Button";
 import axios from "axios";
 import {ACCESS_LEVEL, SERVER_PATH} from "../config/global_const";

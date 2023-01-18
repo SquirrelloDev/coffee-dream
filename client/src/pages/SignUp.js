@@ -3,7 +3,6 @@ import Input from "../components/UI/inputs/Input";
 import Button from "../components/UI/Button";
 import classes from "./SignUp.module.scss";
 import axios from "axios";
-import defaultProfilePicture from '../img/profile-loggedout-s.jpg';
 import {SERVER_PATH} from "../config/global_const";
 import {Redirect} from "react-router-dom";
 class SignUp extends React.Component{

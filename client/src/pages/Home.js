@@ -17,7 +17,6 @@ class Home extends React.Component{
         //log in as guest for first visit
         const userObj = JSON.parse(localStorage.getItem('currentUser'));
         if(!userObj){
-            console.log('USER NIE ISTNIEJE! ZACIĄGAM GUESTA');
             axios.get(`${SERVER_PATH}/users/${GUEST_ID}`).then(res => {
                 localStorage.setItem('currentUser', JSON.stringify({
                     _id: res.data._id,
@@ -37,7 +36,6 @@ class Home extends React.Component{
 
     render() {
         const currentUser =  JSON.parse(localStorage.getItem('currentUser'));
-        console.log(currentUser);
         let content, access;
         if(!currentUser){
             content = "Guest";

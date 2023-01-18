@@ -40,12 +40,11 @@ class LogIn extends React.Component{
             //good, fetch user from server
             axios.post(`${SERVER_PATH}/users/login/${this.state.email}/${this.state.password}`).then(res => {
                 if(this.state.password === res.data.password){
-                    console.log('correct');
                     if(JSON.parse(localStorage.getItem('currentUser'))._id === GUEST_ID){
                         localStorage.removeItem(CART_CONTEXT);
                     }
                     axios.get(`${SERVER_PATH}/users/${res.data.id}`).then(response => {
-                        console.log(response.data);
+
 
                         localStorage.setItem('currentUser', JSON.stringify({
                             _id: response.data._id,
@@ -60,7 +59,6 @@ class LogIn extends React.Component{
 
                 }
                 else{
-                    console.log('incorrect passwrod');
                     this.setState({toastPasswd: true})
                 }
             }).catch(err => console.log(err));

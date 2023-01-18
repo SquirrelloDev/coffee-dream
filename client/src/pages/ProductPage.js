@@ -115,7 +115,7 @@ class ProductPage extends React.Component{
                 <section className={`${classes.main__box} ${classes.section}`}>
                     <h2 className={classes.main__box__title}>{this.state.productData.name}</h2>
                     <SCA score={this.state.productData.sca}/>
-                    <p className={classes.main__box__price}><span>$</span>{this.state.productData.price}<span>per item</span></p>
+                    <p className={classes.main__box__price}><span>$</span>{(this.state.productData.price).toFixed(2)}<span>per item</span></p>
                     <p className={classes.main__box__stock}>In stock: {this.state.productData.stock}</p>
                 </section>
                 <section className={`${classes.section} ${classes['action-box']}`}>

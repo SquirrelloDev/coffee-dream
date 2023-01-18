@@ -15,13 +15,14 @@ class LogIn extends React.Component{
             emailErr: false,
             passwordErr: false,
             redirectToHome: false,
+            toastPasswd: false,
         }
     }
     setMail(inputText){
         this.setState({email: inputText})
     }
     setPassword(inputText){
-        this.setState({password: inputText})
+        this.setState({password: inputText, toastPasswd: false})
     }
     validateLogin(e){
         e.preventDefault();
@@ -45,6 +46,7 @@ class LogIn extends React.Component{
                     }
                     axios.get(`${SERVER_PATH}/users/${res.data.id}`).then(response => {
                         console.log(response.data);
+
                         localStorage.setItem('currentUser', JSON.stringify({
                             _id: response.data._id,
                             accessLevel: response.data.accessLevel,
@@ -57,9 +59,14 @@ class LogIn extends React.Component{
                     });
 
                 }
+                else{
+                    console.log('incorrect passwrod');
+                    this.setState({toastPasswd: true})
+                }
             }).catch(err => console.log(err));
         }
         else{
+
             this.setState({emailErr: emailIsInvalid, passwordErr: passwdIsInvalid})
         }
     }
@@ -81,6 +88,7 @@ class LogIn extends React.Component{
                         <Input getValue={this.setPassword.bind(this)} errStatus={this.state.passwordErr} errValue={'Enter password'} label={'Password'} type={'password'}/>
                         <Button type={'submit'} variant={'fill'}>Log in</Button>
                     </form>
+                    {this.state.toastPasswd && <Toast>Incorrect password!</Toast>}
                 </section>
                 <div className={classes.container__image}></div>
             </main>

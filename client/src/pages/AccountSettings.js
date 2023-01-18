@@ -5,7 +5,7 @@ import Input from "../components/UI/inputs/Input";
 import Avatar from "../components/profile/Avatar";
 import Button from "../components/UI/Button";
 import axios from "axios";
-import {SERVER_PATH} from "../config/global_const";
+import {ACCESS_LEVEL, SERVER_PATH} from "../config/global_const";
 import {Redirect} from "react-router-dom";
 import TopBar from "../components/navs/TopBar";
 class AccountSettings extends React.Component{
@@ -189,7 +189,11 @@ class AccountSettings extends React.Component{
         })
     }
     componentDidMount() {
-        if(JSON.parse(localStorage.getItem('currentUser'))){
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        if((currentUser && currentUser.accessLevel < ACCESS_LEVEL.USER) || !currentUser){
+            this.setState({redirectToHome: true});
+        }
+        if(currentUser){
             this.setState({
                 id: (JSON.parse(localStorage.getItem('currentUser')))._id,
                 name: ((JSON.parse(localStorage.getItem('currentUser'))).name).split(' ')[0],

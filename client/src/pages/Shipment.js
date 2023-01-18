@@ -4,11 +4,14 @@ import classes from "./Shipment.module.scss";
 import Input from "../components/UI/inputs/Input";
 import {PAYPAL_SANDBOX} from "../config/global_const";
 import PayPalBtn from "../components/PayPalBtn";
+import {Redirect} from "react-router-dom";
 class Shipment extends React.Component{
 
     constructor(props) {
         super(props);
-        this.state={customerData:{
+        this.state={
+            redirectToHome: false,
+            customerData:{
                 name: '',
                 lastName: '',
                 phone: '',
@@ -57,6 +60,14 @@ class Shipment extends React.Component{
         }
         this.setState({btnsAvailable: true})
     }
+    componentDidMount() {
+        const cart = JSON.parse(localStorage.getItem('cartItems'));
+        console.log(cart);
+        if((cart && cart.items.length === 0) || !cart){
+            this.setState({redirectToHome: true})
+        }
+    }
+
     componentDidUpdate(prevProps, prevState) {
         if(prevState.customerData !== this.state.customerData){
             this.checkFormValidation();
@@ -66,6 +77,7 @@ class Shipment extends React.Component{
     render() {
         return (
             <main className={classes.shipment}>
+                {this.state.redirectToHome && <Redirect to={'/home'}/>}
                 <BackButton path='/cart' glassZone={40}/>
                 <h1>Shipment details</h1>
                 <form className={classes.shipment__inputs}>

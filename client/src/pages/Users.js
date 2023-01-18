@@ -7,10 +7,11 @@ import Button from "../components/UI/Button";
 import WarningPrompt from "../components/UI/WarningPrompt";
 import axios from "axios";
 import {ACCESS_LEVEL, SERVER_PATH} from "../config/global_const";
+import {Redirect} from "react-router-dom";
 class Users extends React.Component{
     constructor(props) {
         super(props);
-        this.state={modalOpen: false, dangerPrompt: false, users:[], userIdx: 0}
+        this.state={redirect: false,modalOpen: false, dangerPrompt: false, users:[], userIdx: 0}
     }
     openDetails(idx){
         this.setState({modalOpen: true, userIdx: idx});
@@ -25,6 +26,10 @@ class Users extends React.Component{
     }
     componentDidMount() {
         //fetchowaniie wszystkich userów
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        if((currentUser && currentUser.accessLevel < ACCESS_LEVEL.ADMIN) || !currentUser){
+            this.setState({redirect: true});
+        }
         axios.get(`${SERVER_PATH}/users`).then(res => {
             const onlyUsers = res.data.filter(user => user.accessLevel === ACCESS_LEVEL.USER);
             this.setState({users: onlyUsers})
@@ -34,7 +39,7 @@ class Users extends React.Component{
     render() {
         return (
             <main className={classes.users}>
-
+                {this.state.redirect && <Redirect to='/home'/>}
                 <BackButton path='/profile' glassZone={25}/>
                 <h1>Users</h1>
                 <Table users={this.state.users} openModalFn={this.openDetails.bind(this)}/>

@@ -7,7 +7,7 @@ import Avatar from "../components/profile/Avatar";
 import Button from "../components/UI/Button";
 import Textarea from "../components/UI/inputs/Textarea";
 import axios from "axios";
-import {SERVER_PATH} from "../config/global_const";
+import {ACCESS_LEVEL, SERVER_PATH} from "../config/global_const";
 import logIn from "./LogIn";
 import {Redirect} from "react-router-dom";
 class EditProduct extends React.Component{
@@ -187,10 +187,12 @@ class EditProduct extends React.Component{
                     scaErr: scaInvalid,
                 }})
         }
-
-
     }
     componentDidMount() {
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        if((currentUser && currentUser.accessLevel < ACCESS_LEVEL.ADMIN) || !currentUser){
+            this.setState({redirectToHome: true});
+        }
         axios.get(`${SERVER_PATH}/products/${this.props.match.params.id}`).then(res =>
             this.setState({
             name: res.data.name,

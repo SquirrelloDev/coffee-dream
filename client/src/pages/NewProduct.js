@@ -23,8 +23,8 @@ class NewProduct extends React.Component{
             origin: '',
             composition:'',
             aroma: '',
-            intensity: 0,
-            body: 0,
+            intensity: 1,
+            body: 1,
             sca: 0,
             errorObj:{
                 nameErr: false,

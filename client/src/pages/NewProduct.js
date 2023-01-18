@@ -9,6 +9,7 @@ import Textarea from "../components/UI/inputs/Textarea";
 import axios from "axios";
 import {SERVER_PATH} from "../config/global_const";
 import {Redirect} from "react-router-dom";
+import Toast from "../components/UI/Toast";
 class NewProduct extends React.Component{
     constructor(props) {
         super(props);
@@ -139,6 +140,9 @@ class NewProduct extends React.Component{
         if(this.state.quantity !== 0){
             quantityInvalid = false
         }
+        if(this.state.productImage){
+            imageInvalid = false;
+        }
         if(this.state.origin !== ''){
             originInvalid = false;
         }
@@ -157,7 +161,7 @@ class NewProduct extends React.Component{
         if(this.state.sca >= 0 || this.state.sca <= 100){
             scaInvalid = false;
         }
-        if(!nameInvalid && !priceInvalid && !quantityInvalid && !originInvalid && !compositionInvalid && !aromaInvalid && !intensityInvalid && !bodyInvalid && !scaInvalid){
+        if(!nameInvalid && !priceInvalid && !quantityInvalid && !imageInvalid && !originInvalid && !compositionInvalid && !aromaInvalid && !intensityInvalid && !bodyInvalid && !scaInvalid){
             const formData = new FormData();
             formData.append('name', `${this.state.name}`);
             formData.append('price', this.state.price);
@@ -177,7 +181,7 @@ class NewProduct extends React.Component{
                     nameErr: nameInvalid,
                     priceErr: priceInvalid,
                     quantityErr: quantityInvalid,
-                    productImageErr: false,
+                    productImageErr: imageInvalid,
                     originErr: originInvalid,
                     compositionErr: compositionInvalid,
                     aromaErr: aromaInvalid,
@@ -203,7 +207,6 @@ class NewProduct extends React.Component{
                     <h3>Picture</h3>
                     <div className={classes['user__form__avatar']}>
                         <input type={'file'} name={'productPhoto'} onChange={this.setImage.bind(this)}/>
-                        <Button variant={'outline danger'}>Delete</Button>
                     </div>
                     <h3>Extra information</h3>
                     <Textarea getValue={this.setDescription.bind(this)}/>
@@ -214,6 +217,7 @@ class NewProduct extends React.Component{
                     <Input errStatus={this.state.errorObj.bodyErr} errValue={'Invalid range'} getValue={this.setBody.bind(this)} label={'Body'} type={'number'} min={1} max={5} defValue={this.state.body}/>
                     <Input errStatus={this.state.errorObj.scaErr} errValue={'Invalid range'} getValue={this.setSca.bind(this)} label={'SCA score'} type={'number'} min={0} max={100} defValue={this.state.sca}/>
                     <Button type={'submit'} variant={'fill'}>Save</Button>
+                    {this.state.errorObj.productImageErr && <Toast>Set product image!</Toast>}
                 </form>
             </main>
         );

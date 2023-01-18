@@ -1,5 +1,4 @@
 import React from "react";
-import Card from "./Card";
 import classes from "./HorizontalContainer.module.scss";
 import ProductCard from "../Products/ProductCard";
 import {Link} from "react-router-dom";
@@ -13,7 +12,6 @@ class HorizontalContainer extends React.Component{
     }
     componentDidMount() {
         axios.get(`${SERVER_PATH}/products/composition/${this.props.composition}`).then(res => this.setState({products: {items: res.data}})).catch(err => console.log(err));
-        //a może tu fetchowanie?
     }
 
     render() {
@@ -23,8 +21,6 @@ class HorizontalContainer extends React.Component{
                 {prodArray.items.map(prod =>{
                     return <Link to={{pathname: `/product/${prod._id}`}} key={prod.id} className={classes.link}><ProductCard key={prod.id} price={prod.price} stockValue={prod.stock} prodImage={prod.imageFileName}>{prod.name}</ProductCard></Link>
                 })}
-
-
             </div>
         );
     }

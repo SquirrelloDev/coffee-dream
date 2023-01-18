@@ -21,7 +21,7 @@ class ConfirmationPage extends React.Component{
                 <Confirmation btnLabel={this.state.fromPayment ? 'Come back to home page' : 'Browse'}>
                     {this.state.fromPayment && (
                         <React.Fragment>
-                        <h1>Thank you for your shopping</h1>
+                        <h1>Thank you for shopping</h1>
                         <p>We will send you invoice via email</p>
                         <p>Hope you will be satisfied</p>
                         </React.Fragment>)

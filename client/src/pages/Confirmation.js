@@ -10,7 +10,6 @@ class Confirmation extends React.Component{
         super(props);
 
     }
-    //in children goes h1 and p and in btnLabel goes button name
     render() {
         return (
             <main className={classes.confirmation}>

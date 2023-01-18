@@ -9,10 +9,12 @@ import Textarea from "../components/UI/inputs/Textarea";
 import axios from "axios";
 import {SERVER_PATH} from "../config/global_const";
 import logIn from "./LogIn";
+import {Redirect} from "react-router-dom";
 class EditProduct extends React.Component{
     constructor(props) {
         super(props);
         this.state={
+            redirectToHome: false,
             name: '',
             price: '',
             quantity: '',
@@ -169,7 +171,7 @@ class EditProduct extends React.Component{
             formData.append('intensity', this.state.intensity);
             formData.append('body', this.state.body);
             formData.append('sca', this.state.sca);
-            axios.put(`${SERVER_PATH}/products/${this.props.match.params.id}`, formData, {headers:{"Content-type": "multipart/form-data"}}).then(res=> console.log(res.data)).catch(err => console.log(err));
+            axios.put(`${SERVER_PATH}/products/${this.props.match.params.id}`, formData, {headers:{"Content-type": "multipart/form-data"}}).then(res=> this.setState({redirectToHome: true})).catch(err => console.log(err));
         }
         else{
             this.setState({errorObj:{
@@ -209,6 +211,7 @@ class EditProduct extends React.Component{
     render() {
         return (
             <main className={classes.user}>
+                {this.state.redirectToHome && <Redirect to='/home'/>}
                 <BackButton path={`/product/${this.props.match.params.id}`} glassZone={45}/>
                 <h1>Editing product</h1>
                 <h3>Basic information</h3>

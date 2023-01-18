@@ -34,6 +34,7 @@ class Users extends React.Component{
     render() {
         return (
             <main className={classes.users}>
+
                 <BackButton path='/profile' glassZone={25}/>
                 <h1>Users</h1>
                 <Table users={this.state.users} openModalFn={this.openDetails.bind(this)}/>

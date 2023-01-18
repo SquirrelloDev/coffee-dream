@@ -1,6 +1,6 @@
 @use '../../styles/utils' as *;
 .promo{
-
+  display: flex;
   button{
     margin-left: 1em;
     font-size: $tinier;

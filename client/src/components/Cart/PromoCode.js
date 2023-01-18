@@ -16,7 +16,6 @@ class PromoCode extends React.Component{
     }
     checkPromo(){
         if(this.props.codeStatus){
-            console.error("KOD UŻYTY!")
             setTimeout(() => this.setState({displayToast: false}), 3500);
             this.setState({displayToast: true})
             return;
@@ -25,7 +24,7 @@ class PromoCode extends React.Component{
             return promo.code === this.state.promoValue;
         })
         if(!promoEntry){
-            console.warn('KOD niepoprawny')
+            console.warn('KOD niepoprawny');
             return;
         }
         else{

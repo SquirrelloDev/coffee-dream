@@ -14,8 +14,8 @@ class ModalCart extends React.Component{
                 <h2>With account it's simpler to order</h2>
                 <p>With created account you’re able to order simpler and faster! </p>
                 <div className={classes.buttons}>
-                    <Button variant={'fill'}>Sign up</Button>
-                    <Button variant={'outline'}>Log in</Button>
+                    <Link to={'/signup'}> <Button variant={'fill'}>Sign up</Button></Link>
+                    <Link to={'/login'}><Button variant={'outline'}>Log in</Button></Link>
                     <Link to={{pathname: '/shipment'}}><Button variant={'outline'}>Continue</Button></Link>
                 </div>
 

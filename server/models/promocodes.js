@@ -12,9 +12,9 @@ const promocodesSchema = new mongoose.Schema(
     });
 
 const promoCodes = [
-    { code: 'DEREK1', discount: 25, expiration: '2023-09-30', active: true },
-    { code: 'DEREK2', discount: 10, expiration: '2023-12-31', active: true },
-    { code: 'DEREK3', discount: 15, expiration: '2023-06-30', active: true },
+    { code: 'PROMO1', discount: 25, expiration: '2023-09-30', active: true },
+    { code: 'PROMO2', discount: 10, expiration: '2023-12-31', active: true },
+    { code: 'PROMO3', discount: 15, expiration: '2023-06-30', active: true },
     ];
 
 const promocodesModel = mongoose.model('promocodes', promocodesSchema);

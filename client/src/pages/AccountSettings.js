@@ -142,10 +142,11 @@ class AccountSettings extends React.Component{
     validatePassword(e){
         e.preventDefault();
         let passInvalid = true, passwdConfirmInvalid = true;
-        if (this.state.passwd >= 8){
+        if (this.state.passwd.length >= 8){
+
             passInvalid = false;
         }
-        if(this.state.passwdConfirm >= 8 && this.state.passwdConfirm === this.state.passwd){
+        if(this.state.passwdConfirm.length >= 8 && this.state.passwdConfirm === this.state.passwd){
             passwdConfirmInvalid = false;
         }
         if(!passInvalid && !passwdConfirmInvalid){
